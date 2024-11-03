@@ -1,0 +1,71 @@
+package Dao;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Model.Account;
+
+public class AccountDaoImpl extends AbstractDao<Account>{
+
+	@Override
+	public String getTableName() {
+		return "accounts";
+	}
+
+	@Override
+	public Account converToObject(ResultSet resultset) {
+		Account account = null;
+		try {
+			int id = resultset.getInt("id");
+			String accountNumber = resultset.getString("account_number");
+			int accountType = resultset.getInt("account_type");
+			double balance = (double)resultset.getFloat("balance"); 
+			Date createdAt = resultset.getDate("created_at");
+			account = new Account(id,accountNumber,accountType,balance,createdAt);
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "+e.getMessage());
+		}
+		return account;
+	}
+
+	@Override
+	public String getInsertQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void prepareParams(PreparedStatement preparedStatement, Account object) {
+		try {
+			
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "e.getMessage());
+		}
+		
+	}
+
+	@Override
+	public void prepareParamsForUpdate(PreparedStatement preparedStatement, Account object) {
+		try {
+			
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "e.getMessage());
+		}
+		
+	}
+
+}

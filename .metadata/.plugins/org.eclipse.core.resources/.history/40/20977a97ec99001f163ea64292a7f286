@@ -1,0 +1,90 @@
+package Model;
+
+import java.sql.Date;
+
+public class Account {
+	
+	private int id;
+	private String account_number;
+	private String account_type;
+	private double balance;
+	private Date created_at;
+	private Branch branch;
+	private Customer customer;
+	
+	public Account(int id, String account_number, String account_type, double balance, Branch branch,
+			Customer customer) {
+		this.id = id;
+		this.account_number = account_number;
+		this.account_type = account_type;
+		this.balance = balance;
+		this.branch = branch;
+		this.customer = customer;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAccount_number() {
+		return account_number;
+	}
+
+	public void setAccount_number(String account_number) {
+		this.account_number = account_number;
+	}
+
+	public String getAccount_type() {
+		return account_type;
+	}
+
+	public void setAccount_type(String account_type) {
+		this.account_type = account_type;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public Date getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Date created_at) {
+		this.created_at = created_at;
+	}
+
+	public Branch getBranch() {
+		return branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", account_number=" + account_number + ", account_type=" + account_type
+				+ ", balance=" + balance + ", created_at=" + created_at + ", branch=" + branch + ", customer="
+				+ customer + "]";
+	}
+	
+	
+	
+}

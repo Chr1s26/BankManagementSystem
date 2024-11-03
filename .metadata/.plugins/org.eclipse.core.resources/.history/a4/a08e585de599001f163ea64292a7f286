@@ -1,0 +1,76 @@
+package Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Database.ConnectionFactory;
+import Database.PgSqlConnectionFactory;
+
+public abstract class AbstractDao<T> {
+	
+	public ConnectionFactory connectionFactory;
+	
+	public AbstractDao() {
+		this.connectionFactory = new PgSqlConnectionFactory();
+	}
+	
+	public abstract String getTableName();
+	
+	public abstract T converToObject(ResultSet resultset);
+	
+	public abstract String getInsertQuery();
+	
+	public abstract String getUpdateQuery();
+	
+	public abstract String getDeleteQuery();
+	
+	public abstract void prepareParams(PreparedStatement preparedStatement,T object);
+	
+	public abstract void prepareParamsForUpdate(PreparedStatement prepareStatement,T object);
+	
+	public void create(T object) {
+		try {
+			String query = this.getInsertQuery();
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			this.prepareParams(preparedStatement, object);
+			preparedStatement.executeUpdate();
+			this.connectionFactory.closeConnection();
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}finally{
+			this.connectionFactory.closeConnection();
+		}
+	}
+	
+	
+	public void update(T object) {
+		try {
+			String query = this.getUpdateQuery();
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			this.prepareParamsForUpdate(preparedStatement, object);
+			preparedStatement.executeUpdate();
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}finally {
+			this.connectionFactory.closeConnection();
+		}
+	}
+	
+	public void delete(int id) {
+		try {
+			String query = this.getDeleteQuery();
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			preparedStatement.executeUpdate();
+		}catch(SQLException e){
+			System.out.print("SQL Exception : "+e.getMessage());
+		}finally {
+			this.connectionFactory.closeConnection();
+		}
+	}
+}

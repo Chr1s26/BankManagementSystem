@@ -1,0 +1,102 @@
+package Model;
+
+import java.sql.Date;
+
+public class Loan {
+	
+	private int id;
+	private String loan_type;
+	private double loan_amount;
+	private double interest_rate;
+	private Date loan_start_date;
+	private Date loan_end_date;
+	private Customer customer;
+	
+	public Loan(int id, String loan_type, double loan_amount, double interest_rate, Date loan_start_date,
+			Date loan_end_date, Customer customer) {
+		
+		this.id = id;
+		this.loan_type = loan_type;
+		this.loan_amount = loan_amount;
+		this.interest_rate = interest_rate;
+		this.loan_start_date = loan_start_date;
+		this.loan_end_date = loan_end_date;
+		this.customer = customer;
+	}
+	
+	public Loan(int id, String loan_type, double loan_amount, double interest_rate, Date loan_start_date,
+			Date loan_end_date) {
+		
+		this.id = id;
+		this.loan_type = loan_type;
+		this.loan_amount = loan_amount;
+		this.interest_rate = interest_rate;
+		this.loan_start_date = loan_start_date;
+		this.loan_end_date = loan_end_date;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getLoan_type() {
+		return loan_type;
+	}
+
+	public void setLoan_type(String loan_type) {
+		this.loan_type = loan_type;
+	}
+
+	public double getLoan_amount() {
+		return loan_amount;
+	}
+
+	public void setLoan_amount(double loan_amount) {
+		this.loan_amount = loan_amount;
+	}
+
+	public double getInterest_rate() {
+		return interest_rate;
+	}
+
+	public void setInterest_rate(double interest_rate) {
+		this.interest_rate = interest_rate;
+	}
+
+	public Date getLoan_start_date() {
+		return loan_start_date;
+	}
+
+	public void setLoan_start_date(Date loan_start_date) {
+		this.loan_start_date = loan_start_date;
+	}
+
+	public Date getLoan_end_date() {
+		return loan_end_date;
+	}
+
+	public void setLoan_end_date(Date loan_end_date) {
+		this.loan_end_date = loan_end_date;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	@Override
+	public String toString() {
+		return "Loan [id=" + id + ", loan_type=" + loan_type + ", loan_amount=" + loan_amount + ", interest_rate="
+				+ interest_rate + ", loan_start_date=" + loan_start_date + ", loan_end_date=" + loan_end_date
+				+ ", customer=" + customer + "]";
+	}
+
+	
+}
