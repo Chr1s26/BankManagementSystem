@@ -26,6 +26,15 @@ public class Customer {
 		this.address = address;
 		this.dateOfBirth = dateOfBirth;
 	}
+	
+	public Customer(String firstName, String lastName, String email, String phoneNumber, String address,Date dateOfBirth) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+	}
 
 	public int getId() {
 		return id;

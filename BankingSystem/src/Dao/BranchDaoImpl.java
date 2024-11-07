@@ -1,12 +1,13 @@
 package Dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Model.Branch;
 
-public class BranchDaoImpl extends AbstractDao<Branch> {
+public class BranchDaoImpl extends BranchDao {
 
 	@Override
 	public String getTableName() {
@@ -66,6 +67,28 @@ public class BranchDaoImpl extends AbstractDao<Branch> {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
 		
+	}
+
+	@Override
+	public Branch findByName(String name) {
+		Branch branch = null;
+		try {
+			String query = "Select id from "+this.getTableName()+" where name like ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,name);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				int branchId = resultSet.getInt("id");
+				branch = this.getById(branchId);
+			}
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return branch;
 	}
 
 }

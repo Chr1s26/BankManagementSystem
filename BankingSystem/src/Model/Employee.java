@@ -32,6 +32,18 @@ public class Employee {
 		this.salary = salary;
 		
 	}
+	
+	public Employee(String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch) {
+
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.position = position;
+		this.salary = salary;
+		this.branch = branch;
+		
+	}
 
 	public int getId() {
 		return id;

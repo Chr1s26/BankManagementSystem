@@ -23,6 +23,15 @@ public class Account {
 		this.customer = customer;
 	}
 	
+	public Account(String accountNumber, String accountType, double balance,Branch branch,Customer customer) {
+	
+		this.accountNumber = accountNumber;
+		this.accountType = accountType;
+		this.balance = balance;
+		this.branch = branch;
+		this.customer = customer;
+	}
+	
 	public Account(int id, String accountNumber, String accountType, double balance,Date createdAt) {
 		this.id = id;
 		this.accountNumber = accountNumber;

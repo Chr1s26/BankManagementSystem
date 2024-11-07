@@ -1,5 +1,6 @@
 package Dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 import Model.Branch;
 import Model.Employee;
 
-public class EmployeeDaoImpl extends AbstractDao<Employee>{
+public class EmployeeDaoImpl extends EmployeeDao{
 	
 	BranchDaoImpl branchDaoImpl;
 	
@@ -86,6 +87,28 @@ public class EmployeeDaoImpl extends AbstractDao<Employee>{
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
 		
+	}
+
+	@Override
+	public Employee findByName(String name) {
+		Employee employee = null;
+		try {
+			String query = "Select id from "+this.getTableName()+" where first_name like ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,name);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				int id = resultSet.getInt("id");
+				employee = this.getById(id);
+			}
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return employee;
 	}
 
 }

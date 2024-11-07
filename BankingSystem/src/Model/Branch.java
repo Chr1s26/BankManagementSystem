@@ -13,6 +13,12 @@ public class Branch {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public Branch(String name, String address, String phoneNumber) {
+		this.name = name;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+	}
 
 	public int getId() {
 		return id;
@@ -52,7 +58,5 @@ public class Branch {
 		return "Branch [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber
 				+ "]";
 	}
-	
-	
 	
 }

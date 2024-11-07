@@ -1,0 +1,37 @@
+package Service;
+
+import java.io.IOException;
+
+import Dao.BranchDaoImpl;
+import Model.Branch;
+
+public class BranchService extends BaseService {
+	
+	private BranchDaoImpl branchDao;
+	
+	public BranchService() {
+		branchDao = new BranchDaoImpl();
+	}
+	
+	public void createBranch() throws IOException {
+		this.branchInfo();
+	}
+	
+	public void branchInfo() throws IOException {
+		try {
+		System.out.println("Enter the branch name : ");
+		String name = bufferedReader.readLine();
+		System.out.println("Enter the address : ");
+		String address = bufferedReader.readLine();
+		System.out.println("Enter the phone number : ");
+		String phone = bufferedReader.readLine();
+		Branch branch = new Branch(name,address,phone);
+		branchDao.create(branch);}
+		catch(IOException e){
+			System.out.println("Error reading Input : "+e.getMessage());
+		}
+		catch(Exception e) {
+			System.out.print("Unexpected Error occur : "+e.getMessage());
+		}
+	}
+}

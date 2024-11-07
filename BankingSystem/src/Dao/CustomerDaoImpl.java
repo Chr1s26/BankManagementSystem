@@ -1,13 +1,15 @@
 package Dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Model.Branch;
 import Model.Customer;
 
-public class CustomerDaoImpl extends AbstractDao<Customer> {
+public class CustomerDaoImpl extends CustomerDao {
 
 	@Override
 	public String getTableName() {
@@ -79,5 +81,28 @@ public class CustomerDaoImpl extends AbstractDao<Customer> {
 		}
 		
 	}
+
+	@Override
+	public Customer findByName(String fname) {
+		Customer customer = null;
+		try {
+			String query = "Select id from "+this.getTableName()+" where first_name like ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1,fname);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			if(resultSet.next()) {
+				int branchId = resultSet.getInt("id");
+				customer = this.getById(branchId);
+			}
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return customer;
+	}
+	
 
 }
