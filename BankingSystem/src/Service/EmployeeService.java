@@ -41,7 +41,10 @@ public class EmployeeService extends BaseService {
 		int branchId = Integer.parseInt(bufferedReader.readLine());
 		Branch branch = branchDao.getById(branchId);
 		
-		Employee employee = new Employee(fname,lname,email,phone,position,salary,branch);
+		System.out.print("Please choose the password |: ");
+		String password = bufferedReader.readLine();
+		
+		Employee employee = new Employee(fname,lname,email,phone,position,salary,branch,password);
 		employeeDao.create(employee);
 		System.out.print("Employee Created Successfully!!");
 		}
@@ -71,6 +74,9 @@ public class EmployeeService extends BaseService {
 			employee.setPhoneNumber(bufferedReader.readLine());
 			System.out.print("Please enter the employee salary : ");
 			employee.setSalary(Double.parseDouble(bufferedReader.readLine()));
+			System.out.print("Please enter the password : ");
+			employee.setEncryptPassword(bufferedReader.readLine());
+			
 			List<Branch> Allbranch = branchDao.getAll();
 			for(Branch branches : Allbranch) {
 				System.out.println(branches);

@@ -43,12 +43,12 @@ public class EmployeeDaoImpl extends EmployeeDao{
 
 	@Override
 	public String getInsertQuery() {
-		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,employee_position,salary,branch_id) values (?,?,?,?,?,?,?)";
+		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,employee_position,salary,branch_id,encrypt_password) values (?,?,?,?,?,?,?,?)";
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? where id = ?";
+		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? encrypt_password = ? where id = ?";
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			preparedStatement.setString(5, object.getPosition());
 			preparedStatement.setFloat(6, (float)object.getSalary());
 			preparedStatement.setInt(7, object.getBranch().getId());
+			preparedStatement.setString(8, object.getEncryptPassword());
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -82,7 +83,8 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			preparedStatement.setString(5, object.getPosition());
 			preparedStatement.setFloat(6, (float)object.getSalary());
 			preparedStatement.setInt(7, object.getBranch().getId());
-			preparedStatement.setInt(8, object.getId());
+			preparedStatement.setString(8, object.getEncryptPassword());
+			preparedStatement.setInt(9, object.getId());
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}

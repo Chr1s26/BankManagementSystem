@@ -1,0 +1,30 @@
+package View;
+
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+import Dao.CustomerDaoImpl;
+import Dao.EmployeeDaoImpl;
+
+public class CustomerListingPage {
+	
+	private CustomerDaoImpl customerDao;
+	private String[] columns = {"id","firstname","lastname","email","phone number","address","date of birth","created at","updated at","created by","updated by"};
+	private JButton createButton;
+	private JButton updateButton;
+	private JButton deleteButton;
+	private JPanel panel;
+	private String[][] customerData = new String[1][11];
+	
+	public CustomerListingPage() {
+		initializeComponent();
+	}
+	
+	public void initializeComponent() {
+		panel = new JPanel();
+		panel.setLayout(new GridLayout(1,3));
+		customerDao = new CustomerDaoImpl();
+	}
+}

@@ -6,6 +6,7 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String encryptPassword;
 	private String phoneNumber;
 	private String position;
 	private double salary;
@@ -33,7 +34,7 @@ public class Employee {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch) {
+	public Employee(String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch,String encryptPassword) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -42,6 +43,7 @@ public class Employee {
 		this.position = position;
 		this.salary = salary;
 		this.branch = branch;
+		this.encryptPassword = encryptPassword;
 		
 	}
 
@@ -107,6 +109,14 @@ public class Employee {
 
 	public void setBranch(Branch branch) {
 		this.branch = branch;
+	}
+
+	public String getEncryptPassword() {
+		return encryptPassword;
+	}
+
+	public void setEncryptPassword(String encryptPassword) {
+		this.encryptPassword = encryptPassword;
 	}
 
 	@Override

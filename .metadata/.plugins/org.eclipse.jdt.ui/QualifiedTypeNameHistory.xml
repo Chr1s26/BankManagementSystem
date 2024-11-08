@@ -4,4 +4,7 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="Dao.CustomerDaoImpl"/>
     <fullyQualifiedTypeName name="Util.DateConverter"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javax.swing.JFrame"/>
+    <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
 </qualifiedTypeNameHistroy>

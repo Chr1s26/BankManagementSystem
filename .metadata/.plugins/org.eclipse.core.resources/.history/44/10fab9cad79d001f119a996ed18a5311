@@ -1,0 +1,39 @@
+package View;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import Exception.InvalidTokenException;
+
+public class BaseWindow {
+	
+	private JFrame baseWindow;
+	private String title;
+	private String[][] tableData;
+	private String[] columns;
+	private JLabel dataTableTemplate;
+	private JScrollPane scrollPane;
+	private DefaultTableModel tableModel;
+	
+	public BaseWindow() {
+		
+	}
+	
+	private void initializeBaseFrame() {
+		this.baseWindow = new JFrame(this.title);
+		this.baseWindow.setLayout(new BorderLayout());
+		this.baseWindow.setLocation(200,300);
+		this.baseWindow.setSize(453,250);
+		this.baseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void createTable() {
+		
+	}
+
+}

@@ -1,0 +1,53 @@
+package View;
+
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import Exception.InvalidTokenException;
+
+public class EmployeeRegisterForm extends BaseWindow{
+	
+	private JLabel firstNameLabel;
+	private JTextField firstNameField;
+	
+	private JLabel lastNameLabel;
+	private JTextField lastNameField;
+	
+	private JLabel emailLabel;
+	private JTextField emailField;
+	
+	private JLabel passwordLabel;
+	private JPasswordField passwordField;
+	
+	private JLabel phoneNumberLabel;
+	private JTextField phoneNumberField;
+	
+	private JComboBox<String> positionComboBox;
+	private JComboBox<String> branchComboBox;
+	
+	public EmployeeRegisterForm() {
+		initializeComponent();
+	}
+	
+	public void initializeComponent() {
+		
+		firstNameLabel = new JLabel();
+		firstNameField = new JTextField();
+		
+		lastNameLabel = new JLabel();
+		lastNameField = new JTextField();
+		
+		emailLabel = new JLabel();
+		emailField = new JTextField();
+		
+		passwordLabel = new JLabel();
+		passwordField = new JPasswordField();
+		
+		phoneNumberLabel = new JLabel();
+		phoneNumberField = new JTextField();
+		
+	}
+}
