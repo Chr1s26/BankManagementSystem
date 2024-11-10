@@ -1,9 +1,0 @@
-package Model;
-
-public class AccountTransaction {
-	
-	private int id;
-	private String transactionType;
-	private double amount;
-	private transactionDate;
-}

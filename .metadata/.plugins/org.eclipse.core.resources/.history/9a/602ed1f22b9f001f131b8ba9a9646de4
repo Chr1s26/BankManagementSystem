@@ -1,0 +1,16 @@
+package Converter;
+
+import DTO.EmployeeDTO;
+import Model.Employee;
+
+public class EmployeeMapper {
+	
+	public static Employee toEmployee(EmployeeDTO employeeDto) {
+		Employee employee = new Employee();
+		employee.setfirstName(employeeDto.getFirstName());
+		employee.setlastName(employeeDto.getLastName());
+		employee.setBranch(employeeDto.getBranchId());
+		
+	}
+
+}

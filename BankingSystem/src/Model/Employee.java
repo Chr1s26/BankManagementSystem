@@ -11,8 +11,13 @@ public class Employee {
 	private String position;
 	private double salary;
 	private Branch branch;
+	private String LoginToken;
 	
-	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch) {
+	public Employee() {
+		
+	}
+	
+	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch,String encryptPassword) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -21,6 +26,7 @@ public class Employee {
 		this.position = position;
 		this.salary = salary;
 		this.branch = branch;
+		this.encryptPassword = encryptPassword;
 	}
 	
 	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary) {
@@ -117,6 +123,14 @@ public class Employee {
 
 	public void setEncryptPassword(String encryptPassword) {
 		this.encryptPassword = encryptPassword;
+	}
+
+	public String getLoginToken() {
+		return LoginToken;
+	}
+
+	public void setLoginToken(String loginToken) {
+		LoginToken = loginToken;
 	}
 
 	@Override

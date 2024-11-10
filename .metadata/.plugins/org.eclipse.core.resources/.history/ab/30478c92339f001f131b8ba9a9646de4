@@ -1,0 +1,18 @@
+package Service;
+
+import DTO.EmployeeDTO;
+import Dao.EmployeeDaoImpl;
+
+public class EmployeeCreateService {
+	
+	private EmployeeDaoImpl employeeDao;
+	
+	public EmployeeCreateService() {
+		this.employeeDao = new EmployeeDaoImpl();
+	}
+	
+	public void call(EmployeeDTO employeeDto) {
+		
+	}
+
+}

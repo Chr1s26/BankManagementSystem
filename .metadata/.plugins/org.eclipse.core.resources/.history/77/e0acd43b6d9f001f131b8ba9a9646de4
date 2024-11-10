@@ -1,0 +1,8 @@
+package Exception;
+
+public class IncorrectPasswordException {
+	
+	public IncorrectPasswordException(String message) {
+		super(message);
+	}
+}

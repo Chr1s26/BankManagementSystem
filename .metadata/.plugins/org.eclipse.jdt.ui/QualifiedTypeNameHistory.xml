@@ -7,4 +7,8 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
+    <fullyQualifiedTypeName name="Util.PasswordUtil"/>
+    <fullyQualifiedTypeName name="java.util.Base64"/>
+    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
+    <fullyQualifiedTypeName name="View.BranchListingPage"/>
 </qualifiedTypeNameHistroy>

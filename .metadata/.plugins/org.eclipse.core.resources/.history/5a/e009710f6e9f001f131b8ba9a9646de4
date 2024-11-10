@@ -1,0 +1,23 @@
+package Service;
+
+import Dao.EmployeeDaoImpl;
+import Model.Employee;
+
+public class AuthenticationService {
+	
+	public static Employee employee;
+	public static final EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+	
+	public static void login(String email,String password) {
+		employee = employeeDao.validateEmployee();
+	}
+	
+	public static void authenticate() {
+		if(employee != null) {
+			employeeDao.validateLoginToken(employee);
+		}
+		else {
+			throw new InvalidTokenException("Unauthorized request !");
+		}
+	}
+}

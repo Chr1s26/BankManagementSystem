@@ -38,7 +38,7 @@ public class CustomerListingPage extends BaseWindow {
 		panel.add(updateButton);
 		panel.add(deleteButton);
 		
-		this.baseWindow.add(panel,BorderLayout.SOUTH);
+		this.add(panel,BorderLayout.SOUTH);
 		
 		this.addActionOnCreateButton();
 		this.addActionOnUpdateButton();
@@ -62,9 +62,9 @@ public class CustomerListingPage extends BaseWindow {
 	}
 	
 	public void prepareBaseWindow() {
-		this.baseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Customer Information");
-		this.baseWindow.setSize(1300,400);
-		this.baseWindow.setVisible(true);
+		this.setSize(1300,400);
+		this.setVisible(true);
 	}
 }

@@ -5,8 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Exception.IncorrectEmailException;
+import Exception.IncorrectPasswordException;
+import Exception.IncorrectUserNameException;
+import Exception.InvalidTokenException;
 import Model.Branch;
 import Model.Employee;
+import Util.PasswordUtil;
+import Util.TokenUtil;
 
 public class EmployeeDaoImpl extends EmployeeDao{
 	
@@ -34,7 +40,8 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			Double salary = (double) resultset.getFloat("salary");
 			int branchId = resultset.getInt("branch_id");
 			Branch branch = branchDaoImpl.getById(branchId);
-			employee = new Employee(id,firstName,lastName,email,phoneNumber,employeePosition,salary,branch);
+			String password = resultset.getString("encrypt_password");
+			employee = new Employee(id,firstName,lastName,email,phoneNumber,employeePosition,salary,branch,password);
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -112,5 +119,122 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		}
 		return employee;
 	}
+
+	@Override
+	public boolean isEmailExists(String email) {
+		boolean exists = false;
+		try{
+			String query = "SELECT id FROM "+this.getTableName()+" WHERE email = ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, email);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			exists = resultSet.next();
+		}catch (SQLException e) {
+	        System.out.print("SQL Exception for isEmailExists: " + e.getMessage());
+	    }
+		return exists;
+	}
+
+	@Override
+	public boolean isPhoneExists(String phoneNumber) {
+		boolean exists = false;
+		try {
+			String query = "SELECT id FROM "+this.getTableName()+" WHERE phone_number = ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, phoneNumber);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			exists = resultSet.next();
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for isPhoneNumberExists: "+e.getMessage());
+		}
+		return exists;
+	}
+	
+	@Override
+	public Employee validateEmployee(String email,String password) throws IncorrectPasswordException, IncorrectEmailException {
+		Employee employee = this.getEmployeeByEmployeeEmail(email);
+		if(employee != null) {
+			String hashedPassword = PasswordUtil.encryptPassword(password);
+			String passwordHash = employee.getEncryptPassword();
+			System.out.println("hello"+hashedPassword);
+			System.out.print("hi"+passwordHash);
+			Boolean flag = passwordHash != null && passwordHash.equals(hashedPassword);
+			if(flag) {
+				String logintoken = TokenUtil.generateToken(employee.getEmail());
+				employee.setLoginToken(logintoken);
+				this.updateLoginToken(employee);
+				return employee;
+			}else {
+				throw new IncorrectPasswordException("Incorrect Password for: "+password);
+			}
+			
+		}else {
+			throw new IncorrectEmailException("Incorrect email for: "+email);
+		}
+	}
+
+	@Override
+	public void updateLoginToken(Employee employee) {
+		try {
+			String query = "update "+this.getTableName()+" set login_token = ? where id = ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, employee.getLoginToken());
+			preparedStatement.setInt(2, employee.getId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}finally {
+			this.connectionFactory.closeConnection();
+		}
+	}	
+
+	@Override
+	public void validateLoginToken(Employee employee) throws InvalidTokenException {
+		Employee object = null;
+		try {
+			String query = "SELECT * FROM "+this.getTableName()+" WHERE email = ? AND login_token = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			prepareStatement.setString(1, employee.getEmail());
+			prepareStatement.setString(2, employee.getLoginToken());
+			ResultSet resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				object = this.converToObject(resultSet);
+				if(object == null) {
+					throw new InvalidTokenException("Invalid Token for: "+employee.getLoginToken());
+				}
+			}
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+	}
+
+	@Override
+	public Employee getEmployeeByEmployeeEmail(String email) {
+		Employee object = null;
+		try {
+			String query = "SELECT * FROM "+this.getTableName()+" WHERE email = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			prepareStatement.setString(1, email);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			if(resultSet.next()) {
+				object = this.converToObject(resultSet);
+			}
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return object;
+	}
+
 
 }

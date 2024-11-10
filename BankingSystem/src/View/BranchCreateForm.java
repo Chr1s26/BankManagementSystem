@@ -55,7 +55,7 @@ public class BranchCreateForm extends BaseWindow {
 		panel.add(createButton);
 		panel.add(cancelButton);
 		
-		this.baseWindow.add(panel,BorderLayout.NORTH);
+		this.add(panel,BorderLayout.NORTH);
 		prepareBaseWindow();
 	}
 	
@@ -68,9 +68,9 @@ public class BranchCreateForm extends BaseWindow {
 	}
 	
 	public void prepareBaseWindow() {
-		this.baseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Branch Create Form");
-		this.baseWindow.setSize(800,400);
-		this.baseWindow.setVisible(true);
+		this.setSize(800,400);
+		this.setVisible(true);
 	}
 }

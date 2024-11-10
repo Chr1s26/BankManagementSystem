@@ -55,7 +55,7 @@ public class BranchUpdateForm extends BaseWindow{
 		panel.add(updateButton);
 		panel.add(cancelButton);
 		
-		this.baseWindow.add(panel,BorderLayout.NORTH);
+		this.add(panel,BorderLayout.NORTH);
 		prepareBaseWindow();
 	}
 	
@@ -68,9 +68,9 @@ public class BranchUpdateForm extends BaseWindow{
 	}
 	
 	public void prepareBaseWindow() {
-		this.baseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Branch Update Form");
-		this.baseWindow.setSize(800,400);
-		this.baseWindow.setVisible(true);
+		this.setSize(800,400);
+		this.setVisible(true);
 	}
 }

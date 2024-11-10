@@ -39,7 +39,7 @@ public class BranchListingPage extends BaseWindow {
 		panel.add(updateButton);
 		panel.add(deleteButton);
 		
-		this.baseWindow.add(panel,BorderLayout.SOUTH);
+		this.add(panel,BorderLayout.SOUTH);
 		
 		this.addActionOnCreateButton();
 		this.addActionOnUpdateButton();
@@ -63,9 +63,9 @@ public class BranchListingPage extends BaseWindow {
 	}
 	
 	public void prepareBaseWindow() {
-		this.baseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Branch Information");
-		this.baseWindow.setSize(800,400);
-		this.baseWindow.setVisible(true);
+		this.setSize(800,400);
+		this.setVisible(true);
 	}
 }

@@ -1,0 +1,21 @@
+package Converter;
+
+import DTO.EmployeeDTO;
+import Dao.BranchDaoImpl;
+import Model.Employee;
+
+public class EmployeeMapper {
+	
+	public static BranchDaoImpl branchDao;
+	
+	
+	public static Employee toEmployee(EmployeeDTO employeeDto) {
+		Employee employee = new Employee();
+		employee.setfirstName(employeeDto.getFirstName());
+		employee.setlastName(employeeDto.getLastName());
+		employee.setBranch(branchDao.getById(employeeDto.getBranchId()));
+		
+		
+	}
+
+}

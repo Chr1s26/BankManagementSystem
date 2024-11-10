@@ -11,9 +11,8 @@ import javax.swing.table.DefaultTableModel;
 
 import Exception.InvalidTokenException;
 
-public class BaseWindow {
+public class BaseWindow extends JFrame {
 	
-	public JFrame baseWindow;
 	private String title;
 	private String[][] tableData;
 	private String[] columns;
@@ -26,11 +25,10 @@ public class BaseWindow {
 	}
 	
 	private void initializeBaseFrame() {
-		this.baseWindow = new JFrame(this.title);
-		this.baseWindow.setLayout(new BorderLayout());
-		this.baseWindow.setLocation(200,300);
-		this.baseWindow.setSize(453,250);
-		this.baseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setLocation(200,300);
+		this.setSize(453,250);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void createDataTable(String[][] data,String[] column) {
@@ -39,7 +37,7 @@ public class BaseWindow {
 		this.tableModel = new DefaultTableModel(null,columns);
 		this.dataTableTemplate = new JTable(this.tableModel);
 		this.scrollPane = new JScrollPane(this.dataTableTemplate);
-		this.baseWindow.add(this.scrollPane,BorderLayout.CENTER);
+		this.add(this.scrollPane,BorderLayout.CENTER);
 		loadDataTable();
 	}
 	
@@ -59,8 +57,5 @@ public class BaseWindow {
 		return dataTableTemplate;
 	}
 	
-	public void setTitle(String title) {
-		this.baseWindow.setTitle(title);
-	}
 
 }

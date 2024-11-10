@@ -39,7 +39,7 @@ public class EmployeeListingPage extends BaseWindow {
 		panel.add(updateButton);
 		panel.add(deleteButton);
 		
-		this.baseWindow.add(panel,BorderLayout.SOUTH);
+		this.add(panel,BorderLayout.SOUTH);
 		
 		this.addActionOnCreateButton();
 		this.addActionOnUpdateButton();
@@ -63,9 +63,9 @@ public class EmployeeListingPage extends BaseWindow {
 	}
 	
 	public void prepareBaseWindow() {
-		this.baseWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Employee Information");
-		this.baseWindow.setSize(1000,400);
-		this.baseWindow.setVisible(true);
+		this.setSize(1000,400);
+		this.setVisible(true);
 	}
 }

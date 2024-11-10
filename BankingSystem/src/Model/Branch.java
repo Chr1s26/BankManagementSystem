@@ -55,8 +55,7 @@ public class Branch {
 
 	@Override
 	public String toString() {
-		return "Branch [id=" + id + ", name=" + name + ", address=" + address + ", phoneNumber=" + phoneNumber
-				+ "]";
+		return this.name;
 	}
 	
 }
