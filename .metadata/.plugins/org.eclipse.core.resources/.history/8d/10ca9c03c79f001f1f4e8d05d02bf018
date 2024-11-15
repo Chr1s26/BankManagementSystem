@@ -1,0 +1,16 @@
+package Controller;
+
+import Exception.InvalidTokenException;
+import Service.AuthenticationService;
+
+public class BaseController {
+	
+	public BaseController() {
+		try {
+		AuthenticationService.authenticate();
+		}catch(InvalidTokenException e){
+			new LoginController();
+		}
+	}
+	
+}

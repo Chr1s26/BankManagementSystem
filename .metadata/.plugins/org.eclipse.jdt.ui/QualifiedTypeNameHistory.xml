@@ -4,11 +4,13 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="Dao.CustomerDaoImpl"/>
     <fullyQualifiedTypeName name="Util.DateConverter"/>
-    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="Util.PasswordUtil"/>
     <fullyQualifiedTypeName name="java.util.Base64"/>
-    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
     <fullyQualifiedTypeName name="View.BranchListingPage"/>
+    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="Converter.BranchMapper"/>
+    <fullyQualifiedTypeName name="Converter.EmployeeMapper"/>
 </qualifiedTypeNameHistroy>

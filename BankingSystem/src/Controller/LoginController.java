@@ -9,13 +9,13 @@ import Service.AuthenticationService;
 import View.LoginWindow;
 import View.BranchListingPage;
 
-public class LoginController {
+public class LoginController extends BaseController {
 	
 	private LoginWindow view;
 	
-	public LoginController(LoginWindow view) {
-		this.view = view;
-		handleEmployeeLogin();
+	public LoginController() {
+		super(new LoginWindow());
+		this.initController();
 	}
 	
 	public void handleEmployeeLogin() {
@@ -27,7 +27,8 @@ public class LoginController {
 		String password = new String(this.view.getPasswordField().getPassword());
 		try {
 			AuthenticationService.login(email, password);
-			BranchListingPage branchListingPage= new BranchListingPage();
+			new BranchListingController();
+			this.view.dispose();
 		}	
 		catch (IncorrectPasswordException e2) {
 			JOptionPane.showMessageDialog(this.view, e2.getMessage(), "Error",
@@ -37,6 +38,13 @@ public class LoginController {
 			JOptionPane.showMessageDialog(this.view, e3.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
+	}
+
+	@Override
+	public void initController() {
+		this.view =(LoginWindow) this.getView();
+		this.view.setVisible(true);
+		handleEmployeeLogin();
 	}
 	
 }

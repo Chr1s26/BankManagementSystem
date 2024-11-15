@@ -167,18 +167,12 @@ public class EmployeeRegisterForm extends BaseWindow{
 		
 	}
 	
-	public void showErrorMessage(String errorMessage) {
-		JOptionPane.showMessageDialog(this, errorMessage);
-	}
-	
 	public void prepareBaseWindow() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Employee Create Form");
 		this.setSize(800,400);
-		this.setVisible(true);
+		
 	}
 
-	public void showSuccessMessage(String string) {
-		JOptionPane.showMessageDialog(this, string);
-	}
+	
 }

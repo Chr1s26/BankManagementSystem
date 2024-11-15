@@ -10,7 +10,7 @@ public class Account {
 	private double balance;
 	private Date createdAt;
 	private Branch branch;
-	private Customer customer;
+	private Customer customer;	
 	
 	public Account(int id, String accountNumber, String accountType, double balance,Date createdAt ,Branch branch,
 			Customer customer) {

@@ -1,0 +1,23 @@
+package Controller;
+
+import View.BranchCreateForm;
+
+public class BranchCreateController extends BaseController {
+	
+	private BranchCreateForm view;
+	
+	public BranchCreateController() {
+		super(new BranchCreateForm());
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (BranchCreateForm)this.getView();
+		this.view.getCreateButton().addActionListener(e -> handleEmployeeCreateAction());
+	}
+
+	private Object handleEmployeeCreateAction() {
+		EmployeeDTO employeeDTO = new EmployeeDTO(;)
+	}
+}

@@ -48,8 +48,8 @@ public class BaseWindow extends JFrame {
 	}
 	
 	public void loadDataTable() {
-		for(String[] daatArr : this.tableData) {
-			this.tableModel.addRow(daatArr);
+		for(String[] dataArr : this.tableData) {
+			this.tableModel.addRow(dataArr);
 		}
 	}
 	
@@ -57,5 +57,12 @@ public class BaseWindow extends JFrame {
 		return dataTableTemplate;
 	}
 	
+	public void showErrorMessage(String errorMessage) {
+		JOptionPane.showMessageDialog(this, errorMessage);
+	}
+	
+	public void showSuccessMessage(String string) {
+		JOptionPane.showMessageDialog(this, string);
+	}
 
 }

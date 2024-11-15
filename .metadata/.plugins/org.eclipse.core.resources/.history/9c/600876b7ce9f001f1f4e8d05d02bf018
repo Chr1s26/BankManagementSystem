@@ -1,0 +1,11 @@
+package Controller;
+
+import View.BranchCreateForm;
+
+public class BranchCreateController extends BaseController {
+	
+	public BranchCreateController() {
+		super(new BranchCreateForm());
+		this.authenticate();
+	}
+}

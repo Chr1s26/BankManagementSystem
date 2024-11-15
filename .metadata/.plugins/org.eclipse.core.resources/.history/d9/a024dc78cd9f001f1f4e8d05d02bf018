@@ -1,0 +1,18 @@
+package Controller;
+
+import View.BranchListingPage;
+
+public class BranchListingController extends BaseController {
+	
+	public BranchListingController() {
+		super(new BranchListingPage());
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

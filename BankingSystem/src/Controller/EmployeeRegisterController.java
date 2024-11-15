@@ -5,17 +5,16 @@ import Service.EmployeeCreateService;
 import View.EmployeeRegisterForm;
 import View.LoginWindow;
 
-public class EmployeeRegisterController {
+public class EmployeeRegisterController extends BaseController {
 	
-	private EmployeeRegisterForm view;
+	private EmployeeRegisterForm view ;
 	private EmployeeCreateService createService;
 	private LoginWindow loginWindow;
 	private LoginController loginController;
 	
-	public EmployeeRegisterController(EmployeeRegisterForm view) {
-		this.view = view;
-		this.view.getCreateButton().addActionListener(e -> handleEmployeeRegisteration());
-		this.createService = new EmployeeCreateService();
+	public EmployeeRegisterController() {
+		super(new EmployeeRegisterForm());
+		this.authenticate();
 	}
 	
 	public void handleEmployeeRegisteration() {
@@ -33,14 +32,18 @@ public class EmployeeRegisterController {
 		this.createService.call(employeeDto);
 		this.view.showSuccessMessage("Employee Register successfully");
 		this.view.dispose();
-		this.loginWindow = new LoginWindow();
-		this.loginController = new LoginController(loginWindow);
+		this.loginController = new LoginController();
 		}
 		catch(Exception e) {
 			this.view.showErrorMessage(e.getMessage());
-			this.view.dispose();
-			EmployeeRegisterForm employeeRegisterForm= new EmployeeRegisterForm();
-			EmployeeRegisterController employeeRegisterController = new EmployeeRegisterController(employeeRegisterForm);
 		}
+	}
+
+	@Override
+	public void initController() {
+		this.view = (EmployeeRegisterForm) this.getView();
+		this.view.getCreateButton().addActionListener(e -> handleEmployeeRegisteration());
+		this.createService = new EmployeeCreateService();
+		
 	}
 }

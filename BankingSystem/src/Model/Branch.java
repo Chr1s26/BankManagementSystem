@@ -19,6 +19,10 @@ public class Branch {
 		this.address = address;
 		this.phoneNumber = phoneNumber;
 	}
+	
+	public Branch() {
+		
+	}
 
 	public int getId() {
 		return id;

@@ -1,0 +1,8 @@
+package Controller;
+
+public class BranchCreateController extends BaseController {
+	
+	public BranchCreateController() {
+		super(new BranchCreateForm());
+	}
+}

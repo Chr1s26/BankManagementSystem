@@ -16,15 +16,15 @@ public class AuthenticationService {
 		employee = employeeDao.validateEmployee(email,password);
 	}
 	
-	public static void authenticate() throws InvalidTokenException {
+	public static Employee authenticate() throws InvalidTokenException {
 		if(employee != null) {
-			try {
-				employeeDao.validateLoginToken(employee);
-			} catch (InvalidTokenException e) {
-				e.printStackTrace();
+			employeeDao.validateLoginToken(employee);
+			return employee;
 			}
+		else {
+			throw new InvalidTokenException("Need to login!!");
 		}
-	}
+		}
 	
 	public static Employee getEmployee() {
 		return employee;

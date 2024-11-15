@@ -10,16 +10,16 @@ import Model.Employee;
 
 public class EmployeeCreateService {
 	
-	
 	private EmployeeDTO employeeDto;
 	private EmployeeDaoImpl employeeDao;
 	private List<String> errorMessages = new ArrayList<>();
 	
 	public EmployeeCreateService() {
 		this.employeeDao = new EmployeeDaoImpl();
-	}
-	
+	}	
+	 
 	public void call(EmployeeDTO employeeDto) throws Exception {
+		this.errorMessages.clear();
 		this.employeeDto = employeeDto;
 		this.validatePassword();
 		this.checkEmailDuplication();
@@ -51,14 +51,12 @@ public class EmployeeCreateService {
 		if(!errorMessages.isEmpty()) {
 			throw new Exception(errorMessages.toString().concat("\n")); 
 		}
-		
 	}
 
 	private void validatePassword() {
 		if(!this.employeeDto.getPassword().equals(this.employeeDto.getConfirmPassword())) {
 			this.errorMessages.add("Incorrect Passowrd!!");
 		}
-		
 	}
 
 }

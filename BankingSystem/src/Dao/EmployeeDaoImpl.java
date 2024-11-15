@@ -158,8 +158,6 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		if(employee != null) {
 			String hashedPassword = PasswordUtil.encryptPassword(password);
 			String passwordHash = employee.getEncryptPassword();
-			System.out.println("hello"+hashedPassword);
-			System.out.print("hi"+passwordHash);
 			Boolean flag = passwordHash != null && passwordHash.equals(hashedPassword);
 			if(flag) {
 				String logintoken = TokenUtil.generateToken(employee.getEmail());

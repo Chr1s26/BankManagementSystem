@@ -1,8 +1,0 @@
-package Service;
-
-public class BranchService extends BaseService {
-	
-	public void createBranch() {
-		System.out.println("");
-	}
-}
