@@ -32,12 +32,12 @@ public class EmailSenderService extends Thread {
 	public EmailSenderService() {
 		Properties properties = new Properties();
 		try {
-			FileInputStream input = new FileInputStream("src/resources/application.properties");
+			FileInputStream input = new FileInputStream("src/application.properties");
 			properties.load(input);
-			this.smtpHost = properties.getProperty("smtp.host");
-			this.smtpPort = properties.getProperty("smtp.port");
-			this.username = properties.getProperty("smtp.username");
-			this.password = properties.getProperty("smtp.password");
+			this.smtpHost = properties.getProperty(smtpHost);
+			this.smtpPort = properties.getProperty(smtpPort);
+			this.username = properties.getProperty(username);
+			this.password = properties.getProperty(password);
 			}
 		catch(IOException e) {
 			System.out.print("Error  loading properties file : "+e.getMessage());
@@ -49,7 +49,7 @@ public class EmailSenderService extends Thread {
 		
 			props.put("mail.smtp.auth","true");
 			props.put("mail.smtp.starttls.enable",true);
-			props.put("mail.smtp.starttls.required", true);
+			props.put("mail.smtp.startttls.required", true);
 			props.put("mail.smtp.ssl.protocols","TLSv1.2");
 			props.put("mail.smtp.host", this.smtpHost);
 			props.put("mail.smtp.port", this.smtpPort);

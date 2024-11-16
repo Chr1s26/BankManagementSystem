@@ -32,7 +32,7 @@ public class EmailSenderService extends Thread {
 	public EmailSenderService() {
 		Properties properties = new Properties();
 		try {
-			FileInputStream input = new FileInputStream("src/resources/application.properties");
+			FileInputStream input = new FileInputStream("src/application.properties");
 			properties.load(input);
 			this.smtpHost = properties.getProperty("smtp.host");
 			this.smtpPort = properties.getProperty("smtp.port");
