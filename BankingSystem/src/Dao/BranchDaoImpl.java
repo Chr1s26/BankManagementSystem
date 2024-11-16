@@ -66,7 +66,6 @@ public class BranchDaoImpl extends BranchDao {
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
-		
 	}
 
 	@Override

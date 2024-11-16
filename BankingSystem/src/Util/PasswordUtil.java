@@ -10,9 +10,11 @@ public class PasswordUtil {
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		byte[] hash = md.digest(password.getBytes());
 		return Base64.getEncoder().encodeToString(hash);
+		
 		}catch(Exception e) {
 			throw new RuntimeException();
 		}
 		
 	}
+	
 }

@@ -2,9 +2,13 @@ package Controller;
 
 import javax.swing.JOptionPane;
 
+import Converter.EmployeeMapper;
+import DTO.EmployeeDTO;
 import Exception.IncorrectEmailException;
 import Exception.IncorrectPasswordException;
 import Exception.IncorrectUserNameException;
+import Exception.NotConfirmedException;
+import Model.Employee;
 import Service.AuthenticationService;
 import View.LoginWindow;
 import View.BranchListingPage;
@@ -37,6 +41,13 @@ public class LoginController extends BaseController {
 		catch (IncorrectEmailException e3) {
 			JOptionPane.showMessageDialog(this.view, e3.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
+		}
+		catch(NotConfirmedException e4) {
+			JOptionPane.showMessageDialog(this.view, e4.getMessage(), "Error",
+					JOptionPane.ERROR_MESSAGE);
+		Employee employee = AuthenticationService.employee;
+			OTPController otpController = new OTPController(EmployeeMapper.toEmployeeDTO(employee));
+			otpController.sentOTP();
 		}
 	}
 

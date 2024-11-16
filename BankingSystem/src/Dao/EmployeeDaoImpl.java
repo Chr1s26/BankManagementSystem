@@ -1,6 +1,7 @@
 package Dao;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +42,10 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			int branchId = resultset.getInt("branch_id");
 			Branch branch = branchDaoImpl.getById(branchId);
 			String password = resultset.getString("encrypt_password");
+			java.sql.Date confirmAt = resultset.getDate("confirmed_at");
 			employee = new Employee(id,firstName,lastName,email,phoneNumber,employeePosition,salary,branch,password);
+			employee.setConfirmedAt(confirmAt);
+			
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -95,9 +99,9 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
-		
 	}
 
+	
 	@Override
 	public Employee findByName(String name) {
 		Employee employee = null;
@@ -120,6 +124,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		return employee;
 	}
 
+	
 	@Override
 	public boolean isEmailExists(String email) {
 		boolean exists = false;
@@ -135,6 +140,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 	    }
 		return exists;
 	}
+	
 
 	@Override
 	public boolean isPhoneExists(String phoneNumber) {
@@ -151,6 +157,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		}
 		return exists;
 	}
+	
 	
 	@Override
 	public Employee validateEmployee(String email,String password) throws IncorrectPasswordException, IncorrectEmailException {
@@ -172,6 +179,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			throw new IncorrectEmailException("Incorrect email for: "+email);
 		}
 	}
+	
 
 	@Override
 	public void updateLoginToken(Employee employee) {
@@ -189,6 +197,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 		}
 	}	
 
+	
 	@Override
 	public void validateLoginToken(Employee employee) throws InvalidTokenException {
 		Employee object = null;
@@ -212,6 +221,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			this.connectionFactory.closeConnection();
 		}
 	}
+	
 
 	@Override
 	public Employee getEmployeeByEmployeeEmail(String email) {
@@ -222,9 +232,11 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			PreparedStatement prepareStatement = connection.prepareStatement(query);
 			prepareStatement.setString(1, email);
 			ResultSet resultSet = prepareStatement.executeQuery();
+			
 			if(resultSet.next()) {
 				object = this.converToObject(resultSet);
 			}
+			
 		} catch (SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -232,6 +244,25 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			this.connectionFactory.closeConnection();
 		}
 		return object;
+	}
+	
+	
+	@Override
+	public void setConfimedAt(Employee employee) {
+		try {
+			String query = "Update "+this.getTableName()+" set confirmed_at = ? WHERE id = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+			prepareStatement.setDate(1,sqlDate);
+			prepareStatement.setInt(2, employee.getId());
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
 	}
 
 

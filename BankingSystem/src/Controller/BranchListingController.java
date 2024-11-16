@@ -22,7 +22,6 @@ public class BranchListingController extends BaseController {
 		this.view.getCreateButton().addActionListener(e -> handleBranchCreateButtonAction());
 		this.view.getUpdateButton().addActionListener(e -> handleBranchUpdateButtonAction());
 		this.view.getDeleteButton().addActionListener(e -> handleBranchDeleteButtonAction());
-		this.view.setVisible(true);
 	}
 
 

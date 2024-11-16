@@ -1,0 +1,20 @@
+package Controller;
+
+import javax.swing.JFrame;
+
+import View.EmployeeListingPage;
+
+public class EmployeeListingController extends BaseController {
+
+	public EmployeeListingController() {
+		super(new EmployeeListingPage());
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		
+		
+	}
+
+}

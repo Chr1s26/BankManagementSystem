@@ -17,6 +17,7 @@ public class PgSqlConnectionFactory implements ConnectionFactory {
 		return this.connection;
 	}
 
+	
 	@Override
 	public void closeConnection() {
 		try {
@@ -24,7 +25,6 @@ public class PgSqlConnectionFactory implements ConnectionFactory {
 		}catch(SQLException e){
 			System.out.print(e.getMessage());
 		}
-		
 	}
 
 }

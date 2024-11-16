@@ -1,0 +1,21 @@
+package Controller;
+
+import javax.swing.JFrame;
+
+import View.OTP.OTPConfirmationForm;
+
+public class OTPController extends BaseController {
+	
+	private OTPConfirmationForm view;
+
+	public OTPController() {
+		super(new OTPConfirmationForm());
+	}
+
+	@Override
+	public void initController() {
+		
+		
+	}
+
+}

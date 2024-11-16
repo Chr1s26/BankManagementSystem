@@ -14,4 +14,5 @@ public class TokenUtil {
 	public static boolean validateToken(String token) {
 		return token != null && token.isEmpty();
 	}
+	
 }

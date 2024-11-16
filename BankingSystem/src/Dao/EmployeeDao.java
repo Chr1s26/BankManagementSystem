@@ -14,4 +14,5 @@ public abstract class EmployeeDao extends AbstractDao<Employee>{
 	public abstract Employee validateEmployee(String email,String password) throws IncorrectPasswordException, IncorrectEmailException;
 	public abstract void updateLoginToken(Employee employee);
 	public abstract void validateLoginToken(Employee employee) throws InvalidTokenException;
+	public abstract void setConfimedAt(Employee employee);
 }

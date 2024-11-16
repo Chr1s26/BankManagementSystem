@@ -4,6 +4,7 @@ import Dao.EmployeeDaoImpl;
 import Exception.IncorrectEmailException;
 import Exception.IncorrectPasswordException;
 import Exception.InvalidTokenException;
+import Exception.NotConfirmedException;
 import Model.Employee;
 
 public class AuthenticationService {
@@ -12,10 +13,13 @@ public class AuthenticationService {
 
 	public static final EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
 	
-	public static void login(String email,String password) throws IncorrectPasswordException, IncorrectEmailException {
+	public static void login(String email,String password) throws IncorrectPasswordException, IncorrectEmailException, NotConfirmedException{
 		employee = employeeDao.validateEmployee(email,password);
+		if(!employee.isConfirmed()) {
+			throw new NotConfirmedException("Account is not confirmed!!");
+		}
 	}
-	
+	 
 	public static Employee authenticate() throws InvalidTokenException {
 		if(employee != null) {
 			employeeDao.validateLoginToken(employee);

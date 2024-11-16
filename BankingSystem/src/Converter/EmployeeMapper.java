@@ -23,5 +23,18 @@ public class EmployeeMapper {
 		employee.setPosition(employeeDto.getPosition());
 		return employee;
 	}
+	
+	public static EmployeeDTO toEmployeeDTO(Employee employee) {
+		
+		EmployeeDTO employeeDTO = new EmployeeDTO();
+		employeeDTO.setFirstName(employee.getfirstName());
+		employeeDTO.setLastName(employee.getlastName());
+		employeeDTO.setBranch(employee.getBranch().getId());
+		employeeDTO.setEmail(employee.getEmail());
+		employeeDTO.setSalary(employee.getSalary()+"");
+		employeeDTO.setPhoneNumber(employee.getPhoneNumber());
+		employeeDTO.setPosition(employee.getPosition());
+		return employeeDTO;
+	}
 
 }

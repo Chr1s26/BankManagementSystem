@@ -1,0 +1,44 @@
+package View;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+public class HomeView extends BaseWindow {
+	
+	private JMenuBar homeMenu;
+	
+	private JMenu employeeMenu;
+	private JMenuItem employeeListing;
+	
+	private JMenu BranchMenu;
+	private JMenuItem BranchListing;
+	
+	private JMenu CustomerMenu;
+	private JMenuItem CustomerListing;
+	
+	private JMenu AccountMenu;
+	private JMenuItem AccountListing;
+	
+	private JMenu loanMenu;
+	private JMenuItem loanListing;
+	
+	private JMenu transactionMenu;
+	private JMenuItem transactionListing;
+	
+	private JMenu cardMenu;
+	private JMenuItem cardListing;
+	
+	private JMenu cardTransactionMenu;
+	private JMenuItem cardTransactionListing;
+	
+	public HomeView() {
+		
+	}
+	
+	public void initializeComponent() {
+		
+		this.homeMenu = new JMenuBar();
+		
+	}
+}

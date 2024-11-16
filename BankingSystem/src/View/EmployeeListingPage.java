@@ -41,31 +41,55 @@ public class EmployeeListingPage extends BaseWindow {
 		
 		this.add(panel,BorderLayout.SOUTH);
 		
-		this.addActionOnCreateButton();
-		this.addActionOnUpdateButton();
 		prepareBaseWindow();
 	}
 	
-	public void addActionOnCreateButton() {
-		this.createButton.addActionListener(e -> employeeCreateAction());
-	}
-	
-	public void employeeCreateAction() {
-		EmployeeRegisterForm employeeRegisterForm = new EmployeeRegisterForm();
-	}
-	
-	public void addActionOnUpdateButton() {
-		this.updateButton.addActionListener(e -> employeeUpdateAction());
-	}
-	
-	public void employeeUpdateAction() {
-		EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm();
-	}
 	
 	public void prepareBaseWindow() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Employee Information");
 		this.setSize(1000,400);
-		this.setVisible(true);
+//		this.setVisible(true);
 	}
+
+	public JButton getCreateButton() {
+		return createButton;
+	}
+
+	public void setCreateButton(JButton createButton) {
+		this.createButton = createButton;
+	}
+
+	public JButton getUpdateButton() {
+		return updateButton;
+	}
+
+	public void setUpdateButton(JButton updateButton) {
+		this.updateButton = updateButton;
+	}
+
+	public JButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public void setDeleteButton(JButton deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+	public String[][] getEmployeeData() {
+		return employeeData;
+	}
+
+	public void setEmployeeData(String[][] employeeData) {
+		this.employeeData = employeeData;
+	}
+
+	public String[] getColumns() {
+		return columns;
+	}
+
+	public void setColumns(String[] columns) {
+		this.columns = columns;
+	}
+
 }

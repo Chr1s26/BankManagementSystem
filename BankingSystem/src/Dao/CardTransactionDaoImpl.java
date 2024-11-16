@@ -69,8 +69,7 @@ public class CardTransactionDaoImpl extends AbstractDao<CardTransaction>{
 			preparedStatement.setInt(5, object.getCard().getId());
 		}catch(SQLException e){
 			System.out.print("SQL Exception for : "+e.getMessage());
-		}
-		
+		}	
 	}
 
 	@Override

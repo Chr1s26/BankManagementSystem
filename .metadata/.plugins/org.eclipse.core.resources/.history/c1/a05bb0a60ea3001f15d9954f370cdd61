@@ -1,0 +1,11 @@
+package View;
+
+import Controller.EmployeeRegisterController;
+import View.OTP.OTPConfirmationForm;
+
+public class ViewTest {
+	public static void main(String[] args) {
+		EmployeeRegisterController employeeRegisterController = new EmployeeRegisterController();
+//		new OTPConfirmationForm();
+	}
+}	

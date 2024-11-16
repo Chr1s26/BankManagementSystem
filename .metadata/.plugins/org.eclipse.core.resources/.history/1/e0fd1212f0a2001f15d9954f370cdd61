@@ -1,0 +1,49 @@
+package Service;
+
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Session;
+
+
+
+public class EmailSenderService extends BaseService {
+	
+	private final String smtpHost;
+	private final String smtpPort;
+	private final String username;
+	private final String password;
+	
+	public EmailSenderService(String smtpHost,String smtpPort,String username,String password) {
+		this.smtpHost = smtpHost;
+		this.smtpPort = smtpPort;
+		this.username = username;
+		this.password = password;
+	}
+	
+	public void sendEmail(String toEmail,String subject,String body) {
+		Properties props = new Properties();
+		props.put("mail.smtp.auth","true");
+		props.put("mail.smtp.starttls.enable",true);
+		props.put("mail.smtp.host", this.smtpHost);
+		props.put("mail.smtp.port", this.smtpPort);
+		
+		Session session = Session.getInstance(props,new Authenticator() {
+			@override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username,password);
+			}
+		});
+		
+		try {
+			MimeMessage message = new MimeMessage(Session);
+			message.sentForm(new InternetAddress(username));
+			message.sentRecipient(Message.RecipientType.TO,internetAddress.parse(toEmail));
+			
+		}catch(MessageException e) {
+			e.printStackTrace();
+			System.out.print("Error sending email : "+e.getMessage());
+		}
+	}
+	
+}

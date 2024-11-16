@@ -1,0 +1,13 @@
+package Service;
+
+import Model.Employee;
+
+public class OTPService extends BaseService {
+	
+	private Employee employee;
+	
+	private OTPService(Employee employee) {
+		this.employee = employee;
+		
+	}
+}

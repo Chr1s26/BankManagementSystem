@@ -13,6 +13,7 @@ public class EmployeeCreateService {
 	private EmployeeDTO employeeDto;
 	private EmployeeDaoImpl employeeDao;
 	private List<String> errorMessages = new ArrayList<>();
+	private OTPService optService;
 	
 	public EmployeeCreateService() {
 		this.employeeDao = new EmployeeDaoImpl();
@@ -26,6 +27,8 @@ public class EmployeeCreateService {
 		this.checkPhoneDuplication();
 		this.checkErrorMessage();
 		this.creationProcess();
+		this.optService = new OTPService(employeeDto);
+		this.optService.sentOTPmail();
 	}
 
 	private void creationProcess() {
