@@ -31,7 +31,7 @@ public class LoginController extends BaseController {
 		String password = new String(this.view.getPasswordField().getPassword());
 		try {
 			AuthenticationService.login(email, password);
-			new BranchListingController();
+			homeViewController home = new homeViewController();
 			this.view.dispose();
 		}	
 		catch (IncorrectPasswordException e2) {
@@ -55,6 +55,7 @@ public class LoginController extends BaseController {
 	public void initController() {
 		this.view =(LoginWindow) this.getView();
 		this.view.setVisible(true);
+		this.view.setTitle("Login Page");
 		handleEmployeeLogin();
 	}
 	

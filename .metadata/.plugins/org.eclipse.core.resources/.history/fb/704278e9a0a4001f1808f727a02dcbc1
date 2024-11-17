@@ -1,0 +1,45 @@
+package Controller;
+
+import DTO.CustomerDTO;
+import Service.CustomerUpdateService;
+import Util.DateConverter;
+import Util.DateUtil;
+import View.CustomerUpdateForm;
+
+public class CustomerUpdateController extends BaseController {
+	private CustomerUpdateForm view ;
+	private CustomerUpdateService updateService;
+	private CustomerListingController parentController;
+	
+	public CustomerUpdateController(CustomerListingController parentController) {
+		super(new CustomerUpdateForm());
+		this.parentController = parentController;
+		this.authenticate();
+	}
+	
+	public void handleCustomerRegisteration() {
+		CustomerDTO CustomerDTO = new CustomerDTO();
+		CustomerDTO.setFirstName(this.view.getFirstName());
+		CustomerDTO.setLastName(this.view.getLastName());
+		CustomerDTO.setEmail(this.view.getEmail());
+		CustomerDTO.setPhoneNumber(this.view.getPhoneNumber());
+		CustomerDTO.setAddress(this.view.getAddressField().getText());
+		CustomerDTO.setDateOfBirth(DateConverter.toSqlDate(DateUtil.getSelectedDate(this.view.getDatePanel(), this.view.getDateSpinner())));
+		try {
+			this.updateService.call(CustomerDTO);
+			this.parentController.refreshTableData();
+			this.view.showSuccessMessage("Customer Register successfully");
+			this.view.dispose();
+		}
+		catch(Exception e) {
+			this.view.showErrorMessage(e.getMessage());
+		}
+	}
+
+	@Override
+	public void initController() {
+		this.view = (CustomerUpdateForm) this.getView();
+		this.view.getupdateButton().addActionListener(e -> handleCustomerRegisteration());
+		this.updateService = new CustomerUpdateService();
+	}
+}

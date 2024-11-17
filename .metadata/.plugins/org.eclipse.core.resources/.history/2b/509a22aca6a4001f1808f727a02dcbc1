@@ -1,0 +1,65 @@
+package Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Converter.EmployeeMapper;
+import DTO.AccountDTO;
+import Dao.AccountDaoImpl;
+import Model.Employee;
+
+public class AccountCreateService {
+	
+	private AccountDTO AccountDTO;
+	private AccountDaoImpl accountDao;
+	private List<String> errorMessages = new ArrayList<>();
+	private OTPService optService;
+	
+	public AccountCreateService() {
+		this.accountDao = new AccountDaoImpl();
+	}	
+	 
+	public void call(AccountDTO AccountDTO) throws Exception {
+		this.errorMessages.clear();
+		this.AccountDTO = AccountDTO;
+		this.validatePassword();
+		this.checkEmailDuplication();
+		this.checkPhoneDuplication();
+		this.checkErrorMessage();
+		this.creationProcess();
+		this.optService = new OTPService(AccountDTO);
+		this.optService.sentOTPmail();
+	}
+
+	private void creationProcess() {
+		Employee employee = EmployeeMapper.toEmployee(this.AccountDTO);
+		accountDao.create(employee);
+	}
+
+	private void checkPhoneDuplication() {
+		String phone = AccountDTO.getPhoneNumber();
+		if(accountDao.isPhoneExists(phone)) {
+			errorMessages.add("Phone number is already in use.");
+		}
+	}
+
+	private void checkEmailDuplication() {
+		String email = AccountDTO.getEmail();
+		if(accountDao.isEmailExists(email)) {
+			errorMessages.add("Emailed is already in use.");
+		}
+	} 
+
+	private void checkErrorMessage() throws Exception {
+		if(!errorMessages.isEmpty()) {
+			throw new Exception(errorMessages.toString().concat("\n")); 
+		}
+	}
+
+	private void validatePassword() {
+		if(!this.AccountDTO.getPassword().equals(this.AccountDTO.getConfirmPassword())) {
+			this.errorMessages.add("Incorrect Passowrd!!");
+		}
+	}
+
+}

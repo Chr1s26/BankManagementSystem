@@ -17,7 +17,6 @@ public class CustomerListingPage extends BaseWindow {
 	private JButton updateButton;
 	private JButton deleteButton;
 	private JPanel panel;
-	private String[][] customerData = new String[1][11];
 	
 	public CustomerListingPage() {
 		initializeComponent();
@@ -27,8 +26,6 @@ public class CustomerListingPage extends BaseWindow {
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(1,3));
 		customerDao = new CustomerDaoImpl();
-		
-		this.createDataTable(customerData,this.columns);
 		
 		this.createButton = new JButton("Create");
 		this.updateButton = new JButton("Update");
@@ -40,31 +37,52 @@ public class CustomerListingPage extends BaseWindow {
 		
 		this.add(panel,BorderLayout.SOUTH);
 		
-		this.addActionOnCreateButton();
-		this.addActionOnUpdateButton();
 		prepareBaseWindow();
-	}
-	
-	public void addActionOnCreateButton() {
-		this.createButton.addActionListener(e -> customerCreateAction());
-	}
-	
-	public void customerCreateAction() {
-//		customerRegisterForm customerRegisterForm = new customerRegisterForm();
-	}
-	
-	public void addActionOnUpdateButton() {
-		this.updateButton.addActionListener(e -> customerUpdateAction());
-	}
-	
-	public void customerUpdateAction() {
-//		customerUpdateForm customerUpdateForm = new customerUpdateForm();
 	}
 	
 	public void prepareBaseWindow() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Customer Information");
 		this.setSize(1300,400);
-		this.setVisible(true);
+	}
+
+	public CustomerDaoImpl getCustomerDao() {
+		return customerDao;
+	}
+
+	public void setCustomerDao(CustomerDaoImpl customerDao) {
+		this.customerDao = customerDao;
+	}
+
+	public String[] getColumns() {
+		return columns;
+	}
+
+	public void setColumns(String[] columns) {
+		this.columns = columns;
+	}
+
+	public JButton getCreateButton() {
+		return createButton;
+	}
+
+	public void setCreateButton(JButton createButton) {
+		this.createButton = createButton;
+	}
+
+	public JButton getUpdateButton() {
+		return updateButton;
+	}
+
+	public void setUpdateButton(JButton updateButton) {
+		this.updateButton = updateButton;
+	}
+
+	public JButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public void setDeleteButton(JButton deleteButton) {
+		this.deleteButton = deleteButton;
 	}
 }

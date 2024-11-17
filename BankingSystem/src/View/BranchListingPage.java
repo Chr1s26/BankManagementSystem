@@ -17,7 +17,6 @@ public class BranchListingPage extends BaseWindow {
 	private JButton updateButton;
 	private JButton deleteButton;
 	private JPanel panel;
-	private String[][] branchData = new String[1][4];
 	
 	public BranchListingPage() {
 		initializeComponent();
@@ -29,7 +28,6 @@ public class BranchListingPage extends BaseWindow {
 		panel.setLayout(new GridLayout(1,3));
 		branchDao = new BranchDaoImpl();
 		
-		this.createDataTable(branchData,this.columns);
 		
 		this.createButton = new JButton("Create");
 		this.updateButton = new JButton("Update");
@@ -60,5 +58,25 @@ public class BranchListingPage extends BaseWindow {
 
 	public JButton getDeleteButton() {
 		return deleteButton;
+	}
+
+	public String[] getColumns() {
+		return columns;
+	}
+
+	public void setColumns(String[] columns) {
+		this.columns = columns;
+	}
+
+	public void setCreateButton(JButton createButton) {
+		this.createButton = createButton;
+	}
+
+	public void setUpdateButton(JButton updateButton) {
+		this.updateButton = updateButton;
+	}
+
+	public void setDeleteButton(JButton deleteButton) {
+		this.deleteButton = deleteButton;
 	}
 }

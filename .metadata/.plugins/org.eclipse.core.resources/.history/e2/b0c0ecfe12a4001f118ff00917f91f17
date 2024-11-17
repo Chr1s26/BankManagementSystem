@@ -1,0 +1,23 @@
+package Controller;
+
+import View.HomeView;
+
+public class homeViewController extends BaseController {
+	
+	private HomeView view;
+	
+	public homeViewController() {
+		super(new HomeView());
+		this.initController();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (HomeView)this.getView();
+		this.view.getEmployeeListing().addActionListener(e -> addActionOnEmployee());
+	}
+
+	private void addActionOnEmployee() {
+		new EmployeeListingController();
+	}
+}

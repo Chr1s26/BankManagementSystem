@@ -1,0 +1,43 @@
+package Controller;
+
+import DTO.AccountDTO;
+import Service.AccountUpdateService;
+import View.AccountUpdateForm;
+
+public class AccountUpdateController extends BaseController {
+	
+	private AccountUpdateForm view ;
+	private AccountUpdateService createService;
+	private AccountListingController parentController;
+	
+	public AccountUpdateController(AccountListingController parentController,int id) {
+		super(new AccountUpdateForm());
+		this.parentController = parentController;
+		this.authenticate();
+	}
+	
+	public void handleAccountRegisteration() {
+		AccountDTO AccountDTO = new AccountDTO();
+		AccountDTO.setAccountNumber(this.view.getNumberField().getText());
+		AccountDTO.setAccountType(this.view.getAccountType());
+		AccountDTO.setBalance(Double.parseDouble(this.view.getBalanceField().getText()));
+		AccountDTO.setBranch(this.view.getBranch());
+		AccountDTO.setCustomer(this.view.getCustomer());
+		try {
+			this.createService.call(AccountDTO);
+			this.parentController.refreshTableData();
+			this.view.showSuccessMessage("Account Register successfully");
+			this.view.dispose();
+		}
+		catch(Exception e) {
+			this.view.showErrorMessage(e.getMessage());
+		}
+	}
+
+	@Override
+	public void initController() {
+		this.view = (AccountUpdateForm) this.getView();
+		this.view.getCreateButton().addActionListener(e -> handleAccountRegisteration());
+		this.createService = new AccountUpdateService();
+	}
+}

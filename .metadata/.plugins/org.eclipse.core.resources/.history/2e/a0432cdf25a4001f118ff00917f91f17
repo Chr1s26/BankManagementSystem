@@ -1,0 +1,63 @@
+package Controller;
+
+import java.util.List;
+
+import Dao.CustomerDaoImpl;
+import Model.Customer;
+import View.CustomerListingPage;
+
+public class CustomerListingController extends BaseController {
+	
+	private CustomerListingPage view;
+	private CustomerDaoImpl customerDao;
+	
+	public CustomerListingController() {
+		super(new CustomerListingPage());
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (CustomerListingPage)this.getView();
+		
+		String[] columns = this.view.getColumns();
+		this.view.createDataTable(getCustomerData(),columns);
+		
+		this.view.getCreateButton().addActionListener(e -> handleCreateButton());
+		this.view.getUpdateButton().addActionListener(e -> handleUpdateButton());
+		this.view.getDeleteButton().addActionListener(e -> handleDeleteButton());
+	}
+	
+	private Object handleUpdateButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private void handleCreateButton() {
+		
+	}
+	
+	private void handleDeleteButton() {}
+	
+	public String[][] getCustomerData(){
+		List<Customer> Customers = customerDao.getAll();
+		String[][] CustomerArray = new String[Customers.size()][this.view.getColumns().length];
+		int rowCount = 0;
+		for(Customer Customer : Customers) {
+			CustomerArray[rowCount][0] = Customer.getId()+""; 
+			CustomerArray[rowCount][1] = Customer.getfirstName();
+			CustomerArray[rowCount][2] = Customer.getlastName();
+			CustomerArray[rowCount][3] = Customer.getEmail();
+			CustomerArray[rowCount][4] = Customer.getPhoneNumber();
+			CustomerArray[rowCount][5] = Customer.getAddress();
+			CustomerArray[rowCount][6] = Customer.getdateOfBirth()+"";
+			CustomerArray[rowCount][7] = Customer.getCreatedAt()+"";
+			CustomerArray[rowCount][8] = Customer.getUpdatedAt()+"";
+			CustomerArray[rowCount][7] = Customer.getcreatedBy()+"";
+			CustomerArray[rowCount][8] = Customer.getupdatedBy()+"";
+			rowCount++;
+		}
+		return CustomerArray;
+	}
+
+}

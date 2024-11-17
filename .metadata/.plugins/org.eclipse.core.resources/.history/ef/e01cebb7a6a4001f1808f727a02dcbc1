@@ -1,0 +1,37 @@
+package Service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Converter.EmployeeMapper;
+import DTO.AccountDTO;
+import Dao.AccountDaoImpl;
+import Model.Employee;
+
+public class AccountCreateService {
+	
+	private AccountDTO AccountDTO;
+	private AccountDaoImpl accountDao;
+
+	public AccountCreateService() {
+		this.accountDao = new AccountDaoImpl();
+	}	
+	 
+	public void call(AccountDTO AccountDTO) throws Exception {
+		this.AccountDTO = AccountDTO;
+		this.creationProcess();
+	}
+
+	private void creationProcess() {
+		Employee employee = EmployeeMapper.toEmployee(this.AccountDTO);
+		accountDao.create(employee);
+	}
+
+	private void checkPhoneDuplication() {
+		String phone = AccountDTO.getPhoneNumber();
+		if(accountDao.isPhoneExists(phone)) {
+			errorMessages.add("Phone number is already in use.");
+		}
+	}
+
+}

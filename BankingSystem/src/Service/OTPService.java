@@ -7,17 +7,17 @@ public class OTPService extends BaseService {
 	
 	private EmployeeDTO employee;
 	private EmailSenderService emailSenderService;
-	private static String sendOtp;
+	public static String sendOtp;
 	
 	public OTPService(EmployeeDTO employee) {
+		this.emailSenderService = new EmailSenderService(employee.getEmail(),"OTP mail",sendOtp);
 		this.employee = employee;
-		this.emailSenderService = new EmailSenderService();
 	}
 	
 	
 	public void sentOTPmail() {
-		sendOtp = Util.OTPUtil.generateOTP(5);
-		this.emailSenderService.sendEmail(employee.getEmail(), "OTP mail",sendOtp);
+		this.emailSenderService.setName("OTP thread");
+		this.emailSenderService.start();
 	}
 	
 	

@@ -1,0 +1,12 @@
+package background_job;
+
+public abstract class PerformSentMail extends Thread{
+	
+	public abstract void sentEmailThread();
+
+	@Override
+	public void run() {
+		
+	}
+	
+}

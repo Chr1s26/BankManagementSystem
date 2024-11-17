@@ -73,4 +73,44 @@ public class BranchUpdateForm extends BaseWindow{
 		this.setSize(800,400);
 		this.setVisible(true);
 	}
+
+	public JTextField getNameField() {
+		return nameField;
+	}
+
+	public void setNameField(JTextField nameField) {
+		this.nameField = nameField;
+	}
+
+	public JTextField getAddressField() {
+		return addressField;
+	}
+
+	public void setAddressField(JTextField addressField) {
+		this.addressField = addressField;
+	}
+
+	public JTextField getPhoneField() {
+		return phoneField;
+	}
+
+	public void setPhoneField(JTextField phoneField) {
+		this.phoneField = phoneField;
+	}
+
+	public JButton getUpdateButton() {
+		return updateButton;
+	}
+
+	public void setUpdateButton(JButton updateButton) {
+		this.updateButton = updateButton;
+	}
+
+	public JButton getCancelButton() {
+		return cancelButton;
+	}
+
+	public void setCancelButton(JButton cancelButton) {
+		this.cancelButton = cancelButton;
+	}
 }

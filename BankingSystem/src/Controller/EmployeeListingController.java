@@ -3,6 +3,7 @@ package Controller;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import Dao.EmployeeDaoImpl;
 import Model.Employee;
@@ -15,40 +16,47 @@ public class EmployeeListingController extends BaseController {
 
 	public EmployeeListingController() {
 		super(new EmployeeListingPage());
-		this.authenticate();
 		this.employeeDao = new EmployeeDaoImpl();
+		this.authenticate();
 	}
 
 	@Override
 	public void initController() {
 		this.view = (EmployeeListingPage) this.getView();
+		
+		String[] columns = this.view.getColumns();
+		this.view.createDataTable(getEmployeeData(),columns);
+		
 		this.view.getCreateButton().addActionListener(e -> handleCreateButton());
 		this.view.getUpdateButton().addActionListener(e -> handleUpdateButton());
 		this.view.getDeleteButton().addActionListener(e -> handleDeleteButton());
-		this.getAllEmployeeData();
 	}
 
-	private Object handleDeleteButton() {
-		// TODO Auto-generated method stub
-		return null;
+	private void handleDeleteButton() {
+		 int selectedRowIndex = getSelectedRow();
+
+		 if (selectedRowIndex == -1) {
+			 JOptionPane.showMessageDialog(this.view, "Please select a employee to delete.");
+			 return;
+		 }
+
+		 int employeeId = getemployeeIdFromSelectedRow(selectedRowIndex);
+
+		 if (confirmDeletion(employeeId)) {
+			 deleteEmployeeAndRefresh(employeeId);
+		 }
 	}
 
-	private Object handleUpdateButton() {
-		// TODO Auto-generated method stub
-		return null;
+	private void handleUpdateButton() {
+		new EmployeeUpdateController(this,this.getemployeeIdFromSelectedRow(getSelectedRow()));
 	}
 
-	private Object handleCreateButton() {
-		// TODO Auto-generated method stub
-		return null;
+	private void handleCreateButton() {
+		new EmployeeRegisterController(this);
 	}
 	
-	public void getAllEmployeeData() {
+	public String[][] getEmployeeData(){
 		List<Employee> employees = employeeDao.getAll();
-		this.view.setEmployeeData(getEmployeeStrings(employees));
-	}
-	
-	public String[][] getEmployeeStrings(List<Employee> employees){
 		String[][] employeeArray = new String[employees.size()][this.view.getColumns().length];
 		int rowCount = 0;
 		for(Employee employee : employees) {
@@ -65,5 +73,37 @@ public class EmployeeListingController extends BaseController {
 		}
 		return employeeArray;
 	}
+	
+
+	private int getSelectedRow() {
+			return this.view.getDataTableTemplate().getSelectedRow();
+		}
+	
+
+	private int getemployeeIdFromSelectedRow(int rowIndex) {
+			return Integer.parseInt(getEmployeeData()[rowIndex][0]);
+		}
+	
+
+	private boolean confirmDeletion(int employeeId) {
+			int response = JOptionPane.showConfirmDialog(
+					this.view,
+					"Are you sure you want to delete employee with ID " + employeeId + "?",
+					"Confirm Deletion",
+					JOptionPane.YES_NO_OPTION
+		 );
+			return response == JOptionPane.YES_OPTION;
+		}
+		
+	private void deleteEmployeeAndRefresh(int employeeId) {
+			 employeeDao.delete(employeeId);
+			 this.refreshTableData();
+			}
+	
+	public void refreshTableData() {
+		this.view.refreshDataTable(getEmployeeData());
+	}
 
 }
+
+

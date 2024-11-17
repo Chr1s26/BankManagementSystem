@@ -13,39 +13,25 @@ public class EmployeeUpdateService {
 	private EmployeeDTO employeeDto;
 	private EmployeeDaoImpl employeeDao;
 	private List<String> errorMessages = new ArrayList<>();
- 	
-	public EmployeeUpdateService() {
-		employeeDao = new EmployeeDaoImpl();
-	}
 	
-	public void call(EmployeeDTO employeeDTO) throws Exception {
+	public EmployeeUpdateService() {
+		this.employeeDao = new EmployeeDaoImpl();
+	}	
+	 
+	public void calls(EmployeeDTO employeeDto) throws Exception {
 		this.errorMessages.clear();
-		this.employeeDto = employeeDTO;
-		this.checkEmailDuplication();
-		this.checkPhoneDuplication();
+		this.employeeDto = employeeDto;
 		this.validatePassword();
 		this.checkErrorMessage();
 		this.updateProcess();
 	}
-	 
-	public void updateProcess() {
-		Employee employee = EmployeeMapper.toEmployee(employeeDto);
+
+	private void updateProcess() {
+		Employee employee = EmployeeMapper.toEmployee(this.employeeDto);
+		System.out.print(employee.getId());
 		employeeDao.update(employee);
 	}
-	
-	private void checkPhoneDuplication() {
-		String phone = employeeDto.getPhoneNumber();
-		if(employeeDao.isPhoneExists(phone)) {
-			errorMessages.add("Phone number is already in use.");
-		}
-	}
-
-	private void checkEmailDuplication() {
-		String email = employeeDto.getEmail();
-		if(employeeDao.isEmailExists(email)) {
-			errorMessages.add("Email is already in use.");
-		}
-	} 
+ 
 
 	private void checkErrorMessage() throws Exception {
 		if(!errorMessages.isEmpty()) {

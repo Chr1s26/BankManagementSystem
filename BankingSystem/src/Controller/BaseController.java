@@ -27,6 +27,7 @@ public abstract class BaseController {
 			this.currentUser = AuthenticationService.authenticate();
 			this.initController();
 			this.view.setVisible(true);
+			
 		}catch(InvalidTokenException e){
 			JOptionPane.showMessageDialog(this.view, e.getMessage());
 			this.view.dispose();

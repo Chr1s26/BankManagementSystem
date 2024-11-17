@@ -1,0 +1,42 @@
+package Controller;
+
+import Dao.AccountDaoImpl;
+import Dao.EmployeeDaoImpl;
+import View.AccountListingPage;
+import View.EmployeeListingPage;
+
+public class AccountListingController extends BaseController {
+	
+	private AccountListingPage view;
+	private AccountDaoImpl accountDao;
+	
+	public AccountListingController() {
+		super(new AccountListingPage());
+		this.accountDao = new AccountDaoImpl();
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (AccountListingPage) this.getView();
+		
+		String[] columns = this.view.getColumns();
+		this.view.createDataTable(getEmployeeData(),columns);
+		
+		this.view.getCreateButton().addActionListener(e -> handleCreateButton());
+		this.view.getUpdateButton().addActionListener(e -> handleUpdateButton());
+		this.view.getDeleteButton().addActionListener(e -> handleDeleteButton());
+		
+	}
+	
+	private void handleDeleteButton() {}
+	
+	private void handleUpdateButton() {
+
+	}
+
+	private void handleCreateButton() {
+		
+	}
+	
+}

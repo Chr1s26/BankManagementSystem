@@ -42,15 +42,22 @@ public class HomeView extends BaseWindow {
 	public void initializeComponent() {
 		
 		this.homeMenu = new JMenuBar();
-		
-		this.employeeMenu.add(employeeListing);
-		this.customerMenu.add(customerListing);
-		this.branchMenu.add(branchListing);
-		this.accountMenu.add(accountListing);
-		this.loanMenu.add(loanListing);
-		this.cardMenu.add(cardListing);
-		this.transactionMenu.add(transactionListing);
-		this.cardTransactionMenu.add(cardTransactionMenu);
+		this.employeeMenu = new JMenu("Employee");
+		this.employeeListing = new JMenuItem("Employee Listing");
+		this.branchMenu = new JMenu("Branch");
+		this.branchListing = new JMenuItem("Branch Listing");
+		this.customerMenu = new JMenu("Customer");
+		this.customerListing = new JMenuItem("Customer Listing");
+		this.accountMenu = new JMenu("Account");
+		this.accountListing = new JMenuItem("Account Listing");
+		this.loanMenu = new JMenu("Loan");
+		this.loanListing = new JMenuItem("Loan Listing");
+		this.transactionMenu = new JMenu("Transaction");
+		this.transactionListing = new JMenuItem("Transaction Listing");
+		this.cardMenu = new JMenu("Card");
+		this.cardListing = new JMenuItem("Card Listing");
+		this.cardTransactionMenu = new JMenu("Card Transaction");
+		this.cardTransactionListing = new JMenuItem("Card Transaction Listing");
 		
 		this.homeMenu.add(employeeMenu);
 		this.homeMenu.add(customerMenu);
@@ -61,17 +68,81 @@ public class HomeView extends BaseWindow {
 		this.homeMenu.add(transactionMenu);
 		this.homeMenu.add(cardTransactionMenu);
 		
-		this.setJMenuBar(homeMenu);
+		this.employeeMenu.add(employeeListing);
+		this.customerMenu.add(customerListing);
+		this.branchMenu.add(branchListing);
+		this.accountMenu.add(accountListing);
+		this.loanMenu.add(loanListing);
+		this.cardMenu.add(cardListing);
+		this.transactionMenu.add(transactionListing);
+		this.cardTransactionMenu.add(cardTransactionListing);
+		
+		this.setJMenuBar(this.homeMenu);
+		this.setTitle("HomeView");
 	}
 	
-	public void addActionOnEmployeeMenu() {
-		this.employeeListing.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+	public JMenuItem getEmployeeListing() {
+		return employeeListing;
 	}
 
+	public void setEmployeeListing(JMenuItem employeeListing) {
+		this.employeeListing = employeeListing;
+	}
+
+	public JMenuItem getBranchListing() {
+		return branchListing;
+	}
+
+	public void setBranchListing(JMenuItem branchListing) {
+		this.branchListing = branchListing;
+	}
+
+	public JMenuItem getCustomerListing() {
+		return customerListing;
+	}
+
+	public void setCustomerListing(JMenuItem customerListing) {
+		this.customerListing = customerListing;
+	}
+
+	public JMenuItem getAccountListing() {
+		return accountListing;
+	}
+
+	public void setAccountListing(JMenuItem accountListing) {
+		this.accountListing = accountListing;
+	}
+
+	public JMenuItem getLoanListing() {
+		return loanListing;
+	}
+
+	public void setLoanListing(JMenuItem loanListing) {
+		this.loanListing = loanListing;
+	}
+
+	public JMenuItem getTransactionListing() {
+		return transactionListing;
+	}
+
+	public void setTransactionListing(JMenuItem transactionListing) {
+		this.transactionListing = transactionListing;
+	}
+
+	public JMenuItem getCardListing() {
+		return cardListing;
+	}
+
+	public void setCardListing(JMenuItem cardListing) {
+		this.cardListing = cardListing;
+	}
+
+	public JMenuItem getCardTransactionListing() {
+		return cardTransactionListing;
+	}
+
+	public void setCardTransactionListing(JMenuItem cardTransactionListing) {
+		this.cardTransactionListing = cardTransactionListing;
+	}
 	
 }

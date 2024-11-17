@@ -1,0 +1,48 @@
+package Controller;
+
+import Converter.BranchMapper;
+import DTO.BranchDTO;
+import Dao.BranchDaoImpl;
+import Model.Branch;
+import Service.BranchCreateService;
+import View.BranchUpdateForm;
+
+public class BranchUpdateController extends BaseController{
+	
+	private BranchUpdateForm view;
+	private BranchCreateService createService;
+	private BranchListingController parentController;
+	private BranchDaoImpl branchDao;
+	private int branchId;
+	
+	public BranchUpdateController(BranchListingController parentController,int branchId) {
+		super(new BranchUpdateForm());
+		this.branchDao = new BranchDaoImpl();
+		this.branchId = branchId;
+		this.parentController = parentController;
+		this.authenticate();
+	}
+	
+	@Override
+	public void initController() {
+		this.view = (BranchUpdateForm)this.getView();
+		this.view.getUpdateButton().addActionListener(e -> handleBranchUpdateAction());
+		this.createService = new BranchCreateService();
+	}
+	
+	private void handleBranchUpdateAction() {
+		BranchDTO branchDTO = new BranchDTO();
+		branchDTO.setName(this.view.getNameField().getText());
+		branchDTO.setAddress(this.view.getAddressField().getText());
+		branchDTO.setPhoneNumber(this.view.getPhoneField().getText());
+		try {
+			this.createService.call(branchDTO);
+			this.parentController.refreshTableData();
+			this.view.showSuccessMessage("Branch created successfully");
+			this.view.dispose();
+		}catch(Exception e) {
+			this.view.showErrorMessage(e.getMessage());
+		}
+	}
+	
+}

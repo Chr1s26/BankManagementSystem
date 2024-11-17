@@ -9,11 +9,11 @@ public class EmployeeRegisterController extends BaseController {
 	
 	private EmployeeRegisterForm view ;
 	private EmployeeCreateService createService;
-	private LoginWindow loginWindow;
-	private LoginController loginController;
+	private EmployeeListingController parentController;
 	
-	public EmployeeRegisterController() {
+	public EmployeeRegisterController(EmployeeListingController parentController) {
 		super(new EmployeeRegisterForm());
+		this.parentController = parentController;
 		this.authenticate();
 	}
 	
@@ -30,6 +30,7 @@ public class EmployeeRegisterController extends BaseController {
 		employeeDto.setSalary(this.view.getSalary());
 		try {
 			this.createService.call(employeeDto);
+			this.parentController.refreshTableData();
 			this.view.showSuccessMessage("Employee Register successfully");
 			this.view.dispose();
 			new OTPController(employeeDto);

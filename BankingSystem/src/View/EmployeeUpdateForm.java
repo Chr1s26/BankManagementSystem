@@ -215,8 +215,8 @@ public class EmployeeUpdateForm extends BaseWindow {
 		return (String)this.positionComboBox.getSelectedItem();
 	}
 
-	public void setPositionComboBox(JComboBox<String> positionComboBox) {
-		this.positionComboBox = positionComboBox;
+	public void setPositionComboBox(String positionComboBox) {
+		this.positionComboBox.setSelectedItem(positionComboBox);;
 	}
 
 	public JLabel getBranchLabel() {
@@ -232,8 +232,8 @@ public class EmployeeUpdateForm extends BaseWindow {
 		return branch.getId();
 	}
 
-	public void setBranchComboBox(JComboBox<Branch> branchComboBox) {
-		this.branchComboBox = branchComboBox;
+	public void setBranchComboBox(String branchComboBox) {
+		this.branchComboBox.setSelectedItem(branchComboBox); 
 	}
 
 	public JLabel getSalaryLabel() {

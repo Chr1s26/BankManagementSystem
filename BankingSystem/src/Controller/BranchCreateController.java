@@ -1,7 +1,6 @@
 package Controller;
 
 import DTO.BranchDTO;
-import DTO.EmployeeDTO;
 import Service.BranchCreateService;
 import View.BranchCreateForm;
 
@@ -9,9 +8,11 @@ public class BranchCreateController extends BaseController {
 	
 	private BranchCreateForm view;
 	private BranchCreateService createService;
+	private BranchListingController parentController;
 	
-	public BranchCreateController() {
+	public BranchCreateController(BranchListingController parentController) {
 		super(new BranchCreateForm());
+		this.parentController = parentController;
 		this.authenticate();
 	}
 	
@@ -19,7 +20,7 @@ public class BranchCreateController extends BaseController {
 	public void initController() {
 		this.view = (BranchCreateForm)this.getView();
 		this.view.getCreateButton().addActionListener(e -> handleBranchCreateAction());
-		this.view.setVisible(true);
+		this.createService = new BranchCreateService();
 	}
 	
 	private void handleBranchCreateAction() {
@@ -29,10 +30,15 @@ public class BranchCreateController extends BaseController {
 		branchDTO.setPhoneNumber(this.view.getPhoneField().getText());
 		try {
 			this.createService.call(branchDTO);
+			this.parentController.refreshTableData();
+			this.view.showSuccessMessage("Branch created successfully");
+			this.view.dispose();
 		}catch(Exception e) {
 			this.view.showErrorMessage(e.getMessage());
 		}
 	}
+	
+	
 	
 	
 }

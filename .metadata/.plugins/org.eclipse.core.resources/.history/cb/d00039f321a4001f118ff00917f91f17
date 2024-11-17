@@ -1,0 +1,40 @@
+package Controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import View.HomeView;
+
+public class homeViewController extends BaseController {
+	
+	private HomeView view;
+	
+	public homeViewController() {
+		super(new HomeView());
+		this.authenticate();
+		this.initController();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (HomeView)this.getView();
+		this.view.getEmployeeListing().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new EmployeeListingController();
+			}
+		});
+		this.view.getAccountListing().addActionListener(e -> addActionOnAccount());
+	}
+
+	private void addActionOnAccount() {
+		new EmployeeRegisterController();
+	}
+
+	private void addActionOnEmployee() {
+		
+	}
+	
+	
+}

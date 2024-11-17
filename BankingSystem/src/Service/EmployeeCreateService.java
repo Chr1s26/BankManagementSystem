@@ -46,7 +46,7 @@ public class EmployeeCreateService {
 	private void checkEmailDuplication() {
 		String email = employeeDto.getEmail();
 		if(employeeDao.isEmailExists(email)) {
-			errorMessages.add("Email is already in use.");
+			errorMessages.add("Emailed is already in use.");
 		}
 	} 
 

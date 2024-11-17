@@ -1,0 +1,18 @@
+package Controller;
+
+import View.HomeView;
+
+public class homeViewController extends BaseController {
+	
+	private HomeView view;
+	
+	public homeViewController() {
+		super(new HomeView());
+		this.initController();
+	}
+
+	@Override
+	public void initController() {
+		this.view = new HomeView();
+	}
+}

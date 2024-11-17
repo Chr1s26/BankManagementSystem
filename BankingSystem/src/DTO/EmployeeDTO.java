@@ -4,6 +4,7 @@ import Model.Branch;
 
 public class EmployeeDTO {
 	
+	private int id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -13,6 +14,14 @@ public class EmployeeDTO {
 	private String position;
 	private String salary;
 	private int branchId;
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getFirstName() {
 		return firstName;

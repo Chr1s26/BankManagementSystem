@@ -49,7 +49,7 @@ public class OTPController extends BaseController {
 		this.view.getMessageLabel().setText("OTP Confirmed!. Access granted");
 		this.view.getMessageLabel().setForeground(Color.GREEN);
 		JOptionPane.showMessageDialog(view, "OTP confirmed ! Access granted");
-		new BranchCreateController();
+		homeViewController home = new homeViewController();
 		}
 		catch(Exception e) {
 			this.view.getMessageLabel().setText("Invalid OTP. Please Try Again !!");

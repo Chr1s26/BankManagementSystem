@@ -17,6 +17,10 @@ public class Customer {
 	private Employee createdBy;
 	private Employee updatedBy;
 	
+	public Customer() {
+		
+	}
+	
 	public Customer(int id, String firstName, String lastName, String email, String phoneNumber, String address,Date dateOfBirth) {
 		this.id = id;
 		this.firstName = firstName;
@@ -119,10 +123,7 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", dateOfBirth=" + dateOfBirth
-				+ ", createdBy=" + createdBy + ", updatedBy=" + updatedBy + "]";
+		return firstName+" "+lastName;
 	}
-	
 	
 }

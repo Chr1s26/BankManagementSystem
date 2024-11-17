@@ -13,7 +13,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EmailSenderService extends Thread {
+import background_job.PerformSentMail;
+
+public class EmailSenderService extends PerformSentMail {
 	
 	private  String smtpHost;
 	private  String smtpPort;
@@ -24,12 +26,10 @@ public class EmailSenderService extends Thread {
 	private String subject;
 	private String body;
 	
-	@Override
-	public void run() {
-		this.sendEmail(this.toEmail, this.subject, this.body);
-	}
-
-	public EmailSenderService() {
+	public EmailSenderService(String toEmail,String subject,String body) {
+		this.toEmail = toEmail;
+		this.subject = subject;
+		this.body = body;
 		Properties properties = new Properties();
 		try {
 			FileInputStream input = new FileInputStream("src/resources/application.properties");
@@ -44,7 +44,8 @@ public class EmailSenderService extends Thread {
 		}
 	}
 	
-	public void sendEmail(String toEmail,String subject,String body) {
+	public void sendEmail() {
+		
 		Properties props = new Properties();
 		
 			props.put("mail.smtp.auth","true");
@@ -53,12 +54,11 @@ public class EmailSenderService extends Thread {
 			props.put("mail.smtp.ssl.protocols","TLSv1.2");
 			props.put("mail.smtp.host", this.smtpHost);
 			props.put("mail.smtp.port", this.smtpPort);
-			sentEmailAction( props, toEmail, subject, body);
+			sentEmailAction( props);
 	}
 		
-	
 
-	public void sentEmailAction(Properties props,String toEmail,String subject,String body) {
+	public void sentEmailAction(Properties props) {
 
 		Session session = Session.getInstance(props,new Authenticator() {
 			@Override
@@ -79,6 +79,13 @@ public class EmailSenderService extends Thread {
 			e.printStackTrace();
 			System.out.print("Error sending email : "+e.getMessage());
 		}
+	}
+
+	@Override
+	public void sentEmailThread() {
+		body = Util.OTPUtil.generateOTP(5);
+		OTPService.sendOtp = body;
+		this.sendEmail();
 	}
 	
 }
