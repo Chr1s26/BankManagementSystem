@@ -1,0 +1,122 @@
+package View;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.util.Properties;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+
+import Dao.BranchDaoImpl;
+import Dao.CustomerDaoImpl;
+import Dao.LoanDaoImpl;
+import Model.Branch;
+import Model.Customer;
+import Model.Loan;
+import Util.DateLabelFormatter;
+
+public class LoanCreateForm extends BaseWindow {
+	
+	private JLabel loanAmount;
+	private JTextField loanAmountField;
+	
+	private JLabel interestRateLabel;
+	private JTextField interestRateField;
+	
+	private JLabel loanStartDateLabel;
+	private SqlDateModel loanStartModel;
+	private JDatePanelImpl loanStartPanel;
+	private JDatePickerImpl loanStartPicker;
+	
+	private JLabel loanEndDateLabel;
+	private SqlDateModel loanEndModel;
+	private JDatePanelImpl loanEndPanel;
+	private JDatePickerImpl loanEndPicker;
+	
+	private JLabel customerLabel;
+	private JComboBox<Customer> customerComboBoxField;
+	
+	private JLabel loanTypeLabel;
+	private JComboBox<String> loanComboBoxField;
+	
+	private JButton createButton;
+	private JButton cancelButton;
+	
+	private JPanel panel;
+	private LoanDaoImpl loanDao;
+	private CustomerDaoImpl customerDao;
+	
+	public LoanCreateForm() {
+		initializeComponent();
+	}
+	
+	public void initializeComponent() {
+		
+		loanDao = new LoanDaoImpl();
+		customerDao = new CustomerDaoImpl();
+		
+		loanAmount = new JLabel("Loan Amount : ");
+		loanAmountField = new JTextField();
+		
+		interestRateLabel = new JLabel("Interest Rate : ");
+		interestRateField = new JTextField();
+		
+		loanStartDateLabel = new JLabel("Loan Start Date : ");
+		this.loanStartModel = new SqlDateModel();
+		this.loanStartPanel = new JDatePanelImpl(loanStartModel,new Properties());
+		this.loanStartPicker = new JDatePickerImpl(loanStartPanel,new DateLabelFormatter());
+	
+		
+		loanEndDateLabel = new JLabel("Loan End Date : ");
+		this.loanEndModel = new SqlDateModel();
+		this.loanEndPanel = new JDatePanelImpl(loanEndModel,new Properties());
+		this.loanEndPicker = new JDatePickerImpl(loanEndPanel,new DateLabelFormatter());
+		
+		customerLabel = new JLabel("Customer : ");
+		customerComboBoxField = new JComboBox<>(customerDao.getAll().toArray(new Customer[0]));
+		
+		loanTypeLabel = new JLabel("Loan Type : ");
+		loanComboBoxField = new JComboBox<>(new String[] {"Personal Loan", "Mortgage Loans", "Car loans"});
+		
+		createButton = new JButton("Create");
+		cancelButton = new JButton("Cancel");
+		
+		panel = new JPanel();
+		panel.setLayout(new GridLayout(7, 2));
+		
+		panel.add(loanAmount);
+		panel.add(loanAmountField);
+		panel.add(interestRateLabel);
+		panel.add(interestRateField);
+		panel.add(loanStartDateLabel);
+		panel.add(loanStartPicker);
+		panel.add(loanEndDateLabel);
+		panel.add(loanEndPicker);
+		panel.add(customerLabel);
+		panel.add(customerComboBoxField);
+		panel.add(loanTypeLabel);
+		panel.add(loanComboBoxField);
+		panel.add(createButton);
+		panel.add(cancelButton);
+		
+		this.add(panel,BorderLayout.NORTH);
+		prepareBaseWindow();
+		
+	}
+
+	public void prepareBaseWindow() {
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Loan Create Form");
+		this.setSize(800,400);
+		
+	}
+
+}

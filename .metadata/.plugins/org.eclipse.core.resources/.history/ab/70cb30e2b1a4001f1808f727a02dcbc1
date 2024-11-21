@@ -1,0 +1,21 @@
+package Converter;
+
+import DTO.LoanDTO;
+import Dao.LoanDaoImpl;
+import Model.Loan;
+
+public class LoanMapper {
+	
+	public static LoanDaoImpl loanDao = new LoanDaoImpl();
+	
+	public static Loan toLoan(LoanDTO loanDto) {
+		
+		Loan loan = new Loan();
+		loan.setloanAmount(loanDto.getLoanAmount());
+		loan.setinterestRate(loan.getinterestRate());
+		loan.setloanStartDate(loanDto.getLoanStartDate());
+		loan.setloanEndDate(loan.getloanEndDate());
+		loan.setCustomer(loanDto.getCustomer());
+		
+	}
+}

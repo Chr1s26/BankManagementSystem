@@ -19,12 +19,12 @@ public class AccountCreateService {
 	 
 	public void call(AccountDTO AccountDTO) throws Exception {
 		this.AccountDTO = AccountDTO;
-		this.creationProcess();
+		Account account = AccountMapper.toAccount(this.AccountDTO);
+		this.creationProcess(account);
 	}
 
-	private void creationProcess() {
-		Account Account = AccountMapper.toAccount(this.AccountDTO);
-		accountDao.create(Account);
+	private void creationProcess(Account account) {
+		accountDao.create(account);
 	}
 
 }

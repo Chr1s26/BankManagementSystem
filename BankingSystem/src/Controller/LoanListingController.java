@@ -46,11 +46,11 @@ public class LoanListingController extends BaseController {
 	}
 
 	private void handleUpdateButton() {
-
+		new LoanUpdateController(this,this.getLoanIdFromSelectedRow(getSelectedRow()));
 	}
 
 	private void handleCreateButton() {
-		
+		new LoanCreateController(this);
 	}
 	
 	public String[][] getLoanData(){

@@ -9,7 +9,6 @@ public class homeViewController extends BaseController {
 	public homeViewController() {
 		super(new HomeView());
 		this.authenticate();
-		this.initController();
 	}
 
 	@Override
@@ -22,7 +21,12 @@ public class homeViewController extends BaseController {
 		this.view.getLoanListing().addActionListener(e-> addActionOnLoan());
 		this.view.getCardListing().addActionListener(e -> addActionOnCard());
 		this.view.getTransactionListing().addActionListener(e -> addActionOnTransaction());
+		this.view.getTransferMoney().addActionListener(e -> addActionOnTransferMoney());
 		this.view.getCardTransactionListing().addActionListener(e -> addActionOnCardTransaction());
+	}
+
+	private void addActionOnTransferMoney() {
+		new TransferMoneyController();
 	}
 
 	private void addActionOnCardTransaction() {

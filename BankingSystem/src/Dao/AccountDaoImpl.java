@@ -1,5 +1,6 @@
 package Dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import Model.Account;
 import Model.Branch;
 import Model.Customer;
 
-public class AccountDaoImpl extends AbstractDao<Account>{
+public class AccountDaoImpl extends AccountDao{
 	
 	private BranchDaoImpl branchDaoImpl;
 	private CustomerDaoImpl customerDaoImpl;
@@ -84,6 +85,7 @@ public class AccountDaoImpl extends AbstractDao<Account>{
 			preparedStatement.setFloat(3, (float)object.getBalance());
 			preparedStatement.setInt(4, object.getBranch().getId());
 			preparedStatement.setInt(5, object.getCustomer().getId());
+			System.out.print("Dao "+object.getCustomer().getId());
 		}catch(SQLException e){
 			System.out.print("SQL exception for : "+e.getMessage());
 		}
@@ -118,6 +120,28 @@ public class AccountDaoImpl extends AbstractDao<Account>{
 			System.out.print("SQL exception for : "+e.getMessage());
 		}
 		
+	}
+
+	@Override
+	public Account findAccountByNum(String num) {
+		Account account = null;
+		try {
+			String query = "Select id from "+this.getTableName()+" where account_number = ?";
+			Connection connection = connectionFactory.createConnection();
+			PreparedStatement preapredStatement = connection.prepareStatement(query);
+			preapredStatement.setString(1,num);
+			ResultSet resultset = preapredStatement.executeQuery();
+			if(resultset.next()) {
+				int id = resultset.getInt("id");
+				account = this.getById(id);
+			}
+		}catch(SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return account;
 	}
 
 }

@@ -1,5 +1,7 @@
 package Controller;
 
+import java.sql.Date;
+
 import DTO.CustomerDTO;
 import Dao.CustomerDaoImpl;
 import Model.Customer;
@@ -31,7 +33,8 @@ public class CustomerUpdateController extends BaseController {
 		CustomerDTO.setEmail(this.view.getEmail());
 		CustomerDTO.setPhoneNumber(this.view.getPhoneNumber());
 		CustomerDTO.setAddress(this.view.getAddressField().getText());
-		CustomerDTO.setDateOfBirth(DateConverter.toSqlDate(DateUtil.getSelectedDate(this.view.getDatePanel(), this.view.getDateSpinner())));
+		CustomerDTO.setDateOfBirth((Date)this.view.getDatePanel().getModel().getValue());
+		CustomerDTO.setId(this.customer.getId());
 		try {
 			this.updateService.call(CustomerDTO);
 			this.parentController.refreshTableData();

@@ -1,0 +1,23 @@
+package Service;
+
+import DTO.TransferMoneyDTO;
+import Dao.AccountDaoImpl;
+import Dao.AccountTransactionDaoImpl;
+import Model.Account;
+
+public class TransferMoneyService {
+	
+	private TransferMoneyDTO transferMoneyDto;
+	private AccountTransactionDaoImpl transactionDao;
+	private AccountDaoImpl accountDao;
+	
+	public TransferMoneyService(TransferMoneyDTO transferMoneyDto) {
+		this.transferMoneyDto = transferMoneyDto;
+		this.accountDao = new AccountDaoImpl();
+	}
+	
+	public void transferProcess() {
+		
+		
+	}
+}

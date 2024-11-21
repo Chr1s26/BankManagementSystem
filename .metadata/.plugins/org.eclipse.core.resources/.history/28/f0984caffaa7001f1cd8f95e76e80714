@@ -1,0 +1,148 @@
+package View;
+
+
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import Dao.AccountDaoImpl;
+import Model.Account;
+
+public class TransferMoneyWindow extends BaseWindow{
+	
+    private JLabel sourceAccLabel;
+    private JComboBox<Account> sourceAccTextField;
+    private JLabel targetAccLabel;
+    private JComboBox<Account> targetAccField;
+    private JLabel amountLabel;
+    private JTextField amountField;
+    private JLabel descLabel;
+    private JTextField descField;
+    private JButton transferButton;
+    private JButton cancelButton;
+    private AccountDaoImpl accountDao;
+
+	public TransferMoneyWindow() {
+		
+		this.accountDao = new AccountDaoImpl();
+        
+        setTitle("Transfer Money");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridBagLayout()); 
+
+       
+        sourceAccLabel = new JLabel("Source Account:");
+        sourceAccTextField = new JComboBox<>();
+
+        targetAccLabel = new JLabel("Target Account:");
+        targetAccField = new JTextField(15);
+
+        amountLabel = new JLabel("Amount:");
+        amountField = new JTextField(15);
+
+        descLabel = new JLabel("Description:");
+        descField = new JTextField(15);
+
+        transferButton = new JButton("Transfer");
+        cancelButton = new JButton("Cancel");
+
+        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); 
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+
+      
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        add(sourceAccLabel, gbc);
+
+        gbc.gridx = 1;
+        add(sourceAccTextField, gbc);
+
+        
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        add(targetAccLabel, gbc);
+
+        gbc.gridx = 1;
+        add(targetAccField, gbc);
+
+       
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        add(amountLabel, gbc);
+
+        gbc.gridx = 1;
+        add(amountField, gbc);
+
+       
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        add(descLabel, gbc);
+
+        gbc.gridx = 1;
+        add(descField, gbc);
+
+       
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 1; 
+        add(transferButton, gbc);
+
+        gbc.gridx = 1;
+        add(cancelButton, gbc);
+
+        
+        transferButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performTransfer();
+            }
+        });
+
+        cancelButton.addActionListener(e -> clearFields());
+    }
+
+    private void performTransfer() {
+        // Perform transfer logic here
+        String sourceAccount = sourceAccTextField.getText();
+        String targetAccount = targetAccField.getText();
+        String amount = amountField.getText();
+        String description = descField.getText();
+        
+        // Validate and process transaction
+        if (sourceAccount.isEmpty() || targetAccount.isEmpty() || amount.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            double amountValue = Double.parseDouble(amount);
+            if (amountValue <= 0) {
+                JOptionPane.showMessageDialog(this, "Amount must be greater than zero.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            JOptionPane.showMessageDialog(this, "Transfer successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid amount format.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void clearFields() {
+        sourceAccTextField.setText("");
+        targetAccField.setText("");
+        amountField.setText("");
+        descField.setText("");
+    }
+
+}

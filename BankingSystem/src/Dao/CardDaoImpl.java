@@ -38,14 +38,28 @@ public class CardDaoImpl extends AbstractDao<Card>{
 			Customer customer = customerDaoImpl.getById(customerId);
 			Account account = accountDaoImpl.getById(account_id);
 			
-			String type = cardType+"";
-			card = new Card(id,cardNumber,type,expireDate,securityCode,customer,account);
+			
+			card = new Card(id,cardNumber,this.changeToString(cardType),expireDate,securityCode,customer,account);
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
 		return card;
 	}
-
+	
+	public String changeToString(int cardType) {
+		if(cardType == 1) {
+			return "Debit Cards";
+		}else if (cardType == 2) {
+			return "Credit Cards";
+		}else if(cardType == 3) {
+			return "Prepaid Cards";
+		}else if (cardType == 4) {
+			return "ATM Cards";
+		}else {
+			return "null";
+		}
+	}
+//	"Debit Cards", "Credit Cards", "Prepaid Cards","ATM Cards"
 	@Override
 	public String getInsertQuery() {
 		return "insert into "+this.getTableName()+" (card_number,card_type,expire_date,security_code,customer_id,account_id) values (?,?,?,?,?,?)";
@@ -65,7 +79,7 @@ public class CardDaoImpl extends AbstractDao<Card>{
 	public void prepareParams(PreparedStatement preparedStatement, Card object) {
 		try {
 			preparedStatement.setString(1, object.getCardNumber());
-			preparedStatement.setInt(2, Integer.parseInt(object.getCardType()));
+			preparedStatement.setInt(2, this.changeToInt(object.getCardType()));
 			preparedStatement.setDate(3, object.getExpireDate());
 			preparedStatement.setInt(4, object.getSecurityCode());
 			preparedStatement.setInt(5, object.getCustomer().getId());
@@ -75,12 +89,26 @@ public class CardDaoImpl extends AbstractDao<Card>{
 		}
 		
 	}
+	
+	public int changeToInt(String cardType) {
+		if(cardType.equals("Debit Cards")) {
+			return 1;
+		}else if(cardType.equals("Credit Cards")) {
+			return 2;
+		}else if(cardType.equals("Prepaid Cards")) {
+			return 3;
+		}else if(cardType.equals("ATM Cards")) {
+			return 4;
+		}else {
+			return -1;
+		}
+	}
 
 	@Override
 	public void prepareParamsForUpdate(PreparedStatement preparedStatement, Card object) {
 		try {
 			preparedStatement.setString(1, object.getCardNumber());
-			preparedStatement.setInt(2, Integer.parseInt(object.getCardType()));
+			preparedStatement.setInt(2, this.changeToInt(object.getCardType()));
 			preparedStatement.setDate(3, object.getExpireDate());
 			preparedStatement.setInt(4, object.getSecurityCode());
 			preparedStatement.setInt(5, object.getCustomer().getId());

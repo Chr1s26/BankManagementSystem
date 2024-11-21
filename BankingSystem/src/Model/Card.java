@@ -12,6 +12,10 @@ public class Card {
 	private Customer customer;
 	private Account account;
 	
+	public Card() {
+		
+	}
+	
 	public Card(int id, String cardNumber, String cardType, Date expireDate, int securityCode, Customer customer,
 			Account account) {
 		

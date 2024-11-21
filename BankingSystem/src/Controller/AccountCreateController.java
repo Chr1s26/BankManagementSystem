@@ -16,6 +16,10 @@ public class AccountCreateController extends BaseController {
 		this.authenticate();
 	}
 	
+//	ALTER TABLE accounts
+//	ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP;
+
+	
 	public void handleEmployeeRegisteration() {
 		AccountDTO AccountDTO = new AccountDTO();
 		AccountDTO.setAccountNumber(this.view.getNumberField().getText());

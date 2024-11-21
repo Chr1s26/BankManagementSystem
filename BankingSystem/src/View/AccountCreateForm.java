@@ -27,10 +27,10 @@ public class AccountCreateForm extends BaseWindow {
 	private JTextField balanceField;
 	
 	private JLabel branchLabel;
-	private JComboBox branchCombo;
+	private JComboBox<Branch> branchCombo;
 	
 	private JLabel customerLabel;
-	private JComboBox customerCombo;
+	private JComboBox<Customer> customerCombo;
 
 	private JButton createButton;
 	private JButton cancelButton;
@@ -94,7 +94,6 @@ public class AccountCreateForm extends BaseWindow {
 	
 	public Customer getCustomer() {
 		Customer customer = (Customer)this.customerCombo.getSelectedItem();
-		System.out.print("Customer id"+customer.getId());
 		return customer;
 	}
 	
@@ -134,11 +133,11 @@ public class AccountCreateForm extends BaseWindow {
 		this.balanceField = balanceField;
 	}
 
-	public JComboBox getBranchCombo() {
+	public JComboBox<Branch> getBranchCombo() {
 		return branchCombo;
 	}
 
-	public void setBranchCombo(JComboBox branchCombo) {
+	public void setBranchCombo(JComboBox<Branch> branchCombo) {
 		this.branchCombo = branchCombo;
 	}
 
@@ -150,11 +149,11 @@ public class AccountCreateForm extends BaseWindow {
 		this.customerLabel = customerLabel;
 	}
 
-	public JComboBox getCustomerCombo() {
+	public JComboBox<Customer> getCustomerCombo() {
 		return customerCombo;
 	}
 
-	public void setCustomerCombo(JComboBox customerCombo) {
+	public void setCustomerCombo(JComboBox<Customer> customerCombo) {
 		this.customerCombo = customerCombo;
 	}
 

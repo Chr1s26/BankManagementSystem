@@ -33,7 +33,7 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 			Date loan_end = resultset.getDate("loan_end_date");
 			int customerId = resultset.getInt("customer_id");
 			Customer customer = customerDaoImpl.getById(customerId);
-			String loanType = loan_type+"";
+			String loanType = getLoanType(loan_type);
 			
 			loan = new Loan(id,loanType,loan_amount,interest_rate,loan_start,loan_end,customer);
 		}catch(SQLException e) {
@@ -41,15 +41,27 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 		}
 		return loan;
 	}
+	
+	public String getLoanType(int loan) {
+		if(loan == 1) {
+			return "Personal Loan";
+		}else if(loan == 2){
+			return "Mortgage Loans";
+		}else if(loan == 3) {
+			return "Car loans";
+		}else {
+			return "null";
+		}
+	}
 
 	@Override
 	public String getInsertQuery() {
-		return "insert into "+this.getTableName()+" (loan_type,loan_amount,interest_rate,loan_start_date,loan_end_date) values(?,?,?,?,?)";
+		return "insert into "+this.getTableName()+" (loan_amount,interest_rate,loan_start_date,loan_end_date,customer_id,loan_type) values(?,?,?,?,?,?)";
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set loan_type = ?, loan_amount = ?, interest_rate = ?, loan_start_date = ?, loan_end_date = ? where id = ?";
+		return "update "+this.getTableName()+" set loan_amount = ?, interest_rate = ?, loan_start_date = ?, loan_end_date = ?, customer_id = ?, loan_type = ? where id = ?";
 	}
 
 	@Override
@@ -60,26 +72,42 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 	@Override
 	public void prepareParams(PreparedStatement preparedStatement, Loan object) {
 		try {
-			preparedStatement.setInt(1, Integer.parseInt(object.getloanType()));
-			preparedStatement.setFloat(2,(float) object.getloanAmount());
-			preparedStatement.setFloat(3,(float) object.getinterestRate());
-			preparedStatement.setDate(4, object.getloanStartDate());
-			preparedStatement.setDate(5, object.getloanEndDate());
+			preparedStatement.setFloat(1,(float) object.getloanAmount());
+			preparedStatement.setFloat(2,(float) object.getinterestRate());
+			preparedStatement.setDate(3, object.getloanStartDate());
+			preparedStatement.setDate(4, object.getloanEndDate());
+			preparedStatement.setInt(5, object.getCustomer().getId());
+			preparedStatement.setInt(6, this.changeToInt(object.getloanType()));
 		}catch(SQLException e) {
 			System.out.print("SQL exception for : "+e.getMessage());
 		}
-		
+	}
+	
+	public int changeToInt(String loanType) {
+		if(loanType.equals("Personal Loan")) {
+			return 1;
+		}
+		else if(loanType.equals("Mortgage Loans")) {
+			return 2;
+		}
+		else if(loanType.equals("Car loans")) {
+			return 3;
+		}
+		else {
+			return -1;
+		}
 	}
 
 	@Override
 	public void prepareParamsForUpdate(PreparedStatement preparedStatement, Loan object) {
 		try {
-			preparedStatement.setInt(1, Integer.parseInt(object.getloanType()));
-			preparedStatement.setFloat(2,(float) object.getloanAmount());
-			preparedStatement.setFloat(3,(float) object.getinterestRate());
-			preparedStatement.setDate(4, object.getloanStartDate());
-			preparedStatement.setDate(5, object.getloanEndDate());
-			preparedStatement.setInt(6, object.getId());
+			preparedStatement.setFloat(1,(float) object.getloanAmount());
+			preparedStatement.setFloat(2,(float) object.getinterestRate());
+			preparedStatement.setDate(3, object.getloanStartDate());
+			preparedStatement.setDate(4, object.getloanEndDate());
+			preparedStatement.setInt(5, object.getCustomer().getId());
+			preparedStatement.setInt(6, this.changeToInt(object.getloanType()));
+			preparedStatement.setInt(7, object.getId());
 		}catch(SQLException e) {
 			System.out.print("SQL exception for : "+e.getMessage());
 		}

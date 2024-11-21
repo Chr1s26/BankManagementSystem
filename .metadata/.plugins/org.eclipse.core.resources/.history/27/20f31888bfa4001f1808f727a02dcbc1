@@ -1,0 +1,185 @@
+package View;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Properties;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.SqlDateModel;
+
+import Dao.AccountDaoImpl;
+import Dao.CustomerDaoImpl;
+import Model.Account;
+import Model.Customer;
+import Util.DateLabelFormatter;
+
+public class CardCreateForm extends BaseWindow {
+	private JLabel cardNumberLabel;
+	private JTextField cardNumberField;
+	
+	private JLabel cardTypeLabel;
+	private JComboBox<String> cardTypeField;
+	
+	private JLabel expireDateLabel;
+	private SqlDateModel expireModel;
+	private JDatePanelImpl expirePanel;
+	private JDatePickerImpl expirePicker;
+	
+	private JLabel securityLabel;
+	private JTextField securityField;
+	
+	private JLabel customerLabel;
+	private JComboBox<Customer> customerField;
+	
+	private JLabel accountLabel;
+	private JComboBox<Account> accountField;
+	
+	private JButton createButton;
+	private JButton cancelButton;
+	
+	private JPanel panel;
+	private CustomerDaoImpl customerDao;
+	private AccountDaoImpl accountDao;
+	
+	public CardCreateForm() {
+		initializeComponent();
+	}
+	
+	public void initializeComponent() {
+		
+		customerDao = new CustomerDaoImpl();
+		accountDao = new AccountDaoImpl();
+		
+		cardNumberLabel = new JLabel("Card Number : ");
+		cardNumberField = new JTextField();
+		
+		cardTypeLabel = new JLabel("Card Type : ");
+		cardTypeField = new JComboBox(new String[] {"Debit Cards", "Credit Cards", "Prepaid Cards","ATM Cards"});
+		
+		expireDateLabel = new JLabel("Expire Date : ");
+		this.expireModel = new SqlDateModel();
+		this.expirePanel = new JDatePanelImpl(expireModel,new Properties());
+		this.expirePicker = new JDatePickerImpl(expirePanel,new DateLabelFormatter());
+		
+		securityLabel = new JLabel("Security Code : ");
+		securityField = new JTextField();
+		
+		customerLabel = new JLabel("Customer : ");
+		customerField = new JComboBox(customerDao.getAll().toArray(new Customer[0]));
+		
+		accountLabel = new JLabel("Account : ");
+		accountField = new JComboBox(accountDao.getAll().toArray(new Account[0]));
+		
+		createButton = new JButton("Register");
+		cancelButton = new JButton("Cancel");
+		
+		panel = new JPanel();
+		panel.setLayout(new GridLayout(6, 2));
+		
+		panel.add(cardNumberLabel);
+		panel.add(cardNumberField);
+		panel.add(cardTypeLabel);
+		panel.add(cardTypeField);
+		panel.add(expireDateLabel);
+		panel.add(expirePicker);
+		panel.add(securityLabel);
+		panel.add(securityField);
+		panel.add(customerLabel);
+		panel.add(customerField);
+		panel.add(accountLabel);
+		panel.add(accountField);
+		panel.add(createButton);
+		panel.add(cancelButton);
+		
+		this.add(panel,BorderLayout.NORTH);
+		prepareBaseWindow();
+		
+	}
+	
+	public JSpinner createTimeSpinner() {
+		SpinnerDateModel timeModel = new SpinnerDateModel(new Date(),null,null,Calendar.HOUR_OF_DAY);
+		JSpinner timeSpinner = new JSpinner(timeModel);
+		JSpinner.DateEditor timeEditer = new JSpinner.DateEditor(timeSpinner,"HH:mm");
+		timeSpinner.setEditor(timeEditer);
+		
+		Dimension spinnerSize = new Dimension(10,10);
+		timeSpinner.setPreferredSize(spinnerSize);
+		return timeSpinner;
+	}
+	
+	public JLabel getcustomerLabel() {
+		return customerLabel;
+	}
+
+	public void setcustomerLabel(JLabel customerLabel) {
+		this.customerLabel = customerLabel;
+	}
+
+	public JTextField getcustomerField() {
+		return customerField;
+	}
+
+	public void setcustomerField(JTextField customerField) {
+		this.customerField = customerField;
+	}
+
+	public JButton getCancelButton() {
+		return cancelButton;
+	}
+
+	public void setCancelButton(JButton cancelButton) {
+		this.cancelButton = cancelButton;
+	}
+
+	public void setCreateButton(JButton createButton) {
+		this.createButton = createButton;
+	}
+	
+	public String getFirstName() {
+		return this.cardNumberField.getText();
+	}
+	
+	public String getLastName() {
+		return this.cardTypeField.getText();
+	}
+	
+	public String getEmail() {
+		return this.emailField.getText();
+	}
+	
+	public String getPhoneNumber() {
+		return this.securityField.getText();
+	}
+	
+	public JDatePanelImpl getDatePanel() {
+		return datePanel;
+	}
+
+	public void setDatePanel(JDatePanelImpl datePanel) {
+		this.datePanel = datePanel;
+	}
+
+	public JButton getCreateButton() {
+		return this.createButton;
+	}
+
+	public void prepareBaseWindow() {
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setTitle("Customer Create Form");
+		this.setSize(800,400);
+		
+	}
+}

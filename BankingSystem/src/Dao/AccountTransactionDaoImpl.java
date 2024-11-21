@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 import Model.Account;
 import Model.AccountTransaction;
 
-public class AccountTransactionDaoImpl extends AbstractDao<AccountTransaction>{
+public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	
 	private AccountDaoImpl accountDaoImpl;
 	
@@ -26,15 +26,14 @@ public class AccountTransactionDaoImpl extends AbstractDao<AccountTransaction>{
 		AccountTransaction accountTransaction = null;
 		try {
 			int id = resultset.getInt("id");
-			int type = resultset.getInt("transaction_type");
+			String type = resultset.getString("transaction_type");
 			double amount = (double) resultset.getFloat("amount");
 			Timestamp transactionDate = resultset.getTimestamp("transaction_date");
 			String description = resultset.getString("description");
 			int accountId = resultset.getInt("account_id");
 			Account account = this.accountDaoImpl.getById(accountId);
 			
-			String transactionType = type +"";
-			accountTransaction = new AccountTransaction(id,transactionType,amount,transactionDate,description,account);
+			accountTransaction = new AccountTransaction(id,type,amount,transactionDate,description,account);
 		} catch(SQLException e) {
 			System.out.print("SQL Exception for : "+ e.getMessage());
 		}
@@ -59,7 +58,7 @@ public class AccountTransactionDaoImpl extends AbstractDao<AccountTransaction>{
 	@Override
 	public void prepareParams(PreparedStatement preparedStatement, AccountTransaction object) {
 		try {
-			preparedStatement.setInt(1, Integer.parseInt(object.getTransactionType()));
+			preparedStatement.setString(1, object.getTransactionType());
 			preparedStatement.setFloat(2, (float)object.getAmount());
 			preparedStatement.setTimestamp(3, object.getTransactionDate());
 			preparedStatement.setString(4, object.getDescription());
@@ -73,7 +72,7 @@ public class AccountTransactionDaoImpl extends AbstractDao<AccountTransaction>{
 	@Override
 	public void prepareParamsForUpdate(PreparedStatement preparedStatement, AccountTransaction object) {
 		try {
-			preparedStatement.setInt(1, Integer.parseInt(object.getTransactionType()));
+			preparedStatement.setString(1, object.getTransactionType());
 			preparedStatement.setFloat(2, (float)object.getAmount());
 			preparedStatement.setTimestamp(3, object.getTransactionDate());
 			preparedStatement.setString(4, object.getDescription());
@@ -84,5 +83,6 @@ public class AccountTransactionDaoImpl extends AbstractDao<AccountTransaction>{
 		}
 		
 	}
+
 	
 }

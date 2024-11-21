@@ -45,7 +45,7 @@ public class CustomerCreateForm extends BaseWindow {
 	private SqlDateModel dateModel;
 	private JDatePanelImpl datePanel;
 	private JDatePickerImpl datePicker;
-	private JSpinner dateSpinner;
+
 	
 	private JButton createButton;
 	private JButton cancelButton;
@@ -80,13 +80,12 @@ public class CustomerCreateForm extends BaseWindow {
 		this.dateModel = new SqlDateModel();
 		this.datePanel = new JDatePanelImpl(dateModel,new Properties());
 		this.datePicker = new JDatePickerImpl(datePanel,new DateLabelFormatter());
-		this.dateSpinner = this.createTimeSpinner();
 		
 		createButton = new JButton("Register");
 		cancelButton = new JButton("Cancel");
 		
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(5, 2));
+		panel.setLayout(new GridLayout(6, 2));
 		
 		panel.add(firstNameLabel);
 		panel.add(firstNameField);
@@ -98,20 +97,15 @@ public class CustomerCreateForm extends BaseWindow {
 		panel.add(phoneNumberField);
 		panel.add(addressLabel);
 		panel.add(addressField);
-		
-		JPanel panel1 = new JPanel();
-		panel1.setLayout(new GridLayout(1,3,40,40));
-		panel1.add(dateLabel);
-		panel1.add(datePicker);
-		panel1.add(dateSpinner);
-		
+		panel.add(dateLabel);
+		panel.add(datePicker);
+	
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new GridLayout(1,1));
 		panel2.add(createButton);
 		panel2.add(cancelButton);
 		
 		this.add(panel,BorderLayout.NORTH);
-		this.add(panel1,BorderLayout.CENTER);
 		this.add(panel2,BorderLayout.SOUTH);
 		prepareBaseWindow();
 		
@@ -182,14 +176,6 @@ public class CustomerCreateForm extends BaseWindow {
 
 	public JButton getCreateButton() {
 		return this.createButton;
-	}
-	
-	public JSpinner getDateSpinner() {
-		return dateSpinner;
-	}
-
-	public void setDateSpinner(JSpinner dateSpinner) {
-		this.dateSpinner = dateSpinner;
 	}
 
 	public void prepareBaseWindow() {

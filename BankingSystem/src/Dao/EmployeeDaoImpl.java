@@ -59,7 +59,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? encrypt_password = ? where id = ?";
+		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? ,encrypt_password = ? where id = ?";
 	}
 
 	@Override

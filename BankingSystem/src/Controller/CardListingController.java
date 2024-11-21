@@ -47,11 +47,12 @@ public class CardListingController extends BaseController {
 	}
 
 	private void handleUpdateButton() {
-		
+		new CardUpdateController(this,getCardIdFromSelectedRow(getSelectedRow()));
 	}
 
 	private void handleCreateButton() {
-		
+		new CardCreateController(this);
+
 	}
 	
 	public String[][] getCardData(){

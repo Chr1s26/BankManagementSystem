@@ -28,12 +28,15 @@ public class HomeView extends BaseWindow {
 	
 	private JMenu transactionMenu;
 	private JMenuItem transactionListing;
+	private JMenuItem transferMoney;
 	
 	private JMenu cardMenu;
 	private JMenuItem cardListing;
 	
 	private JMenu cardTransactionMenu;
 	private JMenuItem cardTransactionListing;
+	
+
 	
 	public HomeView() {
 		this.initializeComponent();
@@ -54,6 +57,7 @@ public class HomeView extends BaseWindow {
 		this.loanListing = new JMenuItem("Loan Listing");
 		this.transactionMenu = new JMenu("Transaction");
 		this.transactionListing = new JMenuItem("Transaction Listing");
+		this.transferMoney = new JMenuItem("Transfer Money");
 		this.cardMenu = new JMenu("Card");
 		this.cardListing = new JMenuItem("Card Listing");
 		this.cardTransactionMenu = new JMenu("Card Transaction");
@@ -75,6 +79,7 @@ public class HomeView extends BaseWindow {
 		this.loanMenu.add(loanListing);
 		this.cardMenu.add(cardListing);
 		this.transactionMenu.add(transactionListing);
+		this.transactionMenu.add(this.transferMoney);
 		this.cardTransactionMenu.add(cardTransactionListing);
 		
 		this.setJMenuBar(this.homeMenu);
@@ -143,6 +148,22 @@ public class HomeView extends BaseWindow {
 
 	public void setCardTransactionListing(JMenuItem cardTransactionListing) {
 		this.cardTransactionListing = cardTransactionListing;
+	}
+
+	public JMenu getTransactionMenu() {
+		return transactionMenu;
+	}
+
+	public void setTransactionMenu(JMenu transactionMenu) {
+		this.transactionMenu = transactionMenu;
+	}
+
+	public JMenuItem getTransferMoney() {
+		return transferMoney;
+	}
+
+	public void setTransferMoney(JMenuItem transferMoney) {
+		this.transferMoney = transferMoney;
 	}
 	
 }

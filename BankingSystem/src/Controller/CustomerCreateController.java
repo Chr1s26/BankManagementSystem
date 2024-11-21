@@ -1,5 +1,7 @@
 package Controller;
 
+import java.sql.Date;
+
 import DTO.CustomerDTO;
 import Service.CustomerCreateService;
 import Util.DateConverter;
@@ -25,7 +27,8 @@ public class CustomerCreateController extends BaseController {
 		CustomerDTO.setEmail(this.view.getEmail());
 		CustomerDTO.setPhoneNumber(this.view.getPhoneNumber());
 		CustomerDTO.setAddress(this.view.getAddressField().getText());
-		CustomerDTO.setDateOfBirth(DateConverter.toSqlDate(DateUtil.getSelectedDate(this.view.getDatePanel(), this.view.getDateSpinner())));
+		Date date = (Date) this.view.getDatePanel().getModel().getValue();
+		CustomerDTO.setDateOfBirth(date);
 		try {
 			this.createService.call(CustomerDTO);
 			this.parentController.refreshTableData();

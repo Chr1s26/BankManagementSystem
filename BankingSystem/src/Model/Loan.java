@@ -12,6 +12,10 @@ public class Loan {
 	private Date loanEndDate;
 	private Customer customer;
 	
+	public Loan() {
+		
+	}
+	
 	public Loan(int id, String loanType, double loanAmount, double interestRate, Date loanStartDate,
 			Date loanEndDate, Customer customer) {
 		

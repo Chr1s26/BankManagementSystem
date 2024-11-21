@@ -1,0 +1,29 @@
+package Util;
+
+
+import javax.swing.JSpinner;
+
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+
+public class DateUtil {
+	
+	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public static Date getSelectedDate(String dateString) {
+		Date sqlDate = null;
+		try {
+			java.util.Date utilDate= sdf.parse(dateString);
+			sqlDate = new Date(utilDate.getTime());
+		}catch(ParseException e) {
+			e.printStackTrace();
+		}
+		return sqlDate;
+	}
+}

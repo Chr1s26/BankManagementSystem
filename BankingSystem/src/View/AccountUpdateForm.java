@@ -32,7 +32,7 @@ public class AccountUpdateForm extends BaseWindow {
 	private JLabel customerLabel;
 	private JComboBox customerCombo;
 
-	private JButton createButton;
+	private JButton updateButton;
 	private JButton cancelButton;
 	
 	private JPanel panel;
@@ -63,7 +63,7 @@ public class AccountUpdateForm extends BaseWindow {
 		customerLabel = new JLabel("Customer : ");
 		customerCombo = new JComboBox<>(customerDao.getAll().toArray(new Customer[0]));
 		
-		createButton = new JButton("Create");
+		updateButton = new JButton("Update");
 		cancelButton = new JButton("Cancel");
 		
 		panel = new JPanel();
@@ -79,7 +79,7 @@ public class AccountUpdateForm extends BaseWindow {
 		panel.add(branchCombo);
 		panel.add(customerLabel);
 		panel.add(customerCombo);
-		panel.add(createButton);
+		panel.add(updateButton);
 		panel.add(cancelButton);
 		
 		this.add(panel,BorderLayout.NORTH);
@@ -157,12 +157,12 @@ public class AccountUpdateForm extends BaseWindow {
 		this.customerCombo = customerCombo;
 	}
 
-	public JButton getCreateButton() {
-		return createButton;
+	public JButton getupdateButton() {
+		return updateButton;
 	}
 
-	public void setCreateButton(JButton createButton) {
-		this.createButton = createButton;
+	public void setupdateButton(JButton updateButton) {
+		this.updateButton = updateButton;
 	}
 
 	public JButton getCancelButton() {

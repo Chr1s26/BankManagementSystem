@@ -21,6 +21,7 @@ public class EmployeeMapper {
 		employee.setEncryptPassword(PasswordUtil.encryptPassword(employeeDto.getPassword()));
 		employee.setPhoneNumber(employeeDto.getPhoneNumber());
 		employee.setPosition(employeeDto.getPosition());
+		employee.setId(employeeDto.getId());
 		return employee;
 	}
 	

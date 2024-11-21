@@ -3,7 +3,6 @@
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="Dao.CustomerDaoImpl"/>
-    <fullyQualifiedTypeName name="Util.DateConverter"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
     <fullyQualifiedTypeName name="Util.PasswordUtil"/>
     <fullyQualifiedTypeName name="java.util.Base64"/>
@@ -18,4 +17,10 @@
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="Converter.EmployeeMapper"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="java.util.Calendar"/>
+    <fullyQualifiedTypeName name="javax.swing.JSpinner"/>
+    <fullyQualifiedTypeName name="javax.swing.JSpinner.DateEditor"/>
+    <fullyQualifiedTypeName name="Util.DateUtil"/>
+    <fullyQualifiedTypeName name="Util.DateConverter"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
 </qualifiedTypeNameHistroy>

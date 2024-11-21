@@ -33,7 +33,7 @@ public class AccountUpdateController extends BaseController {
 		try {
 			this.createService.call(AccountDTO);
 			this.parentController.refreshTableData();
-			this.view.showSuccessMessage("Account Register successfully");
+			this.view.showSuccessMessage("Account Updated successfully");
 			this.view.dispose();
 		}
 		catch(Exception e) {
@@ -49,7 +49,7 @@ public class AccountUpdateController extends BaseController {
 		this.view.getBalanceField().setText(account.getBalance()+"");
 		this.view.getBranchCombo().setSelectedItem(account.getBranch());
 		this.view.getCustomerCombo().setSelectedItem(account.getCustomer());
-		this.view.getCreateButton().addActionListener(e -> handleAccountRegisteration());
+		this.view.getupdateButton().addActionListener(e -> handleAccountRegisteration());
 		this.createService = new AccountUpdateService();
 	}
 }
