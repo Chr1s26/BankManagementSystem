@@ -62,7 +62,7 @@ public class CardListingController extends BaseController {
 		for(Card Card : Cards) {
 			CardArray[rowCount][0] = Card.getId()+""; 
 			CardArray[rowCount][1] = Card.getCardNumber();
-			CardArray[rowCount][2] = Card.getCardType();
+			CardArray[rowCount][2] = Card.getCardType()+"";
 			CardArray[rowCount][3] = Card.getExpireDate()+"";
 			CardArray[rowCount][4] = Card.getSecurityCode()+"";
 			CardArray[rowCount][5] = Card.getCustomer().getfirstName();

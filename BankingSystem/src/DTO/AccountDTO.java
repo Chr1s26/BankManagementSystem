@@ -2,6 +2,7 @@ package DTO;
 
 import java.sql.Date;
 
+import Model.AccountType;
 import Model.Branch;
 import Model.Customer;
 
@@ -9,7 +10,7 @@ public class AccountDTO {
 	
 	private int id;
 	private String accountNumber;
-	private String accountType;
+	private AccountType accountType;
 	private double balance;
 	private Branch branch;
 	private Customer customer;
@@ -26,10 +27,10 @@ public class AccountDTO {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public String getAccountType() {
+	public AccountType getAccountType() {
 		return accountType;
 	}
-	public void setAccountType(String accountType) {
+	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
 	public double getBalance() {

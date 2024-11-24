@@ -64,7 +64,7 @@ public class AccountListingController extends BaseController {
 		for (Account Account : Accounts) {
 			AccountArray[rowCount][0] = Account.getId() + "";
 			AccountArray[rowCount][1] = Account.getaccountNumber();
-			AccountArray[rowCount][2] = Account.getaccountType();
+			AccountArray[rowCount][2] = Account.getaccountType()+"";
 			AccountArray[rowCount][3] = Account.getBalance() + "";
 			AccountArray[rowCount][4] = Account.getcreatedAt() + "";
 			AccountArray[rowCount][5] = Account.getBranch().toString();

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import Model.Customer;
 import Model.Loan;
+import Model.LoanType;
 
 public class LoanDaoImpl extends AbstractDao<Loan>{
 	
@@ -33,26 +34,14 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 			Date loan_end = resultset.getDate("loan_end_date");
 			int customerId = resultset.getInt("customer_id");
 			Customer customer = customerDaoImpl.getById(customerId);
-			String loanType = getLoanType(loan_type);
 			
-			loan = new Loan(id,loanType,loan_amount,interest_rate,loan_start,loan_end,customer);
+			loan = new Loan(id,LoanType.fromValue(loan_type),loan_amount,interest_rate,loan_start,loan_end,customer);
 		}catch(SQLException e) {
 			System.out.print("SQL exception for : "+e.getMessage());
 		}
 		return loan;
 	}
-	
-	public String getLoanType(int loan) {
-		if(loan == 1) {
-			return "Personal Loan";
-		}else if(loan == 2){
-			return "Mortgage Loans";
-		}else if(loan == 3) {
-			return "Car loans";
-		}else {
-			return "null";
-		}
-	}
+
 
 	@Override
 	public String getInsertQuery() {
@@ -77,24 +66,9 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 			preparedStatement.setDate(3, object.getloanStartDate());
 			preparedStatement.setDate(4, object.getloanEndDate());
 			preparedStatement.setInt(5, object.getCustomer().getId());
-			preparedStatement.setInt(6, this.changeToInt(object.getloanType()));
+			preparedStatement.setInt(6, object.getloanType().getValue());
 		}catch(SQLException e) {
 			System.out.print("SQL exception for : "+e.getMessage());
-		}
-	}
-	
-	public int changeToInt(String loanType) {
-		if(loanType.equals("Personal Loan")) {
-			return 1;
-		}
-		else if(loanType.equals("Mortgage Loans")) {
-			return 2;
-		}
-		else if(loanType.equals("Car loans")) {
-			return 3;
-		}
-		else {
-			return -1;
 		}
 	}
 
@@ -106,7 +80,7 @@ public class LoanDaoImpl extends AbstractDao<Loan>{
 			preparedStatement.setDate(3, object.getloanStartDate());
 			preparedStatement.setDate(4, object.getloanEndDate());
 			preparedStatement.setInt(5, object.getCustomer().getId());
-			preparedStatement.setInt(6, this.changeToInt(object.getloanType()));
+			preparedStatement.setInt(6, object.getloanType().getValue());
 			preparedStatement.setInt(7, object.getId());
 		}catch(SQLException e) {
 			System.out.print("SQL exception for : "+e.getMessage());

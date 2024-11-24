@@ -23,4 +23,7 @@
     <fullyQualifiedTypeName name="Util.DateUtil"/>
     <fullyQualifiedTypeName name="Util.DateConverter"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="Converter.AccountTransactionMapper"/>
+    <fullyQualifiedTypeName name="Model.AccountTransactionType"/>
+    <fullyQualifiedTypeName name="Model.AccountType"/>
 </qualifiedTypeNameHistroy>

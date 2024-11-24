@@ -6,7 +6,7 @@ public class Card {
 	
 	private int id;
 	private String cardNumber;
-	private String cardType;
+	private CardType cardType;
 	private Date expireDate;
 	private int securityCode;
 	private Customer customer;
@@ -16,7 +16,7 @@ public class Card {
 		
 	}
 	
-	public Card(int id, String cardNumber, String cardType, Date expireDate, int securityCode, Customer customer,
+	public Card(int id, String cardNumber, CardType cardType, Date expireDate, int securityCode, Customer customer,
 			Account account) {
 		
 		this.id = id;
@@ -28,7 +28,7 @@ public class Card {
 		this.account = account;
 	}
 	
-	public Card(int id, String cardNumber, String cardType, Date expireDate, int securityCode) {
+	public Card(int id, String cardNumber, CardType cardType, Date expireDate, int securityCode) {
 		
 		this.id = id;
 		this.cardNumber = cardNumber;
@@ -54,11 +54,11 @@ public class Card {
 		this.cardNumber = cardNumber;
 	}
 
-	public String getCardType() {
+	public CardType getCardType() {
 		return cardType;
 	}
 
-	public void setCardType(String cardType) {
+	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
 	}
 

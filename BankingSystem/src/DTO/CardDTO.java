@@ -3,13 +3,14 @@ package DTO;
 import java.sql.Date;
 
 import Model.Account;
+import Model.CardType;
 import Model.Customer;
 
 public class CardDTO {
 	
 	private int id;
 	private String cardNumber;
-	private String cardType;
+	private CardType cardType;
 	private Date expireDate;
 	private int securityCode;
 	private Customer customer;
@@ -27,10 +28,10 @@ public class CardDTO {
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-	public String getCardType() {
+	public CardType getCardType() {
 		return cardType;
 	}
-	public void setCardType(String cardType) {
+	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
 	}
 	public Date getExpireDate() {

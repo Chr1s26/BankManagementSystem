@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 
 import Model.Account;
 import Model.AccountTransaction;
+import Model.AccountTransactionType;
 
 public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	
@@ -26,18 +27,18 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 		AccountTransaction accountTransaction = null;
 		try {
 			int id = resultset.getInt("id");
-			String type = resultset.getString("transaction_type");
+			int type = resultset.getInt("transaction_type");
 			double amount = (double) resultset.getFloat("amount");
 			Timestamp transactionDate = resultset.getTimestamp("transaction_date");
 			String description = resultset.getString("description");
 			int accountId = resultset.getInt("account_id");
 			Account account = this.accountDaoImpl.getById(accountId);
 			
-			accountTransaction = new AccountTransaction(id,type,amount,transactionDate,description,account);
+			accountTransaction = new AccountTransaction(id,AccountTransactionType.fromValue(type),amount,transactionDate,description,account);
 		} catch(SQLException e) {
 			System.out.print("SQL Exception for : "+ e.getMessage());
 		}
-		return null;
+		return accountTransaction;
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	@Override
 	public void prepareParams(PreparedStatement preparedStatement, AccountTransaction object) {
 		try {
-			preparedStatement.setString(1, object.getTransactionType());
+			preparedStatement.setInt(1, object.getTransactionType().getValue());
 			preparedStatement.setFloat(2, (float)object.getAmount());
 			preparedStatement.setTimestamp(3, object.getTransactionDate());
 			preparedStatement.setString(4, object.getDescription());
@@ -72,7 +73,7 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	@Override
 	public void prepareParamsForUpdate(PreparedStatement preparedStatement, AccountTransaction object) {
 		try {
-			preparedStatement.setString(1, object.getTransactionType());
+			preparedStatement.setInt(1, object.getTransactionType().getValue());
 			preparedStatement.setFloat(2, (float)object.getAmount());
 			preparedStatement.setTimestamp(3, object.getTransactionDate());
 			preparedStatement.setString(4, object.getDescription());

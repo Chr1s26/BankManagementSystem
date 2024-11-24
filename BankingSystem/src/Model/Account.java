@@ -6,7 +6,7 @@ public class Account {
 	
 	private int id;
 	private String accountNumber;
-	private String accountType;
+	private AccountType accountType;
 	private double balance;
 	private Date createdAt;
 	private Branch branch;
@@ -15,28 +15,18 @@ public class Account {
 	public Account() {
 		
 	}
-	
-	public Account(int id, String accountNumber, String accountType, double balance,Date createdAt ,Branch branch,
-			Customer customer) {
+
+	public Account(int id,String accountNumber, AccountType accountType, double balance,Date createdAt,Branch branch,Customer customer) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.accountType = accountType;
 		this.balance = balance;
+		this.branch = branch;
+		this.customer = customer;
 		this.createdAt = createdAt;
-		this.branch = branch;
-		this.customer = customer;
 	}
 	
-	public Account(String accountNumber, String accountType, double balance,Branch branch,Customer customer) {
-	
-		this.accountNumber = accountNumber;
-		this.accountType = accountType;
-		this.balance = balance;
-		this.branch = branch;
-		this.customer = customer;
-	}
-	
-	public Account(int id, String accountNumber, String accountType, double balance,Date createdAt) {
+	public Account(int id, String accountNumber, AccountType accountType, double balance,Date createdAt) {
 		this.id = id;
 		this.accountNumber = accountNumber;
 		this.accountType = accountType;
@@ -60,11 +50,11 @@ public class Account {
 		this.accountNumber = accountNumber;
 	}
 
-	public String getaccountType() {
+	public AccountType getaccountType() {
 		return accountType;
 	}
 
-	public void setaccountType(String accountType) {
+	public void setaccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
 

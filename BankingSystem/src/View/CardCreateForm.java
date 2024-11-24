@@ -23,6 +23,7 @@ import org.jdatepicker.impl.SqlDateModel;
 import Dao.AccountDaoImpl;
 import Dao.CustomerDaoImpl;
 import Model.Account;
+import Model.CardType;
 import Model.Customer;
 import Util.DateLabelFormatter;
 
@@ -31,7 +32,7 @@ public class CardCreateForm extends BaseWindow {
 	private JTextField cardNumberField;
 	
 	private JLabel cardTypeLabel;
-	private JComboBox<String> cardTypeField;
+	private JComboBox<CardType> cardTypeField;
 	
 	private JLabel expireDateLabel;
 	private SqlDateModel expireModel;
@@ -67,7 +68,7 @@ public class CardCreateForm extends BaseWindow {
 		cardNumberField = new JTextField();
 		
 		cardTypeLabel = new JLabel("Card Type : ");
-		cardTypeField = new JComboBox(new String[] {"Debit Cards", "Credit Cards", "Prepaid Cards","ATM Cards"});
+		cardTypeField = new JComboBox(CardType.values());
 		
 		expireDateLabel = new JLabel("Expire Date : ");
 		this.expireModel = new SqlDateModel();
@@ -128,12 +129,12 @@ public class CardCreateForm extends BaseWindow {
 		this.cardNumberField = cardNumberField;
 	}
 
-	public JComboBox<String> getCardTypeField() {
+	public JComboBox<CardType> getCardTypeField() {
 		return cardTypeField;
 	}
 	
-	public String getCardType() {
-		return (String)this.cardTypeField.getSelectedItem();
+	public CardType getCardType() {
+		return (CardType)this.cardTypeField.getSelectedItem();
 	}
 	
 	public Customer getCustomer() {
@@ -146,7 +147,7 @@ public class CardCreateForm extends BaseWindow {
 		return account;
 	}
 
-	public void setCardTypeField(JComboBox<String> cardTypeField) {
+	public void setCardTypeField(JComboBox<CardType> cardTypeField) {
 		this.cardTypeField = cardTypeField;
 	}
 

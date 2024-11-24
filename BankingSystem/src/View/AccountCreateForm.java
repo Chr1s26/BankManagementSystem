@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import Dao.BranchDaoImpl;
 import Dao.CustomerDaoImpl;
+import Model.AccountType;
 import Model.Branch;
 import Model.Customer;
 
@@ -21,7 +22,7 @@ public class AccountCreateForm extends BaseWindow {
 	private JTextField numberField;
 	
 	private JLabel accountTypeLabel;
-	private JComboBox accountTypeCombo;
+	private JComboBox<AccountType> accountTypeCombo;
 	
 	private JLabel balanceLabel;
 	private JTextField balanceField;
@@ -52,7 +53,7 @@ public class AccountCreateForm extends BaseWindow {
 		numberField = new JTextField();
 		
 		accountTypeLabel = new JLabel("Account Type : ");
-		accountTypeCombo = new JComboBox<>(new String[] {"Saving", "Loan", "Investment"});
+		accountTypeCombo = new JComboBox<>(AccountType.values());
 		
 		balanceLabel = new JLabel("Balance : ");
 		balanceField = new JTextField();
@@ -97,8 +98,8 @@ public class AccountCreateForm extends BaseWindow {
 		return customer;
 	}
 	
-	public String getAccountType() {
-		return (String)this.accountTypeCombo.getSelectedItem();
+	public AccountType getAccountType() {
+		return (AccountType)this.accountTypeCombo.getSelectedItem();
 	}
 	
 	public JTextField getNumberField() {

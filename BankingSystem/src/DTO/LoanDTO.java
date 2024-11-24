@@ -3,11 +3,12 @@ package DTO;
 import java.sql.Date;
 
 import Model.Customer;
+import Model.LoanType;
 
 public class LoanDTO {
 	
 	private int id;
-	private String loanType;
+	private LoanType loanType;
 	private double loanAmount;
 	private double interestRate;
 	private Date loanStartDate;
@@ -20,10 +21,10 @@ public class LoanDTO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getLoanType() {
+	public LoanType getLoanType() {
 		return loanType;
 	}
-	public void setLoanType(String loanType) {
+	public void setLoanType(LoanType loanType) {
 		this.loanType = loanType;
 	}
 	public double getLoanAmount() {

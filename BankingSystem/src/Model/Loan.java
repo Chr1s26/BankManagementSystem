@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Loan {
 	
 	private int id;
-	private String loanType;
+	private LoanType loanType;
 	private double loanAmount;
 	private double interestRate;
 	private Date loanStartDate;
@@ -16,7 +16,7 @@ public class Loan {
 		
 	}
 	
-	public Loan(int id, String loanType, double loanAmount, double interestRate, Date loanStartDate,
+	public Loan(int id, LoanType loanType, double loanAmount, double interestRate, Date loanStartDate,
 			Date loanEndDate, Customer customer) {
 		
 		this.id = id;
@@ -28,7 +28,7 @@ public class Loan {
 		this.customer = customer;
 	}
 	
-	public Loan(int id, String loanType, double loanAmount, double interestRate, Date loanStartDate,
+	public Loan(int id, LoanType loanType, double loanAmount, double interestRate, Date loanStartDate,
 			Date loanEndDate) {
 		
 		this.id = id;
@@ -47,11 +47,11 @@ public class Loan {
 		this.id = id;
 	}
 
-	public String getloanType() {
+	public LoanType getloanType() {
 		return loanType;
 	}
 
-	public void setloanType(String loanType) {
+	public void setloanType(LoanType loanType) {
 		this.loanType = loanType;
 	}
 

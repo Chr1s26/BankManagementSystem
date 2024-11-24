@@ -5,14 +5,18 @@ import java.sql.Timestamp;
 public class AccountTransaction {
 	
 	private int id;
-	private String transactionType;
+	private AccountTransactionType transactionType;
 	private double amount;
 	private Timestamp transactionDate;
 	private String description;
 	private Account account;
 	
 	
-	public AccountTransaction(int id, String transactionType, double amount, Timestamp transactionDate,
+	public AccountTransaction() {
+		
+	}
+	
+	public AccountTransaction(int id, AccountTransactionType transactionType, double amount, Timestamp transactionDate,
 			String description, Account account) {
 		
 		this.id = id;
@@ -23,7 +27,7 @@ public class AccountTransaction {
 		this.account = account;
 	}
 	
-	public AccountTransaction(int id, String transactionType, double amount, Timestamp transactionDate,
+	public AccountTransaction(int id, AccountTransactionType transactionType, double amount, Timestamp transactionDate,
 			String description) {
 		
 		this.id = id;
@@ -40,10 +44,10 @@ public class AccountTransaction {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTransactionType() {
+	public AccountTransactionType getTransactionType() {
 		return transactionType;
 	}
-	public void setTransactionType(String transactionType) {
+	public void setTransactionType(AccountTransactionType transactionType) {
 		this.transactionType = transactionType;
 	}
 	public double getAmount() {
@@ -73,7 +77,7 @@ public class AccountTransaction {
 
 	@Override
 	public String toString() {
-		return "AccountTransaction [id=" + id + ", transactionType=" + transactionType + ", amount=" + amount
+		return "AccountTransaction [id=" + id + ", transactionType=" + transactionType.name() + ", amount=" + amount
 				+ ", transactionDate=" + transactionDate + ", description=" + description + ", account=" + account
 				+ "]";
 	}

@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="Card"/>
+		<item key="selection" value="AccountTransactionDaoImpl"/>
 		<item key="wrap" value="true"/>
-		<item key="casesensitive" value="false"/>
+		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="AccountDaoImpl"/>
+			<item value="createService"/>
+			<item value="CardCreateService"/>
+			<item value="CardCreateForm"/>
+			<item value="createButton"/>
 			<item value="Customer"/>
 			<item value="CustomerDTO"/>
 			<item value="LoanDTO"/>
@@ -18,13 +23,13 @@
 			<item value="BranchDaoImpl"/>
 			<item value="addressField"/>
 			<item value="addressLabel"/>
-			<item value="phoneNumberField"/>
-			<item value="phoneNumberLabel"/>
-			<item value="emailLabel"/>
-			<item value="lastNameField"/>
-			<item value="lastNameLabel"/>
 		</list>
 		<list key="replacehistory">
+			<item value="AccountTransactionDaoImpl"/>
+			<item value="updateService"/>
+			<item value="CardUpdateService"/>
+			<item value="CardUpdateForm"/>
+			<item value="updateButton"/>
 			<item value="Card"/>
 			<item value="CardDTO"/>
 			<item value="CardListingController"/>
@@ -35,11 +40,6 @@
 			<item value="customerField"/>
 			<item value="customerLabel"/>
 			<item value="securityField"/>
-			<item value="securityLabel"/>
-			<item value="security"/>
-			<item value="expireDateLabel"/>
-			<item value="cardTypeField"/>
-			<item value="cardTypeLabel"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

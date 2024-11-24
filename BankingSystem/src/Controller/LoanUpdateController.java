@@ -31,7 +31,6 @@ public class LoanUpdateController extends BaseController {
 		this.view.getLoanAmountField().setText(loan.getloanAmount()+"");
 		this.view.getInterestRateField().setText(loan.getinterestRate()+"");
 		this.view.getCustomerComboBoxField().setSelectedItem(loan.getCustomer());
-		this.view.getLoanComboBoxField().setSelectedItem(loan.getloanType());
 		this.view.getCreateButton().addActionListener(e -> handleBranchCreateAction());
 		this.createService = new LoanCreateService();
 	}

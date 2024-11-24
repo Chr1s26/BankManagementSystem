@@ -18,6 +18,7 @@ import org.jdatepicker.impl.SqlDateModel;
 import Dao.CustomerDaoImpl;
 import Dao.LoanDaoImpl;
 import Model.Customer;
+import Model.LoanType;
 import Util.DateLabelFormatter;
 
 public class LoanUpdateForm extends BaseWindow {
@@ -42,7 +43,7 @@ public class LoanUpdateForm extends BaseWindow {
 	private JComboBox<Customer> customerComboBoxField;
 	
 	private JLabel loanTypeLabel;
-	private JComboBox<String> loanComboBoxField;
+	private JComboBox<LoanType> loanComboBoxField;
 	
 	private JButton updateButton;
 	private JButton cancelButton;
@@ -81,7 +82,7 @@ public class LoanUpdateForm extends BaseWindow {
 		customerComboBoxField = new JComboBox<>(customerDao.getAll().toArray(new Customer[0]));
 		
 		loanTypeLabel = new JLabel("Loan Type : ");
-		loanComboBoxField = new JComboBox<>(new String[] {"Personal Loan", "Mortgage Loans", "Car loans"});
+		loanComboBoxField = new JComboBox<>(LoanType.values());
 		
 		updateButton = new JButton("Update");
 		cancelButton = new JButton("Cancel");
@@ -186,15 +187,15 @@ public class LoanUpdateForm extends BaseWindow {
 		this.customerComboBoxField = customerComboBoxField;
 	}
 
-	public JComboBox<String> getLoanComboBoxField() {
+	public JComboBox<LoanType> getLoanComboBoxField() {
 		return loanComboBoxField;
 	}
 	
-	public String getLoanType() {
-		return (String)this.loanComboBoxField.getSelectedItem();
+	public LoanType getLoanType() {
+		return (LoanType)this.loanComboBoxField.getSelectedItem();
 	}
 
-	public void setLoanComboBoxField(JComboBox<String> loanComboBoxField) {
+	public void setLoanComboBoxField(JComboBox<LoanType> loanComboBoxField) {
 		this.loanComboBoxField = loanComboBoxField;
 	}
 
