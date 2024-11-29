@@ -64,7 +64,10 @@ public class AccountTransactionListingController extends BaseController {
 			AccountTransactionArray[rowCount][2] = AccountTransaction.getAmount()+"";
 			AccountTransactionArray[rowCount][3] = AccountTransaction.getTransactionDate()+"";
 			AccountTransactionArray[rowCount][4] = AccountTransaction.getDescription();
-			AccountTransactionArray[rowCount][5] = AccountTransaction.getAccount().getaccountNumber();
+			AccountTransactionArray[rowCount][5] = AccountTransaction.getStatus()+"";
+			AccountTransactionArray[rowCount][6] = AccountTransaction.getCurrency()+"";
+			AccountTransactionArray[rowCount][7] = AccountTransaction.getTransaction()+"";
+			AccountTransactionArray[rowCount][8] = AccountTransaction.getAccount()+"";
 			rowCount++;
 		}
 		return AccountTransactionArray;

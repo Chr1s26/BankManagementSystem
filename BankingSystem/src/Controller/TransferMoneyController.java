@@ -3,8 +3,11 @@ package Controller;
 import javax.swing.JOptionPane;
 
 import DTO.TransferMoneyDTO;
+import Dao.EmployeeDaoImpl;
 import Exception.InsufficientAmountException;
 import Model.Account;
+import Model.CurrencyType;
+import Model.Employee;
 import Service.TransferMoneyService;
 import View.TransferMoneyWindow;
 
@@ -12,10 +15,12 @@ public class TransferMoneyController extends BaseController {
 	
 	private TransferMoneyWindow view;
 	private TransferMoneyService creationService;
+	private EmployeeDaoImpl employeeDao;
 	
 	public TransferMoneyController() {
 		super(new TransferMoneyWindow());
 		this.authenticate();
+		this.employeeDao = new EmployeeDaoImpl();
 	}
 
 	@Override
@@ -30,11 +35,15 @@ public class TransferMoneyController extends BaseController {
 		Account targetAccNumber = this.view.getTargetAccount();
 		double amount = Double.parseDouble(this.view.getAmountField().getText());
 		String description = this.view.getDescField().getText();
-		TransferMoneyDTO transferMoneyDto = new TransferMoneyDTO(sourceAccNumber,targetAccNumber,amount,description);
+		CurrencyType currency = this.view.getCurrencyType();
+		Employee employee = this.currentUser;
+		TransferMoneyDTO transferMoneyDto = new TransferMoneyDTO(sourceAccNumber,targetAccNumber,amount,description,currency,employee);
 		try {
 			this.creationService = new TransferMoneyService(transferMoneyDto);
 			this.view.showSuccessMessage("Money transfer Successfully!!");
 			this.view.dispose();
+		}catch(InsufficientAmountException e) {
+			this.view.showErrorMessage(e.getMessage());
 		}catch(Exception e) {
 			this.view.showErrorMessage(e.getMessage());
 		}

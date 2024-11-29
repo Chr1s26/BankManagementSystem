@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import Dao.AccountDaoImpl;
 import Model.Account;
+import Model.CurrencyType;
 
 public class TransferMoneyWindow extends BaseWindow{
 	
@@ -27,6 +28,8 @@ public class TransferMoneyWindow extends BaseWindow{
     private JTextField amountField;
     private JLabel descLabel;
     private JTextField descField;
+    private JLabel currencyLabel;
+    private JComboBox<CurrencyType> currencyField;
     private JButton transferButton;
     private JButton cancelButton;
     private AccountDaoImpl accountDao;
@@ -52,6 +55,9 @@ public class TransferMoneyWindow extends BaseWindow{
 
         descLabel = new JLabel("Description:");
         descField = new JTextField(15);
+        
+        currencyLabel = new JLabel("Currency");
+        currencyField = new JComboBox<>(CurrencyType.values());
 
         transferButton = new JButton("Transfer");
         cancelButton = new JButton("Cancel");
@@ -92,10 +98,17 @@ public class TransferMoneyWindow extends BaseWindow{
 
         gbc.gridx = 1;
         add(descField, gbc);
+        
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        add(currencyLabel, gbc);
+
+        gbc.gridx = 1;
+        add(currencyField, gbc);
 
        
         gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 5;
         gbc.gridwidth = 1; 
         add(transferButton, gbc);
 
@@ -104,6 +117,10 @@ public class TransferMoneyWindow extends BaseWindow{
 
   
     }
+	
+	public CurrencyType getCurrencyType() {
+		return (CurrencyType)this.currencyField.getSelectedItem();
+	}
 	
 	public Account getSourceAccount() {
 		Account account = (Account) this.sourceAccTextField.getSelectedItem();

@@ -1,0 +1,60 @@
+package Dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+import Model.Transaction;
+
+public class TransactionDaoImpl extends TransactionDao {
+
+	@Override
+	public String getTableName() {
+		
+		return "transactions";
+	}
+
+	@Override
+	public Transaction converToObject(ResultSet resultset) {
+		try {
+			int id = resultset.getInt("id");
+			int account_id = resultset.getInt("account_id");
+			Timestamp createdAt = resultset.getTimestamp("created_at");
+			Timestamp updatedAt = resultset.getTimestamp("updated_at");
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public String getInsertQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void prepareParams(PreparedStatement preparedStatement, Transaction object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void prepareParamsForUpdate(PreparedStatement preparedStatement, Transaction object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

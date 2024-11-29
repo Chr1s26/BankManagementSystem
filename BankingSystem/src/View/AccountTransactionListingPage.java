@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class AccountTransactionListingPage extends BaseWindow {
 	
-	private String[] columns = {"Id","Transaction Type","Amount","Transaction Date","Description","Account"};
+	private String[] columns = {"Id","Transaction Type","Amount","Transaction Date","Description","Status","Currency","Transaction","Account"};
 	private JButton createButton;
 	private JButton updateButton;
 	private JButton deleteButton;
@@ -40,7 +40,7 @@ public class AccountTransactionListingPage extends BaseWindow {
 	public void prepareBaseWindow() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setTitle("Account Transaction Information");
-		this.setSize(1000,400);
+		this.setSize(1700,400);
 	}
 
 	public JButton getCreateButton() {

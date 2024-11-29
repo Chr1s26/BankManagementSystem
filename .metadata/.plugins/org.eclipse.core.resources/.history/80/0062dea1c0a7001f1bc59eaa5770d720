@@ -1,9 +1,0 @@
-package Dao;
-
-import Model.AccountTransaction;
-
-public abstract class AccountTransactionDao extends AbstractDao<AccountTransaction> {
-	
-	public abstract AccountTransaction findByAccountNum(String Num);
-	
-}

@@ -66,8 +66,17 @@ transaction_type int NOT NULL,
 amount float NOT NULL,
 transaction_date TIMESTAMP NOT NULL,
 description VARCHAR(200),
-account_id int references accounts(id) on delete cascade
+transaction_id Int;
+transaction_id int references transactions(id) on delete cascade
 ) 
+
+create table transactions(id serial primary key,
+account_id int,
+foreign key (account_id) references accounts(id),
+createdAt timestamp default now(),
+createdBy int references employees(id) on delete cascade,
+UpdatedAt timestamp default now(),
+UpdatedBy int references employees(id) on delete cascade);
 
 create table card_transaction(
 id serial primary key,

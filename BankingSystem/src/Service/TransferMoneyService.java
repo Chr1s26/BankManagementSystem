@@ -4,31 +4,48 @@ import Converter.AccountTransactionMapper;
 import DTO.TransferMoneyDTO;
 import Dao.AccountDaoImpl;
 import Dao.AccountTransactionDaoImpl;
+import Dao.TransactionDaoImpl;
 import Exception.InsufficientAmountException;
 import Model.Account;
 import Model.AccountTransaction;
+import Model.Transaction;
 
 public class TransferMoneyService {
 	
 	private TransferMoneyDTO transferMoneyDto;
-	private AccountTransactionDaoImpl transactionDao;
+	private AccountTransactionDaoImpl accountTransactionDao;
+	private TransactionDaoImpl transactionDao;
 	private AccountDaoImpl accountDao;
-
+	 
 	
 	public TransferMoneyService(TransferMoneyDTO transferMoneyDto) throws InsufficientAmountException {
 		this.transferMoneyDto = transferMoneyDto;
-		this.transactionDao = new AccountTransactionDaoImpl();
+		this.accountTransactionDao = new AccountTransactionDaoImpl();
+		transactionDao = new TransactionDaoImpl();
 		this.accountDao = new AccountDaoImpl();
 		this.transferProcess();
 	}
 	
 	public void transferProcess() throws InsufficientAmountException {
 		AccountTransaction[] accountTransaction = AccountTransactionMapper.toAccountTransaction(transferMoneyDto);
+		
+		Transaction transaction = new Transaction();
+		transaction.setCreatedBy(transferMoneyDto.getEmployee());
+		transaction.setUpdatedBy(transferMoneyDto.getEmployee());
+		
 		calculateWithdrawlAmount(accountTransaction[0]);
 		calculateDepositAmount(accountTransaction[1]);
-		transactionDao.create(accountTransaction[0]);
-		transactionDao.create(accountTransaction[1]);
+		
+		transaction = transactionDao.createTransactionWithIdReturn(transaction);
+		
+		
+		accountTransaction[0].setTransaction(transaction);
+		accountTransaction[1].setTransaction(transaction);
+		
+		accountTransactionDao.create(accountTransaction[0]);
+		accountTransactionDao.create(accountTransaction[1]);
 	}
+	
 	
 	public void calculateWithdrawlAmount(AccountTransaction accountTransaction) throws InsufficientAmountException {
 		Account account = accountTransaction.getAccount();

@@ -28,4 +28,6 @@
     <fullyQualifiedTypeName name="Model.AccountType"/>
     <fullyQualifiedTypeName name="Model.CardType"/>
     <fullyQualifiedTypeName name="Model.LoanType"/>
+    <fullyQualifiedTypeName name="Model.CurrencyType"/>
+    <fullyQualifiedTypeName name="Model.StatusType"/>
 </qualifiedTypeNameHistroy>

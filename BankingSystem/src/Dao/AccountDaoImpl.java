@@ -73,8 +73,7 @@ public class AccountDaoImpl extends AccountDao{
 			System.out.print("Dao "+object.getCustomer().getId());
 		}catch(SQLException e){
 			System.out.print("SQL exception for : "+e.getMessage());
-		}
-		
+		}	
 	}
 
 	@Override

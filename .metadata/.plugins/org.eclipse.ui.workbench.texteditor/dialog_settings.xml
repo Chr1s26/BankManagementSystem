@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="AccountTransactionDaoImpl"/>
+		<item key="selection" value="accountTransactionDao"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="transactionDao"/>
 			<item value="AccountDaoImpl"/>
 			<item value="createService"/>
 			<item value="CardCreateService"/>
@@ -22,9 +23,9 @@
 			<item value="branchDao"/>
 			<item value="BranchDaoImpl"/>
 			<item value="addressField"/>
-			<item value="addressLabel"/>
 		</list>
 		<list key="replacehistory">
+			<item value="accountTransactionDao"/>
 			<item value="AccountTransactionDaoImpl"/>
 			<item value="updateService"/>
 			<item value="CardUpdateService"/>
@@ -39,7 +40,6 @@
 			<item value="CustomerDaoImpl"/>
 			<item value="customerField"/>
 			<item value="customerLabel"/>
-			<item value="securityField"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

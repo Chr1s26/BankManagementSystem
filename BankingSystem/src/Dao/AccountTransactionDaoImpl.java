@@ -8,13 +8,18 @@ import java.sql.Timestamp;
 import Model.Account;
 import Model.AccountTransaction;
 import Model.AccountTransactionType;
+import Model.CurrencyType;
+import Model.StatusType;
+import Model.Transaction;
 
 public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	
-	private AccountDaoImpl accountDaoImpl;
+	private AccountDaoImpl accountDao;
+	private TransactionDaoImpl transactionDao;
 	
 	public AccountTransactionDaoImpl() {
-		accountDaoImpl = new AccountDaoImpl();
+		accountDao = new AccountDaoImpl();
+		transactionDao = new TransactionDaoImpl();
 	}
 	
 	@Override
@@ -31,10 +36,15 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 			double amount = (double) resultset.getFloat("amount");
 			Timestamp transactionDate = resultset.getTimestamp("transaction_date");
 			String description = resultset.getString("description");
+			int status = resultset.getInt("status");
+			int currency = resultset.getInt("currency");
+			int transactionId = resultset.getInt("transaction_id");
 			int accountId = resultset.getInt("account_id");
-			Account account = this.accountDaoImpl.getById(accountId);
 			
-			accountTransaction = new AccountTransaction(id,AccountTransactionType.fromValue(type),amount,transactionDate,description,account);
+			Account account = accountDao.getById(accountId);
+			Transaction transaction = transactionDao.getById(transactionId);
+			
+			accountTransaction = new AccountTransaction(id,AccountTransactionType.fromValue(type),amount,transactionDate,description,StatusType.fromValue(status),CurrencyType.fromValue(currency),transaction,account);
 		} catch(SQLException e) {
 			System.out.print("SQL Exception for : "+ e.getMessage());
 		}
@@ -43,12 +53,12 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 
 	@Override
 	public String getInsertQuery() {
-		return "Insert into "+this.getTableName()+" (transaction_type,amount,transaction_date,description,account_id) values (?,?,?,?,?)";
+		return "Insert into "+this.getTableName()+" (transaction_type,amount,description,status,currency,transaction_id,account_id) values (?,?,?,?,?,?,?)";
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set transaction_type = ? amount = ? transaction_date = ? description = ? account_id = ? where id = ?";
+		return "update "+this.getTableName()+" set transaction_type = ? amount = ? description = ? status = ? currency = ? transaction_id = ? account_id = ? where id = ?";
 	}
 
 	@Override
@@ -59,13 +69,16 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 	@Override
 	public void prepareParams(PreparedStatement preparedStatement, AccountTransaction object) {
 		try {
+			System.out.print(object.getTransaction());
 			preparedStatement.setInt(1, object.getTransactionType().getValue());
 			preparedStatement.setFloat(2, (float)object.getAmount());
-			preparedStatement.setTimestamp(3, object.getTransactionDate());
-			preparedStatement.setString(4, object.getDescription());
-			preparedStatement.setInt(5, object.getAccount().getId());
+			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.setInt(4, object.getStatus().getValue());
+			preparedStatement.setInt(5, object.getCurrency().getValue());
+			preparedStatement.setInt(6, object.getTransaction().getId());
+			preparedStatement.setInt(7, object.getAccount().getId());
 		} catch(SQLException e) {
-			System.out.print("SQL Exception for : "+ e.getMessage());
+			System.out.print("SQL Exception for accountTransactionDao : "+ e.getMessage());
 		}
 		
 	}
@@ -75,10 +88,12 @@ public class AccountTransactionDaoImpl extends AccountTransactionDao{
 		try {
 			preparedStatement.setInt(1, object.getTransactionType().getValue());
 			preparedStatement.setFloat(2, (float)object.getAmount());
-			preparedStatement.setTimestamp(3, object.getTransactionDate());
-			preparedStatement.setString(4, object.getDescription());
-			preparedStatement.setInt(5, object.getAccount().getId());
-			preparedStatement.setInt(5, object.getId());
+			preparedStatement.setString(3, object.getDescription());
+			preparedStatement.setInt(4, object.getStatus().getValue());
+			preparedStatement.setInt(5, object.getCurrency().getValue());
+			preparedStatement.setInt(6, object.getTransaction().getId());
+			preparedStatement.setInt(7, object.getAccount().getId());
+			preparedStatement.setInt(8, object.getId());
 		} catch(SQLException e) {
 			System.out.print("SQL Exception for : "+ e.getMessage());
 		}

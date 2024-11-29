@@ -2,8 +2,8 @@ package Model;
 
 public enum AccountTransactionType {
 	
-	PENDING(1),
-	COMPLETED(2),
+	DEPOSIT(1),
+	WITHDRAWL(2),
 	FAILED(3);
 	
 	private final int value;
