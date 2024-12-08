@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import Model.Branch;
 import Model.Customer;
+import Model.Customer;
 
 public class CustomerDaoImpl extends CustomerDao {
 
@@ -103,6 +104,30 @@ public class CustomerDaoImpl extends CustomerDao {
 		}
 		return customer;
 	}
+
+	@Override
+	public Customer getCustomerByCustomerEmail(String email) {
+		Customer object = null;
+		try {
+			String query = "SELECT * FROM "+this.getTableName()+" WHERE email = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			prepareStatement.setString(1, email);
+			ResultSet resultSet = prepareStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				object = this.converToObject(resultSet);
+			}
+			
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		return object;
+	}
+
 	
 
 }

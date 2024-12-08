@@ -1,0 +1,10 @@
+package DTO;
+
+import java.sql.Connection;
+
+@FunctionalInterface
+public interface TransactionOperation<T> {
+	
+	T execute(Connection connection) throws Exception;
+	
+}

@@ -6,13 +6,14 @@ import Exception.IncorrectPasswordException;
 import Exception.InvalidTokenException;
 import Exception.NotConfirmedException;
 import Model.Employee;
+import Model.Transaction;
 
 public class AuthenticationService {
 	
 	public static Employee employee;
 
 	public static final EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
-	
+			
 	public static void login(String email,String password) throws IncorrectPasswordException, IncorrectEmailException, NotConfirmedException{
 		employee = employeeDao.validateEmployee(email,password);
 		if(!employee.isConfirmed()) {
@@ -32,5 +33,11 @@ public class AuthenticationService {
 	
 	public static Employee getEmployee() {
 		return employee;
+	}
+	
+	public static void otpAuthenticate(Transaction transaction) throws NotConfirmedException {
+		if(!transaction.isConfirmed()) {
+			throw new NotConfirmedException("Transaction is not confirmed!!");
+		}
 	}
 }

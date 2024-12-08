@@ -1,5 +1,6 @@
 package Model;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Transaction {
@@ -9,6 +10,7 @@ public class Transaction {
 	private Timestamp updatedAt;
 	private Employee createdBy;
 	private Employee updatedBy;
+	private Date confirmedAt;
 	
 	public Transaction() {
 	
@@ -58,10 +60,23 @@ public class Transaction {
 		this.updatedBy = updatedBy;
 	}
 
+	public Date getConfirmedAt() {
+		return confirmedAt;
+	}
+
+	public void setConfirmedAt(Date confirmedAt) {
+		this.confirmedAt = confirmedAt;
+	}
+	
+	public boolean isConfirmed() {
+		return this.confirmedAt != null;
+	}
+
 	@Override
 	public String toString() {
 		return "TransactionId = "+id;
 	}
+	
 	
 	
 }

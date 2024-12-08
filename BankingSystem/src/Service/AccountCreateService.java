@@ -1,5 +1,6 @@
 package Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class AccountCreateService {
 		this.creationProcess(account);
 	}
 
-	private void creationProcess(Account account) {
+	private void creationProcess(Account account) throws SQLException {
 		accountDao.create(account);
 	}
 

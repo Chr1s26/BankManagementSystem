@@ -1,7 +1,0 @@
-package Dao;
-
-import Model.Transaction;
-
-public class transactionDao extends AbstractDao<Transaction>{
-
-}

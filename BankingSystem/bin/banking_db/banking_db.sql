@@ -71,8 +71,6 @@ transaction_id int references transactions(id) on delete cascade
 ) 
 
 create table transactions(id serial primary key,
-account_id int,
-foreign key (account_id) references accounts(id),
 createdAt timestamp default now(),
 createdBy int references employees(id) on delete cascade,
 UpdatedAt timestamp default now(),

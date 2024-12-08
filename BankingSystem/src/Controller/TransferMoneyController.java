@@ -1,13 +1,18 @@
 package Controller;
 
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import DTO.TransferMoneyDTO;
 import Dao.EmployeeDaoImpl;
 import Exception.InsufficientAmountException;
+import Exception.TransactionFailedException;
 import Model.Account;
 import Model.CurrencyType;
 import Model.Employee;
+import Model.Transaction;
+import Service.AuthenticationService;
 import Service.TransferMoneyService;
 import View.TransferMoneyWindow;
 
@@ -26,11 +31,21 @@ public class TransferMoneyController extends BaseController {
 	@Override
 	public void initController() {
 		this.view = (TransferMoneyWindow)this.getView();
-		this.view.getTransferButton().addActionListener(e -> transferBtnAction());
+		this.view.getTransferButton().addActionListener(e -> {
+			try {
+				transferBtnAction();
+			} catch (InsufficientAmountException e1) {
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			} catch (TransactionFailedException e1) {
+				e1.printStackTrace();
+			}
+		});
 		this.view.getCancelButton().addActionListener(e -> clearFields());
 	}
 
-	private void transferBtnAction() {
+	private void transferBtnAction() throws InsufficientAmountException, SQLException, TransactionFailedException {
 		Account sourceAccNumber = this.view.getSourceAccount();
 		Account targetAccNumber = this.view.getTargetAccount();
 		double amount = Double.parseDouble(this.view.getAmountField().getText());
@@ -38,14 +53,16 @@ public class TransferMoneyController extends BaseController {
 		CurrencyType currency = this.view.getCurrencyType();
 		Employee employee = this.currentUser;
 		TransferMoneyDTO transferMoneyDto = new TransferMoneyDTO(sourceAccNumber,targetAccNumber,amount,description,currency,employee);
+		Transaction transaction = new Transaction();
 		try {
-			this.creationService = new TransferMoneyService(transferMoneyDto);
+			AuthenticationService.otpAuthenticate(transaction);
 			this.view.showSuccessMessage("Money transfer Successfully!!");
 			this.view.dispose();
-		}catch(InsufficientAmountException e) {
+		}
+		catch(Exception e) {
 			this.view.showErrorMessage(e.getMessage());
-		}catch(Exception e) {
-			this.view.showErrorMessage(e.getMessage());
+			this.creationService = new TransferMoneyService(transferMoneyDto,transaction);
+			this.view.dispose();
 		}
 	}
 	

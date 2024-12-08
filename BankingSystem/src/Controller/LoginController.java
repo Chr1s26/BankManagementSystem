@@ -45,7 +45,7 @@ public class LoginController extends BaseController {
 		catch(NotConfirmedException e4) {
 			JOptionPane.showMessageDialog(this.view, e4.getMessage(), "Error",
 					JOptionPane.ERROR_MESSAGE);
-		Employee employee = AuthenticationService.employee;
+			Employee employee = AuthenticationService.employee;
 			OTPController otpController = new OTPController(EmployeeMapper.toEmployeeDTO(employee));
 			otpController.sentOTP();
 		}

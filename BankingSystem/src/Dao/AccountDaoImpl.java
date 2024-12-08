@@ -70,7 +70,7 @@ public class AccountDaoImpl extends AccountDao{
 			preparedStatement.setFloat(3, (float)object.getBalance());
 			preparedStatement.setInt(4, object.getBranch().getId());
 			preparedStatement.setInt(5, object.getCustomer().getId());
-			System.out.print("Dao "+object.getCustomer().getId());
+			
 		}catch(SQLException e){
 			System.out.print("SQL exception for : "+e.getMessage());
 		}	

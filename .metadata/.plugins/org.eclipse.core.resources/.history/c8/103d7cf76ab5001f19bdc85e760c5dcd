@@ -1,0 +1,33 @@
+package Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import Model.Customer;
+import Model.Transaction;
+
+public abstract class TransactionDao extends AbstractDao<Transaction>{
+	
+	public abstract Transaction createTransactionWithIdReturn(Transaction transaction, Connection connection) throws Exception;
+	public abstract void setConfirmedAt(Transaction transaction);
+	
+	@Override
+	public void setConfirmedAt(Customer customer) {
+		try {
+			String query = "Update "+this.getTableName()+" set confirmed_at = ? WHERE id = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+			prepareStatement.setDate(1,sqlDate);
+			prepareStatement.setInt(2, customer.getId());
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.print("SQL Exception for : "+e.getMessage());
+		}
+		finally {
+			this.connectionFactory.closeConnection();
+		}
+		
+	}
+}

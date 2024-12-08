@@ -1,0 +1,6 @@
+package Service;
+
+public class TransactionManager {
+	
+	pulbic static<T> T executeTransaction(TransactionalOperation<T> operation);
+}

@@ -1,5 +1,7 @@
 package Service;
 
+import java.sql.SQLException;
+
 import Converter.CardMapper;
 import DTO.CardDTO;
 import Dao.CardDaoImpl;
@@ -20,7 +22,7 @@ public class CardCreateService {
 		this.creationProcess();
 	}
 
-	private void creationProcess() {
+	private void creationProcess() throws SQLException {
 		Card Card = CardMapper.toCard(this.CardDTO);
 		CardDao.create(Card);
 	}

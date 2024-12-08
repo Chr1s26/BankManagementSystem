@@ -21,4 +21,16 @@ public class CustomerMapper {
 		customer.setdateOfBirth(customerdto.getDateOfBirth());
 		return customer;
 	}
+	
+	public static CustomerDTO toCustomerDTO(Customer customer) {
+		CustomerDTO customerDTO = new CustomerDTO();
+		customerDTO.setId(customer.getId());
+		customerDTO.setFirstName(customer.getfirstName());
+		customerDTO.setLastName(customer.getlastName());
+		customerDTO.setEmail(customer.getEmail());
+		customerDTO.setPhoneNumber(customer.getPhoneNumber());
+		customerDTO.setAddress(customer.getAddress());
+		customerDTO.setDateOfBirth(customer.getdateOfBirth());
+		return customerDTO;
+	}
 }

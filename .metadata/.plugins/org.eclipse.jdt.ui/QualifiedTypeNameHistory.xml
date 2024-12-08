@@ -7,7 +7,6 @@
     <fullyQualifiedTypeName name="Util.PasswordUtil"/>
     <fullyQualifiedTypeName name="java.util.Base64"/>
     <fullyQualifiedTypeName name="View.BranchListingPage"/>
-    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
     <fullyQualifiedTypeName name="Converter.BranchMapper"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
@@ -30,4 +29,8 @@
     <fullyQualifiedTypeName name="Model.LoanType"/>
     <fullyQualifiedTypeName name="Model.CurrencyType"/>
     <fullyQualifiedTypeName name="Model.StatusType"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="Database.PgSqlConnectionFactory"/>
+    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
+    <fullyQualifiedTypeName name="Converter.CustomerMapper"/>
 </qualifiedTypeNameHistroy>

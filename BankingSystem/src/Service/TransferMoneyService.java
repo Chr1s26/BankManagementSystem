@@ -1,13 +1,24 @@
 package Service;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import Controller.OTPController;
 import Converter.AccountTransactionMapper;
+import Converter.CustomerMapper;
+import Converter.EmployeeMapper;
 import DTO.TransferMoneyDTO;
 import Dao.AccountDaoImpl;
 import Dao.AccountTransactionDaoImpl;
 import Dao.TransactionDaoImpl;
+import Database.PgSqlConnectionFactory;
 import Exception.InsufficientAmountException;
+import Exception.NotConfirmedException;
+import Exception.TransactionFailedException;
 import Model.Account;
 import Model.AccountTransaction;
+import Model.Customer;
+import Model.Employee;
 import Model.Transaction;
 
 public class TransferMoneyService {
@@ -18,32 +29,45 @@ public class TransferMoneyService {
 	private AccountDaoImpl accountDao;
 	 
 	
-	public TransferMoneyService(TransferMoneyDTO transferMoneyDto) throws InsufficientAmountException {
+	public TransferMoneyService(TransferMoneyDTO transferMoneyDto,Transaction transaction) throws InsufficientAmountException, SQLException, TransactionFailedException {
 		this.transferMoneyDto = transferMoneyDto;
 		this.accountTransactionDao = new AccountTransactionDaoImpl();
 		transactionDao = new TransactionDaoImpl();
 		this.accountDao = new AccountDaoImpl();
-		this.transferProcess();
+		this.transferProcess(transaction);
 	}
 	
-	public void transferProcess() throws InsufficientAmountException {
-		AccountTransaction[] accountTransaction = AccountTransactionMapper.toAccountTransaction(transferMoneyDto);
+	public void transferProcess(Transaction transaction) throws InsufficientAmountException,SQLException, TransactionFailedException {
 		
-		Transaction transaction = new Transaction();
+			TransactionManager.executeTransaction((connection) -> {
+		        processTransfer(connection,transaction);
+		    });
+			
+	}
+	
+	public void processTransfer(Connection connection,Transaction transaction ) throws InsufficientAmountException, SQLException, NotConfirmedException {
+		
+		AccountTransaction[] accountTransaction = AccountTransactionMapper.toAccountTransaction(transferMoneyDto);
+		transaction = new Transaction();
 		transaction.setCreatedBy(transferMoneyDto.getEmployee());
 		transaction.setUpdatedBy(transferMoneyDto.getEmployee());
 		
+		Customer customer = accountTransaction[0].getAccount().getCustomer();
+		OTPController otpController = new OTPController(CustomerMapper.toCustomerDTO(customer),transaction);
+		otpController.sentOTP();
+
 		calculateWithdrawlAmount(accountTransaction[0]);
 		calculateDepositAmount(accountTransaction[1]);
-		
-		transaction = transactionDao.createTransactionWithIdReturn(transaction);
-		
-		
+			
+		transaction = transactionDao.createTransactionWithIdReturn(transaction,connection);
+			
 		accountTransaction[0].setTransaction(transaction);
 		accountTransaction[1].setTransaction(transaction);
+			
+		accountTransactionDao.create(accountTransaction[0],connection);
+		accountTransactionDao.create(accountTransaction[1],connection);
+
 		
-		accountTransactionDao.create(accountTransaction[0]);
-		accountTransactionDao.create(accountTransaction[1]);
 	}
 	
 	

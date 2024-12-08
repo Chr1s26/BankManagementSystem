@@ -1,5 +1,6 @@
 package Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CustomerCreateService {
 		this.creationProcess();
 	}
 
-	private void creationProcess() {
+	private void creationProcess() throws SQLException {
 		Customer Customer = CustomerMapper.toCustomer(this.CustomerDTO);
 		CustomerDao.create(Customer);
 	}

@@ -1,5 +1,6 @@
 package Service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class EmployeeCreateService {
 		this.optService.sentOTPmail();
 	}
 
-	private void creationProcess() {
+	private void creationProcess() throws SQLException {
 		Employee employee = EmployeeMapper.toEmployee(this.employeeDto);
 		employeeDao.create(employee);
 	}

@@ -1,5 +1,7 @@
 package Service;
 
+import java.sql.SQLException;
+
 import Converter.LoanMapper;
 import DTO.LoanDTO;
 import Dao.LoanDaoImpl;
@@ -20,7 +22,7 @@ public class LoanCreateService {
 		this.creationProcess();
 	}
 
-	private void creationProcess() {
+	private void creationProcess() throws SQLException {
 		Loan Loan = LoanMapper.toLoan(this.LoanDTO);
 		LoanDao.create(Loan);
 	}

@@ -1,0 +1,16 @@
+package Service;
+
+import java.sql.Connection;
+
+public class TransactionManager {
+	
+	public static<T> T executeTransaction(TransactionalOperation<T> operation) {
+		try(Connection connection = new PgSqlConnectionFactory()){
+			connection.setAutoCommit(false);
+			T result = operation.execute(connection);
+			connection.commit();
+			return result;
+		}
+	}
+	
+}

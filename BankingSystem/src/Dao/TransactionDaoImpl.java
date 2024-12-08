@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 import Model.Account;
+import Model.Customer;
 import Model.Employee;
 import Model.Transaction;
 
@@ -31,10 +32,10 @@ public class TransactionDaoImpl extends TransactionDao {
 		Transaction transaction = null;
 		try {
 			int id = resultset.getInt("id");
-			Timestamp createdAt = resultset.getTimestamp("createdat");
-			Timestamp updatedAt = resultset.getTimestamp("updatedat");
-			int createdBy = resultset.getInt("createdby");
-			int updatedBy = resultset.getInt("updatedby");
+			Timestamp createdAt = resultset.getTimestamp("created_at");
+			Timestamp updatedAt = resultset.getTimestamp("updated_at");
+			int createdBy = resultset.getInt("created_by");
+			int updatedBy = resultset.getInt("updated_by");
 			
 			Employee createdEmployee = employeeDao.getById(createdBy);
 			Employee updatedEmployee = employeeDao.getById(updatedBy);
@@ -52,13 +53,13 @@ public class TransactionDaoImpl extends TransactionDao {
 	@Override
 	public String getInsertQuery() {
 		
-		return "insert into "+this.getTableName()+" (createdby,updatedby) values(?,?)";
+		return "insert into "+this.getTableName()+" (created_by,updated_by) values(?,?)";
 		
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set  updatedby = ? where id = ?";
+		return "update "+this.getTableName()+" set  updated_by = ? where id = ?";
 	}
 
 	@Override
@@ -88,10 +89,10 @@ public class TransactionDaoImpl extends TransactionDao {
 	}
 
 	@Override
-	public Transaction createTransactionWithIdReturn(Transaction transaction) {
-		try {
-			String query = "INSERT INTO transactions (createdby, updatedby) VALUES (?, ?) RETURNING id";
-			Connection connection = connectionFactory.createConnection();
+	public Transaction createTransactionWithIdReturn(Transaction transaction, Connection connection) throws SQLException {
+	
+			String query = "INSERT INTO transactions (created_by, updated_by) VALUES (?, ?) RETURNING id";
+			
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, transaction.getCreatedBy().getId());
 			preparedStatement.setInt(2, transaction.getUpdatedBy().getId());
@@ -99,12 +100,27 @@ public class TransactionDaoImpl extends TransactionDao {
 			if (resultSet.next()) {
 	            transaction.setId(resultSet.getInt("id"));
 	        }
-		}catch(SQLException e) {
+		
+	    return transaction;
+	}
+
+	@Override
+	public void setConfirmedAt(Transaction transaction) {
+		try {
+			String query = "Update "+this.getTableName()+" set confirmed_at = ? WHERE id = ?";
+			Connection connection = connectionFactory.createConnection() ;
+			PreparedStatement prepareStatement = connection.prepareStatement(query);
+			java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
+			prepareStatement.setDate(1,sqlDate);
+			prepareStatement.setInt(2, transaction.getId());
+			prepareStatement.executeUpdate();
+		} catch (SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
-		}finally{
+		}
+		finally {
 			this.connectionFactory.closeConnection();
 		}
-	    return transaction;
+		
 	}
 	
 

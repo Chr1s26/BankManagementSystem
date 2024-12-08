@@ -1,0 +1,30 @@
+package Service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import Database.PgSqlConnectionFactory;
+
+public class TransactionManager {
+	
+	public static void executeTransaction(TransactionOperation operation) throws SQLException {
+		Connection connection = null;
+		try{
+			connection = new PgSqlConnectionFactory().createConnection();
+			try {
+				connection.setAutoCommit(false);
+				operation.execute(connection);
+				connection.commit();
+				}
+			catch(Exception e) {
+				connection.rollback();
+				throw new RuntimeException("Transaction failed.Roll back.",e);
+			}
+		}catch(Exception e) {
+			throw new RuntimeException("Database connection failed",e);
+		}finally {
+			connection.close();
+		}
+	}
+	
+}
