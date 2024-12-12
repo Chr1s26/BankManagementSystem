@@ -4,14 +4,12 @@
     <fullyQualifiedTypeName name="java.io.BufferedReader"/>
     <fullyQualifiedTypeName name="Dao.CustomerDaoImpl"/>
     <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-    <fullyQualifiedTypeName name="Util.PasswordUtil"/>
     <fullyQualifiedTypeName name="java.util.Base64"/>
     <fullyQualifiedTypeName name="View.BranchListingPage"/>
     <fullyQualifiedTypeName name="Converter.BranchMapper"/>
     <fullyQualifiedTypeName name="javax.swing.JLabel"/>
     <fullyQualifiedTypeName name="java.awt.BorderLayout"/>
     <fullyQualifiedTypeName name="javax.mail.Transport"/>
-    <fullyQualifiedTypeName name="Util.OTPUtil"/>
     <fullyQualifiedTypeName name="java.awt.Color"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="Converter.EmployeeMapper"/>
@@ -33,4 +31,6 @@
     <fullyQualifiedTypeName name="Database.PgSqlConnectionFactory"/>
     <fullyQualifiedTypeName name="Service.AuthenticationService"/>
     <fullyQualifiedTypeName name="Converter.CustomerMapper"/>
+    <fullyQualifiedTypeName name="Util.OTPUtil"/>
+    <fullyQualifiedTypeName name="Util.PasswordUtil"/>
 </qualifiedTypeNameHistroy>

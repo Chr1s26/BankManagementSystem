@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Dao.BranchDaoImpl;
@@ -26,6 +27,12 @@ public class AccountCreateForm extends BaseWindow {
 	
 	private JLabel balanceLabel;
 	private JTextField balanceField;
+	
+	private JLabel passwordLabel;
+	private JPasswordField passwordField;
+	
+	private JLabel confirmpasswordLabel;
+	private JPasswordField confirmpasswordField;
 	
 	private JLabel branchLabel;
 	private JComboBox<Branch> branchCombo;
@@ -58,6 +65,12 @@ public class AccountCreateForm extends BaseWindow {
 		balanceLabel = new JLabel("Balance : ");
 		balanceField = new JTextField();
 		
+		passwordLabel = new JLabel("Password");
+		passwordField = new JPasswordField();
+		
+		confirmpasswordLabel = new JLabel("Confirm Password");
+		confirmpasswordField = new JPasswordField();
+		
 		branchLabel = new JLabel("Branch : ");
 		branchCombo = new JComboBox<>(branchDao.getAll().toArray(new Branch[0]));
 		
@@ -68,7 +81,7 @@ public class AccountCreateForm extends BaseWindow {
 		cancelButton = new JButton("Cancel");
 		
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(6, 2));
+		panel.setLayout(new GridLayout(8, 2));
 		
 		panel.add(numberLabel);
 		panel.add(numberField);
@@ -76,6 +89,10 @@ public class AccountCreateForm extends BaseWindow {
 		panel.add(accountTypeCombo);
 		panel.add(balanceLabel);
 		panel.add(balanceField);
+		panel.add(passwordLabel);
+		panel.add(passwordField);
+		panel.add(confirmpasswordLabel);
+		panel.add(confirmpasswordField);
 		panel.add(branchLabel);
 		panel.add(branchCombo);
 		panel.add(customerLabel);
@@ -172,6 +189,38 @@ public class AccountCreateForm extends BaseWindow {
 
 	public void setCancelButton(JButton cancelButton) {
 		this.cancelButton = cancelButton;
+	}
+
+	public JLabel getConfirmpasswordLabel() {
+		return confirmpasswordLabel;
+	}
+
+	public void setConfirmpasswordLabel(JLabel confirmpasswordLabel) {
+		this.confirmpasswordLabel = confirmpasswordLabel;
+	}
+
+	public String getConfirmpasswordField() {
+		return new String(confirmpasswordField.getPassword());
+	}
+
+	public void setConfirmpasswordField(JPasswordField confirmpasswordField) {
+		this.confirmpasswordField = confirmpasswordField;
+	}
+
+	public JLabel getPasswordLabel() {
+		return passwordLabel;
+	}
+
+	public void setPasswordLabel(JLabel passwordLabel) {
+		this.passwordLabel = passwordLabel;
+	}
+
+	public String getPasswordField() {
+		return new String(passwordField.getPassword());
+	}
+
+	public void setPasswordField(JPasswordField passwordField) {
+		this.passwordField = passwordField;
 	}
 
 	public void prepareBaseWindow() {

@@ -11,6 +11,7 @@ public class Account {
 	private Date createdAt;
 	private Branch branch;
 	private Customer customer;	
+	private String encryptPassword;
 	
 	public Account() {
 		
@@ -88,6 +89,38 @@ public class Account {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getEncryptPassword() {
+		return encryptPassword;
+	}
+
+	public void setEncryptPassword(String encryptPassword) {
+		this.encryptPassword = encryptPassword;
 	}
 
 	@Override

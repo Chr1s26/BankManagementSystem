@@ -16,10 +16,6 @@ public class AccountCreateController extends BaseController {
 		this.authenticate();
 	}
 	
-//	ALTER TABLE accounts
-//	ALTER COLUMN created_at SET DEFAULT CURRENT_TIMESTAMP;
-
-	
 	public void handleEmployeeRegisteration() {
 		AccountDTO AccountDTO = new AccountDTO();
 		AccountDTO.setAccountNumber(this.view.getNumberField().getText());
@@ -27,10 +23,11 @@ public class AccountCreateController extends BaseController {
 		AccountDTO.setBalance(Double.parseDouble(this.view.getBalanceField().getText()));
 		AccountDTO.setBranch(this.view.getBranch());
 		AccountDTO.setCustomer(this.view.getCustomer());
+		AccountDTO.setPassword(this.view.getPasswordField());
+		AccountDTO.setConfirmedPassword(this.view.getConfirmpasswordField());
 		try {
 			this.createService.call(AccountDTO);
 			this.parentController.refreshTableData();
-			this.view.showSuccessMessage("Account Register successfully");
 			this.view.dispose();
 		}
 		catch(Exception e) {

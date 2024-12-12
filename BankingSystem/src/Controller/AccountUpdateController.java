@@ -22,6 +22,7 @@ public class AccountUpdateController extends BaseController {
 		this.authenticate();
 	}
 	
+	
 	public void handleAccountRegisteration() {
 		AccountDTO AccountDTO = new AccountDTO();
 		AccountDTO.setAccountNumber(this.view.getNumberField().getText());
@@ -30,15 +31,28 @@ public class AccountUpdateController extends BaseController {
 		AccountDTO.setBranch(this.view.getBranch());
 		AccountDTO.setCustomer(this.view.getCustomer());
 		AccountDTO.setId(account.getId());
+		AccountDTO.setPassword(this.view.getPasswordField());
+		AccountDTO.setConfirmedPassword(this.view.getConfirmpasswordField());;
 		try {
 			this.createService.call(AccountDTO);
 			this.parentController.refreshTableData();
-			this.view.showSuccessMessage("Account Updated successfully");
 			this.view.dispose();
 		}
 		catch(Exception e) {
 			this.view.showErrorMessage(e.getMessage());
 		}
+	}	
+	
+	public void handleAllTransaction() {
+		new TransactionListingController(account,0);
+	}
+	
+	public void handleAllDepositTransaction() {
+		new TransactionListingController(account,1);
+	}
+	
+	public void handleAllWithDrawlTransaction() {
+		new TransactionListingController(account,2);
 	}
 
 	@Override
@@ -50,6 +64,9 @@ public class AccountUpdateController extends BaseController {
 		this.view.getBranchCombo().setSelectedItem(account.getBranch());
 		this.view.getCustomerCombo().setSelectedItem(account.getCustomer());
 		this.view.getupdateButton().addActionListener(e -> handleAccountRegisteration());
+		this.view.getTransactionButton().addActionListener(e -> handleAllTransaction());
+		this.view.getIncomeButton().addActionListener(e -> handleAllDepositTransaction());
+		this.view.getExpenseButton().addActionListener(e -> handleAllWithDrawlTransaction());
 		this.createService = new AccountUpdateService();
 	}
 }

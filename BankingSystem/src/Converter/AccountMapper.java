@@ -2,6 +2,7 @@ package Converter;
 
 import DTO.AccountDTO;
 import Model.Account;
+import Util.PasswordUtil;
 
 public class AccountMapper {
 	
@@ -14,6 +15,7 @@ public class AccountMapper {
 		account.setBalance(accountDto.getBalance());
 		account.setCustomer(accountDto.getCustomer());
 		account.setBranch(accountDto.getBranch());
+		account.setEncryptPassword(PasswordUtil.encryptPassword(accountDto.getPassword()));
 	
 		return account;
 	}

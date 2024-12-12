@@ -14,6 +14,8 @@ public class AccountDTO {
 	private double balance;
 	private Branch branch;
 	private Customer customer;
+	private String password;
+	private String confirmedPassword;
 	
 	public int getId() {
 		return id;
@@ -50,5 +52,17 @@ public class AccountDTO {
 	}
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getConfirmedPassword() {
+		return confirmedPassword;
+	}
+	public void setConfirmedPassword(String confirmedPassword) {
+		this.confirmedPassword = confirmedPassword;
 	}	
 }

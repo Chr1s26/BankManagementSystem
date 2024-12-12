@@ -1,0 +1,53 @@
+package DTO;
+
+import java.sql.Date;
+
+import Model.AccountTransactionType;
+
+public class TransactionDTO {
+	
+	private int transactionId;
+	private AccountTransactionType accountType;
+	private Date createdAt;
+	private String accountNumber;
+	private double amount;
+	private String description;
+	
+	public int getTransactionId() {
+		return transactionId;
+	}
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
+	public AccountTransactionType getAccountType() {
+		return accountType;
+	}
+	public void setAccountType(AccountTransactionType accountType) {
+		this.accountType = accountType;
+	}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public double getAmount() {
+		return amount;
+	}
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+}

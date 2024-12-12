@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class AccountListingPage extends BaseWindow {
+	
 	private String[] columns = {"Id","Account Number","Account Type","balance","Created At","Branch","Customer"};
 	private JButton createButton;
 	private JButton updateButton;
@@ -22,7 +23,7 @@ public class AccountListingPage extends BaseWindow {
 		panel.setLayout(new GridLayout(1,3));
 		
 		this.createButton = new JButton("Create");
-		this.updateButton = new JButton("Update");
+		this.updateButton = new JButton("History");
 		this.deleteButton = new JButton("Delete");
 		
 		panel.add(createButton);

@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Dao.BranchDaoImpl;
@@ -27,6 +28,12 @@ public class AccountUpdateForm extends BaseWindow {
 	private JLabel balanceLabel;
 	private JTextField balanceField;
 	
+	private JLabel passwordLabel;
+	private JPasswordField passwordField;
+	
+	private JLabel confirmpasswordLabel;
+	private JPasswordField confirmpasswordField;
+	
 	private JLabel branchLabel;
 	private JComboBox branchCombo;
 	
@@ -34,7 +41,10 @@ public class AccountUpdateForm extends BaseWindow {
 	private JComboBox customerCombo;
 
 	private JButton updateButton;
-	private JButton cancelButton;
+	private JButton transactionButton;
+	
+	private JButton incomeButton;
+	private JButton expenseButton;
 	
 	private JPanel panel;
 	private BranchDaoImpl branchDao;
@@ -58,30 +68,45 @@ public class AccountUpdateForm extends BaseWindow {
 		balanceLabel = new JLabel("Balance : ");
 		balanceField = new JTextField();
 		
+		passwordLabel = new JLabel("Password");
+		passwordField = new JPasswordField();
+		
+		confirmpasswordLabel = new JLabel("Confirm Password");
+		confirmpasswordField = new JPasswordField();
+		
 		branchLabel = new JLabel("Branch : ");
 		branchCombo = new JComboBox<>(branchDao.getAll().toArray(new Branch[0]));
 		
-		customerLabel = new JLabel("Customer : ");
+		customerLabel = new JLabel("Account Holder Name : ");
 		customerCombo = new JComboBox<>(customerDao.getAll().toArray(new Customer[0]));
 		
 		updateButton = new JButton("Update");
-		cancelButton = new JButton("Cancel");
+		transactionButton = new JButton("All Transaction");
+		
+		incomeButton = new JButton("Income");
+		expenseButton = new JButton("Expense");
 		
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(6, 2));
+		panel.setLayout(new GridLayout(9, 2));
 		
+		panel.add(customerLabel);
+		panel.add(customerCombo);
 		panel.add(numberLabel);
 		panel.add(numberField);
 		panel.add(accountTypeLabel);
 		panel.add(accountTypeCombo);
 		panel.add(balanceLabel);
 		panel.add(balanceField);
+		panel.add(passwordLabel);
+		panel.add(passwordField);
+		panel.add(confirmpasswordLabel);
+		panel.add(confirmpasswordField);
 		panel.add(branchLabel);
 		panel.add(branchCombo);
-		panel.add(customerLabel);
-		panel.add(customerCombo);
 		panel.add(updateButton);
-		panel.add(cancelButton);
+		panel.add(transactionButton);
+		panel.add(incomeButton);
+		panel.add(expenseButton);
 		
 		this.add(panel,BorderLayout.NORTH);
 		prepareBaseWindow();
@@ -100,6 +125,14 @@ public class AccountUpdateForm extends BaseWindow {
 	
 	public AccountType getAccountType() {
 		return (AccountType)this.accountTypeCombo.getSelectedItem();
+	}
+	
+	public Customer getCustomerType() {
+		return (Customer) this.customerCombo.getSelectedItem();
+	}
+	
+	public Branch getBranchType() {
+		return (Branch) this.branchCombo.getSelectedItem();
 	}
 	
 	public JTextField getNumberField() {
@@ -167,16 +200,48 @@ public class AccountUpdateForm extends BaseWindow {
 	}
 
 	public JButton getCancelButton() {
-		return cancelButton;
+		return transactionButton;
 	}
 
-	public void setCancelButton(JButton cancelButton) {
-		this.cancelButton = cancelButton;
+	public void setCancelButton(JButton transactionButton) {
+		this.transactionButton = transactionButton;
+	}
+	
+	public String getPasswordField() {
+		return new String(passwordField.getPassword());
+	}
+	
+	public String getConfirmpasswordField() {
+		return new String(confirmpasswordField.getPassword());
+	}
+
+	public JButton getTransactionButton() {
+		return transactionButton;
+	}
+
+	public void setTransactionButton(JButton transactionButton) {
+		this.transactionButton = transactionButton;
+	}
+
+	public JButton getIncomeButton() {
+		return incomeButton;
+	}
+
+	public void setIncomeButton(JButton incomeButton) {
+		this.incomeButton = incomeButton;
+	}
+
+	public JButton getExpenseButton() {
+		return expenseButton;
+	}
+
+	public void setExpenseButton(JButton expenseButton) {
+		this.expenseButton = expenseButton;
 	}
 
 	public void prepareBaseWindow() {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setTitle("Account Update Form");
+		this.setTitle("Account History");
 		this.setSize(800,400);
 	}
 }

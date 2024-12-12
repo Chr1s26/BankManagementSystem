@@ -126,4 +126,13 @@ public class Customer {
 		return firstName+" "+lastName;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Customer customer = (Customer) obj;
+	    return id == customer.id; 
+	}
+
+	
 }

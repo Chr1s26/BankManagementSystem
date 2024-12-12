@@ -55,7 +55,14 @@ public class Branch {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+	    Branch branch = (Branch) obj;
+	    return id == branch.id; 
+	}
 
 	@Override
 	public String toString() {

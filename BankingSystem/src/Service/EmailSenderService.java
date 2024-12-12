@@ -72,7 +72,7 @@ public class EmailSenderService extends PerformSentMail {
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(toEmail));
 			message.setSubject(subject);
-			message.setText(body);
+			message.setContent(body,"text/html; charset=utf-8");
 			Transport.send(message);
 			System.out.print("Email sent successfully to "+toEmail);
 		}catch(MessagingException e) {
@@ -83,8 +83,7 @@ public class EmailSenderService extends PerformSentMail {
 
 	@Override
 	public void sentEmailThread() {
-		body = Util.OTPUtil.generateOTP(5);
-		OTPService.sendOtp = body;
+
 		this.sendEmail();
 	}
 	
