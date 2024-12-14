@@ -1,0 +1,80 @@
+package Controller;
+
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import DTO.TransferMoneyDTO;
+import Dao.EmployeeDaoImpl;
+import Exception.InsufficientAmountException;
+import Exception.TransactionFailedException;
+import Model.Account;
+import Model.CurrencyType;
+import Model.Employee;
+import Model.Transaction;
+import Service.AuthenticationService;
+import Service.TransferMoneyService;
+import View.TransferMoneyWindow;
+
+public abstract class TransferMoneyController extends BaseController {
+	
+	private static JFrame view;
+	private TransferMoneyService creationService;
+	
+	
+	public TransferMoneyController() {
+		super(view);
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		buttonAction();
+	}
+	
+	public abstract void buttonAction();
+
+	public abstract void transferBtnAction() ;
+	
+    public abstract void clearFields();
+    
+//	Account sourceAccNumber = this.view.getSourceAccount();
+//	Account targetAccNumber = this.view.getTargetAccount();
+//	double amount = Double.parseDouble(this.view.getAmountField().getText());
+//	String description = this.view.getDescField().getText();
+//	CurrencyType currency = this.view.getCurrencyType();
+//	Employee employee = this.currentUser;
+//	TransferMoneyDTO transferMoneyDto = new TransferMoneyDTO(sourceAccNumber,targetAccNumber,amount,description,currency,employee);
+//	Transaction transaction = new Transaction();
+//	try {
+//		AuthenticationService.otpAuthenticate(transaction);
+//		this.view.showSuccessMessage("Money transfer Successfully!!");
+//		this.view.dispose();
+//	}
+//	catch(Exception e) {
+//		this.view.showErrorMessage(e.getMessage());
+//		this.creationService = new TransferMoneyService(transferMoneyDto,transaction);
+//		this.view.dispose();
+//	}
+    
+    
+    
+//	view = (TransferMoneyWindow)this.getView();
+//	view.getTransferButton().addActionListener(e -> {
+//		try {
+//			transferBtnAction();
+//		} catch (InsufficientAmountException e1) {
+//			e1.printStackTrace();
+//		} catch (SQLException e1) {
+//			e1.printStackTrace();
+//		} catch (TransactionFailedException e1) {
+//			e1.printStackTrace();
+//		}
+//	});
+//	view.getCancelButton().addActionListener(e -> clearFields());
+    
+//    
+//    this.view.getAmountField().setText("");
+//    this.view.getDescField().setText("");
+}

@@ -1,0 +1,31 @@
+package Converter;
+
+import DTO.TransferMoneyDTO;
+import Model.AccountTransactionType;
+import Model.CardTransaction;
+import Model.StatusType;
+
+public class CardTransactionMapper {
+	
+	public static CardTransaction[] toCardTransaction(CardTransferMoneyDTO transferMoneyDto) {
+		
+		CardTransaction[] cardTransaction = new CardTransaction[2];
+		cardTransaction[0] = new CardTransaction();
+		cardTransaction[0].setType(AccountTransactionType.WITHDRAWL);
+		cardTransaction[0].setAmount(transferMoneyDto.getAmount());
+		cardTransaction[0].setDescription(transferMoneyDto.getDescription());
+		cardTransaction[0].setAccount(transferMoneyDto.getSourceAccountNum());
+		cardTransaction[0].setCurrency(transferMoneyDto.getCurrency());
+		cardTransaction[0].setStatus(StatusType.COMPLETE);
+		
+		cardTransaction[1] = new CardTransaction();
+		cardTransaction[1].setTransactionType(AccountTransactionType.DEPOSIT);
+		cardTransaction[1].setAmount(transferMoneyDto.getAmount());
+		cardTransaction[1].setDescription(transferMoneyDto.getDescription());
+		cardTransaction[1].setAccount(transferMoneyDto.getTargetAccountNum());
+		cardTransaction[1].setCurrency(transferMoneyDto.getCurrency());
+		cardTransaction[1].setStatus(StatusType.COMPLETE);
+		return cardTransaction;
+		
+	}
+}

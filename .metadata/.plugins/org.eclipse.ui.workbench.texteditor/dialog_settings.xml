@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="transactionButton"/>
+		<item key="selection" value="cardTransaction"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="true"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="accountTransaction"/>
+			<item value="AccountTransaction"/>
+			<item value="Account"/>
+			<item value="accountDao"/>
+			<item value="AccountDaoImpl"/>
+			<item value="targetAccField"/>
+			<item value="targetAccLabel"/>
+			<item value="sourceAccTextField"/>
+			<item value="sourceAccLabel"/>
 			<item value="cancelButton"/>
 			<item value="CustomerDao"/>
 			<item value="Employee"/>
 			<item value="transactionDao"/>
-			<item value="AccountDaoImpl"/>
 			<item value="createService"/>
 			<item value="CardCreateService"/>
-			<item value="CardCreateForm"/>
-			<item value="createButton"/>
-			<item value="Customer"/>
-			<item value="CustomerDTO"/>
-			<item value="LoanDTO"/>
-			<item value="LoanListingController"/>
-			<item value="LoanCreateService"/>
-			<item value="LoanCreateForm"/>
 		</list>
 		<list key="replacehistory">
+			<item value="cardTransaction"/>
+			<item value="CardTransaction"/>
+			<item value="Card"/>
+			<item value="cardDao"/>
+			<item value="CardDaoImpl"/>
+			<item value="targetCardField"/>
+			<item value="targetCardLabel"/>
+			<item value="sourceCardTextField"/>
+			<item value="sourceCardLabel"/>
 			<item value="transactionButton"/>
 			<item value="TransactionDao"/>
 			<item value="Customer"/>
 			<item value="accountTransactionDao"/>
 			<item value="AccountTransactionDaoImpl"/>
 			<item value="updateService"/>
-			<item value="CardUpdateService"/>
-			<item value="CardUpdateForm"/>
-			<item value="updateButton"/>
-			<item value="Card"/>
-			<item value="CardDTO"/>
-			<item value="CardListingController"/>
-			<item value="CardCreateService"/>
-			<item value="CardCreateForm"/>
-			<item value="customerDao"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

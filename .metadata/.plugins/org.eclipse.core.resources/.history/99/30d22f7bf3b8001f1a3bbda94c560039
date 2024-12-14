@@ -1,0 +1,24 @@
+package Controller;
+
+public class AccountTransferMoneyController extends TransferMoneyController {
+	
+	TransferMoneyController.view = new TransferMoneyWindow();
+	@Override
+	public void buttonAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void transferBtnAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clearFields() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

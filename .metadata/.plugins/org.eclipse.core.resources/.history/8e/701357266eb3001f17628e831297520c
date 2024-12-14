@@ -1,7 +1,0 @@
-package Service;
-
-public class TransactionManager {
-	
-	public static<T> T executeTransaction(TransactionalOperation<T> operation);
-	
-}

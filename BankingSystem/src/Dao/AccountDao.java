@@ -11,4 +11,6 @@ public abstract class AccountDao extends AbstractDao<Account> {
 	public abstract List<TransactionDTO> getAllTransaction(Account account);
 	public abstract List<TransactionDTO> getAllDepositTransaction(Account account);
 	public abstract List<TransactionDTO> getAllWithDrawlTransaction(Account account);
+	
+	
 }

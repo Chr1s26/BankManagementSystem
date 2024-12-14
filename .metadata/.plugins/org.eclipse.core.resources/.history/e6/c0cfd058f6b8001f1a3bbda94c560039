@@ -1,0 +1,44 @@
+package Controller;
+
+import java.sql.SQLException;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+import DTO.TransferMoneyDTO;
+import Dao.EmployeeDaoImpl;
+import Exception.InsufficientAmountException;
+import Exception.TransactionFailedException;
+import Model.Account;
+import Model.CurrencyType;
+import Model.Employee;
+import Model.Transaction;
+import Service.AuthenticationService;
+import Service.TransferMoneyService;
+import View.TransferMoneyWindow;
+
+public abstract class TransferMoneyController extends BaseController {
+	
+	public TransferMoneyController(JFrame view) {
+		super(view);
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		buttonAction();
+	}
+	
+	public abstract void buttonAction();
+
+	public abstract void transferBtnAction()throws InsufficientAmountException, SQLException, TransactionFailedException ;
+	
+    public abstract void clearFields();
+    
+
+    
+    
+    
+
+
+}

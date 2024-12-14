@@ -1,0 +1,14 @@
+package Controller;
+
+import Model.Account;
+
+public class AccountTransactionController extends TransactionListingController {
+	
+	private static String[] columns = {"Transaction Id","Transaction Type","CreatedAt","To Account Number","Note"};
+	
+	
+	public AccountTransactionController(Account account,int type) {
+		super(account,type,columns);
+	}
+
+}

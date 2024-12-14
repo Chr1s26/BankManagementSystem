@@ -23,10 +23,15 @@ public class homeViewController extends BaseController {
 		this.view.getTransactionListing().addActionListener(e -> addActionOnTransaction());
 		this.view.getTransferMoney().addActionListener(e -> addActionOnTransferMoney());
 		this.view.getCardTransactionListing().addActionListener(e -> addActionOnCardTransaction());
+		this.view.getCardTransferMoney().addActionListener(e -> addActionOnCardTransferMoney());
+	}
+
+	private void addActionOnCardTransferMoney() {
+		new CardTransferMoneyController();
 	}
 
 	private void addActionOnTransferMoney() {
-		new TransferMoneyController();
+		new AccountTransferMoneyController();
 	}
 
 	private void addActionOnCardTransaction() {

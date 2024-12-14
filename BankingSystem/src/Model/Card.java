@@ -96,8 +96,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [id=" + id + ", cardNumber=" + cardNumber + ", cardType=" + cardType + ", expireDate=" + expireDate
-				+ ", securityCode=" + securityCode + ", customer=" + customer + ", account=" + account + "]";
+		return this.cardNumber;
 	}
 	
 	

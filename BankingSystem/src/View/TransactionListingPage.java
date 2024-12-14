@@ -5,9 +5,10 @@ import javax.swing.JFrame;
 
 public class TransactionListingPage extends BaseWindow {
 	
-	private String[] columns = {"Id","Transaction Type","Created at","To Account"," Amount","Note"};
+	private String[] columns ;
 	
-	public TransactionListingPage() {
+	public TransactionListingPage(String[] columns) {
+		this.columns = columns;
 		initializeComponent();
 	}
 	

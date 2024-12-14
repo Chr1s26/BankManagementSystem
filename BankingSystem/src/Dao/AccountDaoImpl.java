@@ -140,9 +140,9 @@ public class AccountDaoImpl extends AccountDao{
 				TransactionDTO transactionDTO = new TransactionDTO();
 				transactionDTO.setTransactionId(resultset.getInt("transaction_id"));
 				int type = resultset.getInt("transaction_type");
-				transactionDTO.setAccountType(AccountTransactionType.fromValue(type));
+				transactionDTO.setType(AccountTransactionType.fromValue(type));
 				transactionDTO.setCreatedAt(resultset.getString("created_at"));
-				transactionDTO.setAccountNumber(resultset.getString("account_number"));
+				transactionDTO.setNumber(resultset.getString("account_number"));
 				transactionDTO.setAmount(resultset.getDouble("amount"));
 				transactionDTO.setDescription(resultset.getString("description"));
 				objects.add(transactionDTO);
@@ -177,9 +177,9 @@ public class AccountDaoImpl extends AccountDao{
 				TransactionDTO transactionDTO = new TransactionDTO();
 				transactionDTO.setTransactionId(resultset.getInt("transaction_id"));
 				int type = resultset.getInt("transaction_type");
-				transactionDTO.setAccountType(AccountTransactionType.fromValue(type));
+				transactionDTO.setType(AccountTransactionType.fromValue(type));
 				transactionDTO.setCreatedAt(resultset.getString("created_at"));
-				transactionDTO.setAccountNumber(resultset.getString("account_number"));
+				transactionDTO.setNumber(resultset.getString("account_number"));
 				transactionDTO.setAmount(resultset.getDouble("amount"));
 				transactionDTO.setDescription(resultset.getString("description"));
 				objects.add(transactionDTO);
@@ -214,9 +214,9 @@ public class AccountDaoImpl extends AccountDao{
 				TransactionDTO transactionDTO = new TransactionDTO();
 				transactionDTO.setTransactionId(resultset.getInt("transaction_id"));
 				int type = resultset.getInt("transaction_type");
-				transactionDTO.setAccountType(AccountTransactionType.fromValue(type));
+				transactionDTO.setType(AccountTransactionType.fromValue(type));
 				transactionDTO.setCreatedAt(resultset.getString("created_at"));
-				transactionDTO.setAccountNumber(resultset.getString("account_number"));
+				transactionDTO.setNumber(resultset.getString("account_number"));
 				transactionDTO.setAmount(resultset.getDouble("amount"));
 				transactionDTO.setDescription(resultset.getString("description"));
 				objects.add(transactionDTO);

@@ -1,0 +1,58 @@
+package Controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import DTO.TransactionDTO;
+import Dao.AccountDaoImpl;
+import Model.Account;
+import View.AccountListingPage;
+import View.TransactionListingPage;
+
+public class TransactionListingController extends BaseController {
+	
+	public TransactionListingPage view;
+	private AccountDaoImpl accountDao;
+	private Account account;
+	private int type;
+	
+	public TransactionListingController(Account account,int type) {
+		super(new TransactionListingPage());
+		this.type = type;
+		this.account = account;
+		this.accountDao = new AccountDaoImpl();
+		this.authenticate();
+	}
+
+	@Override
+	public void initController() {
+		this.view = (TransactionListingPage) this.getView();
+		String[] columns = this.view.getColumns();
+		this.view.createDataTable(fetchTransactionTableData(), columns);
+	}
+	
+	public String[][] fetchTransactionTableData() {
+		List<TransactionDTO> transactions = new ArrayList<TransactionDTO>();
+		
+		if(type == 0) {
+			transactions = accountDao.getAllTransaction(account);
+		}else if(type == 1) {
+			transactions = accountDao.getAllDepositTransaction(account);
+		}else if(type == 2) {
+			transactions = accountDao.getAllWithDrawlTransaction(account);
+		}
+		
+		String[][] AccountArray = new String[transactions.size()][this.view.getColumns().length];
+		int rowCount = 0;
+		for (TransactionDTO transaction : transactions) {
+			AccountArray[rowCount][0] = transaction.getTransactionId() + "";
+			AccountArray[rowCount][1] = transaction.getAccountType()+"";
+			AccountArray[rowCount][2] = transaction.getCreatedAt()+"";
+			AccountArray[rowCount][3] = transaction.getAccountNumber() + "";
+			AccountArray[rowCount][4] = transaction.getAmount() + "";
+			AccountArray[rowCount][5] = transaction.getDescription();
+			rowCount++;
+		}
+		return AccountArray;
+	}
+}

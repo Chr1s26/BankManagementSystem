@@ -21,74 +21,11 @@ import Model.Customer;
 import Model.Employee;
 import Model.Transaction;
 
-public class TransferMoneyService {
-	
-	private TransferMoneyDTO transferMoneyDto;
-	private AccountTransactionDaoImpl accountTransactionDao;
-	private TransactionDaoImpl transactionDao;
-	private AccountDaoImpl accountDao;
-	 
-	
-	public TransferMoneyService(TransferMoneyDTO transferMoneyDto,Transaction transaction) throws InsufficientAmountException, SQLException, TransactionFailedException {
-		this.transferMoneyDto = transferMoneyDto;
-		this.accountTransactionDao = new AccountTransactionDaoImpl();
-		transactionDao = new TransactionDaoImpl();
-		this.accountDao = new AccountDaoImpl();
-		this.transferProcess(transaction);
-	}
-	
-	public void transferProcess(Transaction transaction) throws InsufficientAmountException,SQLException, TransactionFailedException {
-		
-			TransactionManager.executeTransaction((connection) -> {
-		        processTransfer(connection,transaction);
-		    });
-			
-	}
-	
-	public void processTransfer(Connection connection,Transaction transaction ) throws InsufficientAmountException, SQLException, NotConfirmedException {
-		
-		AccountTransaction[] accountTransaction = AccountTransactionMapper.toAccountTransaction(transferMoneyDto);
-		transaction = new Transaction();
-		transaction.setCreatedBy(transferMoneyDto.getEmployee());
-		transaction.setUpdatedBy(transferMoneyDto.getEmployee());
-		
-		Customer customer = accountTransaction[0].getAccount().getCustomer();
-		OTPController otpController = new OTPController(CustomerMapper.toCustomerDTO(customer),transaction);
-		otpController.sentOTP();
+public abstract class TransferMoneyService {
 
-		calculateWithdrawlAmount(accountTransaction[0]);
-		calculateDepositAmount(accountTransaction[1]);
-			
-		transaction = transactionDao.createTransactionWithIdReturn(transaction,connection);
-			
-		accountTransaction[0].setTransaction(transaction);
-		accountTransaction[1].setTransaction(transaction);
-			
-		accountTransactionDao.create(accountTransaction[0],connection);
-		accountTransactionDao.create(accountTransaction[1],connection);
+	
+	public abstract void transferProcess() throws InsufficientAmountException,SQLException, TransactionFailedException;
+	public abstract void processTransfer(Connection connection,Transaction transaction ) throws InsufficientAmountException, SQLException, NotConfirmedException ;
 
-		
-	}
-	
-	
-	public void calculateWithdrawlAmount(AccountTransaction accountTransaction) throws InsufficientAmountException {
-		Account account = accountTransaction.getAccount();
-		double amount =account.getBalance() - accountTransaction.getAmount();
-		if(amount < 0) {
-			throw new InsufficientAmountException("Insufficient Amount");
-		}else {
-			account.setBalance(amount);
-			accountDao.update(account);
-		}
- 	}
-	
-	public void calculateDepositAmount(AccountTransaction accountTransaction) throws InsufficientAmountException {
-		Account account = accountTransaction.getAccount();
-		double amount =account.getBalance() + accountTransaction.getAmount();
-		account.setBalance(amount);
-		accountDao.update(account);
- 	}
 }
 
-//ALTER TABLE account_transaction
-//ALTER COLUMN transaction_type TYPE VARCHAR();

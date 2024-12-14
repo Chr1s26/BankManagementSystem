@@ -21,16 +21,16 @@
     <fullyQualifiedTypeName name="Util.DateConverter"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="Converter.AccountTransactionMapper"/>
-    <fullyQualifiedTypeName name="Model.AccountTransactionType"/>
     <fullyQualifiedTypeName name="Model.AccountType"/>
     <fullyQualifiedTypeName name="Model.CardType"/>
     <fullyQualifiedTypeName name="Model.LoanType"/>
-    <fullyQualifiedTypeName name="Model.CurrencyType"/>
-    <fullyQualifiedTypeName name="Model.StatusType"/>
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="Database.PgSqlConnectionFactory"/>
-    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
     <fullyQualifiedTypeName name="Converter.CustomerMapper"/>
     <fullyQualifiedTypeName name="Util.OTPUtil"/>
     <fullyQualifiedTypeName name="Util.PasswordUtil"/>
+    <fullyQualifiedTypeName name="Service.AuthenticationService"/>
+    <fullyQualifiedTypeName name="Model.AccountTransactionType"/>
+    <fullyQualifiedTypeName name="Model.CurrencyType"/>
+    <fullyQualifiedTypeName name="Model.StatusType"/>
 </qualifiedTypeNameHistroy>

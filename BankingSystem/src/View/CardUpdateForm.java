@@ -52,6 +52,9 @@ public class CardUpdateForm extends BaseWindow {
 	private JButton updateButton;
 	private JButton cancelButton;
 	
+	private JButton incomeButton;
+	private JButton expenseButton;
+	
 	private JPanel panel;
 	private CustomerDaoImpl customerDao;
 	private AccountDaoImpl accountDao;
@@ -89,7 +92,7 @@ public class CardUpdateForm extends BaseWindow {
 		cancelButton = new JButton("Cancel");
 		
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(7, 2));
+		panel.setLayout(new GridLayout(8, 2));
 		
 		panel.add(cardNumberLabel);
 		panel.add(cardNumberField);
@@ -105,6 +108,8 @@ public class CardUpdateForm extends BaseWindow {
 		panel.add(accountField);
 		panel.add(updateButton);
 		panel.add(cancelButton);
+		panel.add(incomeButton);
+		panel.add(expenseButton);
 		
 		this.add(panel,BorderLayout.NORTH);
 		prepareBaseWindow();
@@ -210,6 +215,22 @@ public class CardUpdateForm extends BaseWindow {
 
 	public JButton getCancelButton() {
 		return cancelButton;
+	}
+
+	public JButton getIncomeButton() {
+		return incomeButton;
+	}
+
+	public void setIncomeButton(JButton incomeButton) {
+		this.incomeButton = incomeButton;
+	}
+
+	public JButton getExpenseButton() {
+		return expenseButton;
+	}
+
+	public void setExpenseButton(JButton expenseButton) {
+		this.expenseButton = expenseButton;
 	}
 
 	public void setCancelButton(JButton cancelButton) {

@@ -9,50 +9,43 @@ import Model.Account;
 import View.AccountListingPage;
 import View.TransactionListingPage;
 
-public class TransactionListingController extends BaseController {
+public abstract class TransactionListingController extends BaseController {
 	
 	public TransactionListingPage view;
-	private AccountDaoImpl accountDao;
-	private Account account;
 	private int type;
+	private String[] columns;
 	
-	public TransactionListingController(Account account,int type) {
-		super(new TransactionListingPage());
+	public TransactionListingController(Account account,int type,String[] columns) {
+		super(new TransactionListingPage(columns));
+		this.columns = columns;
 		this.type = type;
-		this.account = account;
-		this.accountDao = new AccountDaoImpl();
 		this.authenticate();
 	}
 
 	@Override
 	public void initController() {
 		this.view = (TransactionListingPage) this.getView();
-		String[] columns = this.view.getColumns();
-		this.view.createDataTable(getAccountData(), columns);
+		this.view.createDataTable(fetchTransactionData(), columns);
 	}
 	
-	public String[][] getAccountData() {
-		List<TransactionDTO> Accounts = new ArrayList<TransactionDTO>();
+	public abstract List<TransactionDTO> getTransaction(int type);
+	
+	public String[][] fetchTransactionData() {
+		List<TransactionDTO> transactions = new ArrayList<TransactionDTO>();
 		
-		if(type == 0) {
-			Accounts = accountDao.getAllTransaction(account);
-		}else if(type == 1) {
-			Accounts = accountDao.getAllDepositTransaction(account);
-		}else if(type == 2) {
-			Accounts = accountDao.getAllWithDrawlTransaction(account);
-		}
+		transactions = getTransaction(type);
 		
-		String[][] AccountArray = new String[Accounts.size()][this.view.getColumns().length];
+		String[][] transactionArray = new String[transactions.size()][this.view.getColumns().length];
 		int rowCount = 0;
-		for (TransactionDTO Account : Accounts) {
-			AccountArray[rowCount][0] = Account.getTransactionId() + "";
-			AccountArray[rowCount][1] = Account.getAccountType()+"";
-			AccountArray[rowCount][2] = Account.getCreatedAt()+"";
-			AccountArray[rowCount][3] = Account.getAccountNumber() + "";
-			AccountArray[rowCount][4] = Account.getAmount() + "";
-			AccountArray[rowCount][5] = Account.getDescription();
+		for (TransactionDTO transaction : transactions) {
+			transactionArray[rowCount][0] = transaction.getTransactionId() + "";
+			transactionArray[rowCount][1] = transaction.getType()+"";
+			transactionArray[rowCount][2] = transaction.getCreatedAt()+"";
+			transactionArray[rowCount][3] = transaction.getNumber() + "";
+			transactionArray[rowCount][4] = transaction.getAmount() + "";
+			transactionArray[rowCount][5] = transaction.getDescription();
 			rowCount++;
 		}
-		return AccountArray;
+		return transactionArray;
 	}
 }
