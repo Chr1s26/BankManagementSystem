@@ -23,6 +23,7 @@ import Model.Transaction;
 
 public abstract class TransferMoneyService {
 
+	
 	public abstract void transferProcess() throws InsufficientAmountException,SQLException, TransactionFailedException;
 	public abstract void processTransfer(Connection connection,Transaction transaction ) throws InsufficientAmountException, SQLException, NotConfirmedException ;
 
