@@ -14,7 +14,16 @@ public class EmployeeDTO {
 	private String position;
 	private String salary;
 	private int branchId;
+	private int userRoleId;
 	
+	public int getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
+	}
+
 	public int getId() {
 		return id;
 	}

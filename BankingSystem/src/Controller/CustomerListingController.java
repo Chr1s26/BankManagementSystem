@@ -68,8 +68,8 @@ public class CustomerListingController extends BaseController {
 			CustomerArray[rowCount][6] = Customer.getdateOfBirth() + "";
 			CustomerArray[rowCount][7] = Customer.getCreatedAt() + "";
 			CustomerArray[rowCount][8] = Customer.getUpdatedAt() + "";
-			CustomerArray[rowCount][7] = Customer.getcreatedBy() + "";
-			CustomerArray[rowCount][8] = Customer.getupdatedBy() + "";
+			CustomerArray[rowCount][9] = Customer.getcreatedBy() + "";
+			CustomerArray[rowCount][10] = Customer.getupdatedBy() + "";
 			rowCount++;
 		}
 		return CustomerArray;

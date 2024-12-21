@@ -69,6 +69,7 @@ public class EmployeeListingController extends BaseController {
 			employeeArray[rowCount][6] = employee.getSalary()+"";
 			employeeArray[rowCount][7] = employee.getBranch().toString();
 			employeeArray[rowCount][8] = employee.getEncryptPassword();
+			employeeArray[rowCount][9] = employee.getRole()+"";
 			rowCount++;
 		}
 		return employeeArray;

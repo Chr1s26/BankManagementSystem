@@ -8,6 +8,7 @@ import Converter.CustomerMapper;
 import DTO.CustomerDTO;
 import Dao.CustomerDaoImpl;
 import Model.Customer;
+import Model.Employee;
 
 public class CustomerCreateService {
 	
@@ -21,11 +22,14 @@ public class CustomerCreateService {
 	 
 	public void call(CustomerDTO CustomerDTO) throws Exception {
 		this.CustomerDTO = CustomerDTO;
+
 		this.creationProcess();
 	}
 
 	private void creationProcess() throws SQLException {
-		Customer Customer = CustomerMapper.toCustomer(this.CustomerDTO);
-		CustomerDao.create(Customer);
+		Customer customer = CustomerMapper.toCustomer(this.CustomerDTO);
+		Employee createdBy = AuthenticationService.employee;
+		customer.setcreatedBy(createdBy);
+		CustomerDao.create(customer);
 	}
 }

@@ -1,0 +1,15 @@
+package Model;
+
+public class UsersRole {
+	
+	private int id;
+	private int name;
+	private int description;
+	
+	public UsersRole(int id, int name, int description) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
+
+}

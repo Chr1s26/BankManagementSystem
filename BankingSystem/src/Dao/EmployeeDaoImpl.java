@@ -12,15 +12,18 @@ import Exception.IncorrectUserNameException;
 import Exception.InvalidTokenException;
 import Model.Branch;
 import Model.Employee;
+import Model.UsersRole;
 import Util.PasswordUtil;
 import Util.TokenUtil;
 
 public class EmployeeDaoImpl extends EmployeeDao{
 	
 	BranchDaoImpl branchDaoImpl;
+	UsersRoleDaoImpl usersRoleDao;
 	
 	public EmployeeDaoImpl() {
 		branchDaoImpl = new BranchDaoImpl();
+		usersRoleDao = new UsersRoleDaoImpl();
 	}
 
 	@Override
@@ -43,7 +46,9 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			Branch branch = branchDaoImpl.getById(branchId);
 			String password = resultset.getString("encrypt_password");
 			java.sql.Date confirmAt = resultset.getDate("confirmed_at");
-			employee = new Employee(id,firstName,lastName,email,phoneNumber,employeePosition,salary,branch,password);
+			int userRoleId = resultset.getInt("user_roles_id");
+			UsersRole userRole = usersRoleDao.getById(userRoleId);
+			employee = new Employee(id,firstName,lastName,email,phoneNumber,employeePosition,salary,branch,password,userRole);
 			employee.setConfirmedAt(confirmAt);
 			
 		}catch(SQLException e) {
@@ -54,12 +59,12 @@ public class EmployeeDaoImpl extends EmployeeDao{
 
 	@Override
 	public String getInsertQuery() {
-		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,employee_position,salary,branch_id,encrypt_password) values (?,?,?,?,?,?,?,?)";
+		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,employee_position,salary,branch_id,encrypt_password,user_roles_id) values (?,?,?,?,?,?,?,?,?)";
 	}
 
 	@Override
 	public String getUpdateQuery() {
-		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? ,encrypt_password = ? where id = ?";
+		return "update "+this.getTableName()+" set first_name = ?, last_name = ?, email = ?, phone_number = ?, employee_position = ?, salary = ?, branch_id = ? ,encrypt_password = ?, user_roles_id = ? where id = ?";
 	}
 
 	@Override
@@ -78,6 +83,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			preparedStatement.setFloat(6, (float)object.getSalary());
 			preparedStatement.setInt(7, object.getBranch().getId());
 			preparedStatement.setString(8, object.getEncryptPassword());
+			preparedStatement.setInt(9, object.getRole().getId());
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -95,6 +101,7 @@ public class EmployeeDaoImpl extends EmployeeDao{
 			preparedStatement.setFloat(6, (float)object.getSalary());
 			preparedStatement.setInt(7, object.getBranch().getId());
 			preparedStatement.setString(8, object.getEncryptPassword());
+			preparedStatement.setInt(9, object.getRole().getId());
 			preparedStatement.setInt(9, object.getId());
 		}catch(SQLException e) {
 			System.out.print("SQL Update Exception for : "+e.getMessage());

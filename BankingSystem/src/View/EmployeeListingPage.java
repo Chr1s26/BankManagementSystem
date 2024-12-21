@@ -11,7 +11,7 @@ import Dao.EmployeeDaoImpl;
 
 public class EmployeeListingPage extends BaseWindow {
 	
-	private String[] columns = {"id","firstname","lastname","email","phone number","employee-position","salary","branch","encrypt password"};
+	private String[] columns = {"id","firstname","lastname","email","phone number","employee-position","salary","branch","encrypt password","Role"};
 	private JButton createButton;
 	private JButton updateButton;
 	private JButton deleteButton;

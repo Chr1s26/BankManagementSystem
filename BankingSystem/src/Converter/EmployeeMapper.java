@@ -2,12 +2,14 @@ package Converter;
 
 import DTO.EmployeeDTO;
 import Dao.BranchDaoImpl;
+import Dao.UsersRoleDaoImpl;
 import Model.Employee;
 import Util.PasswordUtil;
 
 public class EmployeeMapper {
 	
 	public static BranchDaoImpl branchDao = new BranchDaoImpl();
+	public static UsersRoleDaoImpl userRoleDao = new UsersRoleDaoImpl();
 	
 	
 	public static Employee toEmployee(EmployeeDTO employeeDto) {
@@ -21,6 +23,7 @@ public class EmployeeMapper {
 		employee.setEncryptPassword(PasswordUtil.encryptPassword(employeeDto.getPassword()));
 		employee.setPhoneNumber(employeeDto.getPhoneNumber());
 		employee.setPosition(employeeDto.getPosition());
+		employee.setRole(userRoleDao.getById(employeeDto.getUserRoleId()));
 		employee.setId(employeeDto.getId());
 		return employee;
 	}

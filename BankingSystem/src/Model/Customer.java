@@ -21,6 +21,20 @@ public class Customer {
 		
 	}
 	
+	public Customer(int id, String firstName, String lastName, String email, String phoneNumber, String address,
+			Date dateOfBirth, Employee createdBy, Employee updatedBy) {
+		
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.dateOfBirth = dateOfBirth;
+		this.createdBy = createdBy;
+		this.updatedBy = updatedBy;
+	}
+
 	public Customer(int id, String firstName, String lastName, String email, String phoneNumber, String address,Date dateOfBirth) {
 		this.id = id;
 		this.firstName = firstName;

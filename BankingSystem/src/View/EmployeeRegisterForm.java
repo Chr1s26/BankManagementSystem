@@ -13,8 +13,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Dao.BranchDaoImpl;
+import Dao.UsersRoleDaoImpl;
 import Exception.InvalidTokenException;
 import Model.Branch;
+import Model.UsersRole;
 
 public class EmployeeRegisterForm extends BaseWindow{
 	
@@ -45,11 +47,15 @@ public class EmployeeRegisterForm extends BaseWindow{
 	private JLabel branchLabel;
 	private JComboBox<Branch> branchComboBox;
 	
+	private JLabel userRoleLabel;
+	private JComboBox<UsersRole> userRoleComboBox;
+	
 	private JButton createButton;
 	private JButton cancelButton;
 	
 	private JPanel panel;
 	private BranchDaoImpl branchDao;
+	private UsersRoleDaoImpl usersRoleDao;
 	
 	public EmployeeRegisterForm() {
 		initializeComponent();
@@ -58,6 +64,7 @@ public class EmployeeRegisterForm extends BaseWindow{
 	public void initializeComponent() {
 		
 		branchDao = new BranchDaoImpl();
+		usersRoleDao = new UsersRoleDaoImpl();
 		
 		firstNameLabel = new JLabel("Firstname : ");
 		firstNameField = new JTextField();
@@ -86,11 +93,14 @@ public class EmployeeRegisterForm extends BaseWindow{
 		branchLabel = new JLabel("Branch : ");
 		branchComboBox = new JComboBox<>(branchDao.getAll().toArray(new Branch[0]));
 		
+		userRoleLabel = new JLabel("User Role : ");
+		userRoleComboBox = new JComboBox<>(usersRoleDao.getAll().toArray(new UsersRole[0]));
+		
 		createButton = new JButton("Register");
 		cancelButton = new JButton("Cancel");
 		
 		panel = new JPanel();
-		panel.setLayout(new GridLayout(10, 2));
+		panel.setLayout(new GridLayout(11, 2));
 		
 		panel.add(firstNameLabel);
 		panel.add(firstNameField);
@@ -110,6 +120,8 @@ public class EmployeeRegisterForm extends BaseWindow{
 		panel.add(positionComboBox);
 		panel.add(branchLabel);
 		panel.add(branchComboBox);
+		panel.add(userRoleLabel);
+		panel.add(userRoleComboBox);
 		panel.add(createButton);
 		panel.add(cancelButton);
 		
@@ -149,6 +161,11 @@ public class EmployeeRegisterForm extends BaseWindow{
 	public int getBranchId() {
 		Branch branch = (Branch)this.branchComboBox.getSelectedItem();
 		return branch.getId();
+	}
+	
+	public int getUserRoleId() {
+		UsersRole userRole = (UsersRole) this.userRoleComboBox.getSelectedItem();
+		return userRole.getId();
 	}
 	
 	public JButton getCreateButton() {

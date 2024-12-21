@@ -8,9 +8,16 @@ import java.sql.SQLException;
 
 import Model.Branch;
 import Model.Customer;
+import Model.Employee;
 import Model.Customer;
 
 public class CustomerDaoImpl extends CustomerDao {
+	
+	private EmployeeDao employeeDaoImpl;
+	
+	public CustomerDaoImpl() {
+		this.employeeDaoImpl = new EmployeeDaoImpl();
+	}
 
 	@Override
 	public String getTableName() {
@@ -28,8 +35,13 @@ public class CustomerDaoImpl extends CustomerDao {
 			String phoneNumber = resultset.getString("phone_number");
 			String address = resultset.getString("address");
 			Date dateOfBirth = resultset.getDate("date_of_birth");
+			int createdById = resultset.getInt("created_by");
+			int updatedById = resultset.getInt("updated_by");
 			
-			customer = new Customer(id,firstName,lastName,email,phoneNumber,address,dateOfBirth);
+			Employee createdBy = this.employeeDaoImpl.getById(createdById);
+			Employee updatedBy = this.employeeDaoImpl.getById(updatedById);
+			
+			customer = new Customer(id,firstName,lastName,email,phoneNumber,address,dateOfBirth,createdBy,updatedBy);
 		}catch(SQLException e){
 			System.out.print("SQL Exception for : "+e.getMessage());
 		}
@@ -38,7 +50,7 @@ public class CustomerDaoImpl extends CustomerDao {
 
 	@Override
 	public String getInsertQuery() {
-		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,address,date_of_birth) values (?,?,?,?,?,?)";
+		return "insert into "+this.getTableName()+" (first_name,last_name,email,phone_number,address,date_of_birth,created_by,updated_by) values (?,?,?,?,?,?,?,?)";
 	}
 
 	@Override
@@ -60,6 +72,8 @@ public class CustomerDaoImpl extends CustomerDao {
 			preparedStatement.setString(4, object.getPhoneNumber());
 			preparedStatement.setString(5, object.getAddress());
 			preparedStatement.setDate(6, object.getdateOfBirth());
+			preparedStatement.setInt(7, object.getcreatedBy().getId());
+			preparedStatement.setInt(8, object.getcreatedBy().getId());
 			
 		}catch(SQLException e) {
 			System.out.print("SQL Exception for : "+e.getMessage());

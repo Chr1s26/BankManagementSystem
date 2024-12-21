@@ -28,6 +28,7 @@ public class EmployeeRegisterController extends BaseController {
 		employeeDto.setPosition(this.view.getPosition());
 		employeeDto.setBranch(this.view.getBranchId());
 		employeeDto.setSalary(this.view.getSalary());
+		employeeDto.setUserRoleId(this.view.getUserRoleId());
 		try {
 			this.createService.call(employeeDto);
 			this.parentController.refreshTableData();

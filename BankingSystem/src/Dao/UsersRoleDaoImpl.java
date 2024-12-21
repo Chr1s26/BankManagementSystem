@@ -1,0 +1,76 @@
+package Dao;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Model.Account;
+import Model.AccountType;
+import Model.Branch;
+import Model.Customer;
+import Model.UsersRole;
+
+public class UsersRoleDaoImpl extends UsersRoleDao{
+
+	@Override
+	public String getTableName() {
+		return "users_role";
+	}
+
+	@Override
+	public UsersRole converToObject(ResultSet resultset) {
+		UsersRole userRole = null;
+		try {
+			int id = resultset.getInt("id");
+			String name = resultset.getString("name");
+			String description = resultset.getString("description");
+		
+			userRole = new UsersRole(id,name,description);
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "+e.getMessage());
+		}
+		return userRole;
+	}
+
+	@Override
+	public String getInsertQuery() {
+		return "insert into "+this.getTableName()+" (name,description) values (?,?)";
+	}
+
+	@Override
+	public String getUpdateQuery() {
+		return "update "+this.getTableName()+" set name = ?, description = ? where id = ?";
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		return "delete from "+this.getTableName()+" where id = ?";
+	}
+
+	@Override
+	public void prepareParams(PreparedStatement preparedStatement, UsersRole object) {
+		try {
+			preparedStatement.setString(1, object.getName());
+			preparedStatement.setString(6, object.getDescription());
+			
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "+e.getMessage());
+		}
+		
+	}
+	
+
+	@Override
+	public void prepareParamsForUpdate(PreparedStatement preparedStatement, UsersRole object) {
+		try {
+			preparedStatement.setString(1, object.getName());
+			preparedStatement.setString(6, object.getDescription());
+			preparedStatement.setInt(2, object.getId());
+			
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "+e.getMessage());
+		}
+	}
+
+}

@@ -1,0 +1,66 @@
+package Dao;
+
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Model.Account;
+import Model.AccountType;
+import Model.Branch;
+import Model.Customer;
+import Model.UsersRole;
+
+public class UsersRoleDaoImpl extends UsersRoleDao{
+
+	@Override
+	public String getTableName() {
+		return "users_role";
+	}
+
+	@Override
+	public Object converToObject(ResultSet resultset) {
+		UsersRole userRole = null;
+		try {
+			int id = resultset.getInt("id");
+			String name = resultset.getString("name");
+			String description = resultset.getString("description");
+		
+			userRole = new UsersRole(id,name,description);
+		}catch(SQLException e){
+			System.out.print("SQL exception for : "+e.getMessage());
+		}
+		return userRole;
+	}
+
+	@Override
+	public String getInsertQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getUpdateQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDeleteQuery() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void prepareParams(PreparedStatement preparedStatement, Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void prepareParamsForUpdate(PreparedStatement preparedStatement, Object object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -27,9 +27,9 @@ public class EmployeeCreateService {
 		this.checkEmailDuplication();
 		this.checkPhoneDuplication();
 		this.checkErrorMessage();
-		this.creationProcess();
 		this.optService = new OTPService(employeeDto.getEmail(),"Employee Create Confirmation");
 		this.optService.sentOTPmail();
+		this.creationProcess();
 	}
 
 	private void creationProcess() throws SQLException {

@@ -15,12 +15,13 @@ public class Employee {
 	private Branch branch;
 	private String LoginToken;
 	private Date confirmedAt;
+	private UsersRole userRole;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch,String encryptPassword) {
+	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary,Branch branch,String encryptPassword,UsersRole userRole) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -30,6 +31,7 @@ public class Employee {
 		this.salary = salary;
 		this.branch = branch;
 		this.encryptPassword = encryptPassword;
+		this.userRole = userRole;
 	}
 	
 	public Employee(int id, String firstName, String lastName, String email, String phoneNumber, String position,double salary) {
@@ -148,11 +150,25 @@ public class Employee {
 		return this.confirmedAt != null;
 	}
 	
+	public UsersRole getRole() {
+		return userRole;
+	}
+
+	public void setRole(UsersRole userRole) {
+		this.userRole = userRole;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", position=" + position + ", salary=" + salary + ", branch="
-				+ branch + "]";
+		return firstName+ " "+lastName;
+	}
+
+	public boolean isAdmin() {
+		return false;
+	}
+
+	public boolean isEditor() {
+		return false;
 	}
 	
 	
